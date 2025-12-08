@@ -1,5 +1,1 @@
-// @ts-check
-import { defineConfig } from 'astro/config';
-
-// https://astro.build/config
-export default defineConfig({});
+import { webcore } from 'webcoreui/integration';// @ts-checkimport { defineConfig } from 'astro/config';import svelte from '@astrojs/svelte';// https://astro.build/configexport default defineConfig({  integrations: [svelte(), webcore()]});
