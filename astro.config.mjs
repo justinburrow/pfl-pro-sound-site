@@ -1,1 +1,20 @@
-import { webcore } from 'webcoreui/integration';// @ts-checkimport { defineConfig } from 'astro/config';import svelte from '@astrojs/svelte';// https://astro.build/configexport default defineConfig({  integrations: [svelte(), webcore()]});
+import { defineConfig } from 'astro/config';
+import { webcore } from 'webcoreui/integration';
+import svelte from '@astrojs/svelte';
+import sanity from '@sanity/astro';
+
+//https://astro.build/config
+export default defineConfig({
+  integrations: [
+    sanity({
+      projectId: 'f28fd9dk',
+      dataset: 'production',
+      // Set useCdn to false if you're building statically.
+      useCdn: false,
+    }),
+    svelte(),
+    webcore(),
+  ],
+  apiVersion: '2025-12-08',
+  studioBasePath: '/content-studio',
+});
