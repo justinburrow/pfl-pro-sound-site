@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 import { webcore } from 'webcoreui/integration';
 import svelte from '@astrojs/svelte';
 import sanity from '@sanity/astro';
@@ -17,4 +18,7 @@ export default defineConfig({
   ],
   apiVersion: '2025-12-08',
   studioBasePath: '/content-studio',
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
