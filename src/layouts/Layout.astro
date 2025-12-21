@@ -1,3 +1,10 @@
+---
+// Layout.astro
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Background from '../components/Background.astro';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -7,9 +14,14 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>PFL - Pro Sound &amp; Stage Lighting</title>
 	</head>
-	<body class="bg-black">
-		<slot />
-	</body>
+	<body>
+    <Header />
+      <main class="mt-20">
+        <slot />
+      </main>
+    <Footer />
+    <Background />
+  </body>
 </html>
 
 <style>
@@ -20,3 +32,9 @@
 		height: 100%;
 	}
 </style>
+
+<script>
+  import Lenis from 'lenis';
+  const lenis = new Lenis({ lerp: 0.9 })
+
+</script>

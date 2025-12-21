@@ -1,8 +1,14 @@
 @import "tailwindcss";
-@import "@/styles/fonts.css"
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300&family=Oswald:wght@200..700&family=Playfair+Display:wght@400..900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-oswald: "Oswald", sans-serif;
+  --font-geist-mono: "Geist Mono", mono;
+  --font-playfair: "Playfair Display", serif;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
