@@ -1,16 +1,19 @@
 ---
+// gallery.astro
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
+import { Image } from 'astro:assets';
 ---
 
 <Layout>
-  <div class="container mx-auto p-8">
-    <section class="w-3/4">
-      <h1 class="text-8xl uppercase text-white leading-none font-black tracking-tight w-3/5">
-      This text should get progressively disclosed.
-      </h1>
-    </section>
-  </div>
+  <section class="w-full max-w-7xl mx-auto p-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade">
+
+  </section>
 </Layout>
 
+<style>
+</style>
 
+<script>
+  import { gsap } from "gsap";
+</script>
