@@ -16,9 +16,9 @@ import Background from '../components/Background.astro';
 	</head>
 	<body class="bg-black">
     <div id="smooth-wrapper">
-      <div id="smooth-content">
+      <div id="smooth-content" class="flex min-h-screen flex-col">
         <Header />
-        <main>
+        <main class="grow">
           <slot />
         </main>
         <Background />

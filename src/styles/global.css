@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@414&family=Geist:wght@100..900&family=Oswald:wght@200..700&display=swap');
+@import "@/styles/starwind.css";
+
 
 @custom-variant dark (&:is(.dark *));
 

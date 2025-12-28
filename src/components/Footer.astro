@@ -1,13 +1,58 @@
 ---
 // Footer.astro
+
+const d = new Date();
+const year = d.getFullYear();
 ---
 
-<footer class="w-full bg-gray-950/75 backdrop-blur-2xl pt-18 pb-18">
+<footer class="w-full bg-gray-950/75 backdrop-blur-2xl pt-10 mt-10 pb-2">
   <div class="max-w-7xl mx-auto py-2 px-4 fade text-white grid grid-cols-6">
-    <div class="col-span-2 col-start-4">
-      <h1 class="font-oswald relative font-normal text-3xl leading-7">
-        <span class="bg-white text-black py-0.5 px-2 mr-1">PFL</span> PRO SOUND
-      </h1>
+    <div class="col-span-1 text-right font-geist-mono text-xs font-thin leading-6 lowercase">
+      <ul>
+        <li>
+          <a href="#">- Home</a>
+        </li>
+        <li>
+          <a href="#">- About Us</a>
+        </li>
+        <li>
+          <a href="#">- Services</a>
+        </li>
+        <li>
+          <a href="#">- Gallery</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-span-1 text-right font-geist-mono text-xs font-bold lowercase">
+      <ul class="w-full">
+        <li class="text-right">
+          <a href="#">- Contact</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-span-1 text-right font-geist-mono text-xs font-thin lowercase">
+      <ul>
+        <li class="text-right -mt-1">
+          <a href="https://www.instagram.com/pflprosound/" target="_blank" class="text-right flex justify-self-end">
+            <span class="flex">
+              <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#ffffff" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span class="leading-6 ml-1">Instagram</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+      </a>
+    </div>
+    <div class="col-span-3 text-right">
+      <h6 class="font-oswald relative font-normal text-5xl leading-7 opacity-45">
+        <span class="bg-white text-black py-1 px-3 mr-1">PFL</span> PRO SOUND
+      </h6>
+      <h6 class="font-geist-mono text-sm font-thin text-white lowercase mt-4 mr-8 tracking-wider opacity-45">
+        www.pflprosound.com
+      </h6>
+    </div>
+    <div class="col-span-6">
+      <p class="font-geist-mono text-xs font-normal text-white mt-16 pt-3 text-center opacity-45 border-t border-white/45">&#169;{ year } PFL Pro Sound, LLC.  All rights reserved.</>
     </div>
   </div>
 </footer>
