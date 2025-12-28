@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import { webcore } from 'webcoreui/integration';
@@ -8,7 +9,7 @@ import react from '@astrojs/react';
 
 //https://astro.build/config
 export default defineConfig({
-  integrations: [sanity({
+	integrations: [sanity({
     projectId: 'f28fd9dk',
     dataset: 'production',
     // Set useCdn to false if you're building statically.
