@@ -22,6 +22,7 @@
     "astro": "^5.16.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "flowbite": "^4.0.1",
     "gsap": "^3.14.2",
     "lucide-react": "^0.556.0",
     "react": "^19.2.3",

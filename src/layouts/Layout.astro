@@ -1,20 +1,21 @@
 ---
 // Layout.astro
+import 'flowbite';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Background from '../components/Background.astro';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<meta name="generator" content={ Astro.generator } />
 		<title>PFL - Pro Sound &amp; Stage Lighting</title>
 	</head>
-	<body class="bg-black">
+	<body class="bg-black antialiased">
     <div id="smooth-wrapper">
       <div id="smooth-content" class="flex min-h-screen flex-col">
         <Header />
