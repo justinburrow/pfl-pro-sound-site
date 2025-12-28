@@ -1,9 +1,108 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
+import { Image } from 'astro:assets';
 import Slider from '../components/Slider.astro'
+import digico from '@assets/digico.jpg';
+import naturium from '@assets/naturium.jpg';
 ---
 
 <Layout>
-  <Slider />
+  <section class="w-full relative pb-16 mb-8 bg-gray-900/50 backdrop-blur-lg mx-auto max-w-7xl p-6 rounded-sm mt-8 px-20 fade">
+    <Slider />
+  </section>
+
+  <section class="grid grid-cols-8 gap-1 max-w-7xl mx-auto mb-18 rounded-sm">
+    <div class="row-span-3 bg-gray-900/70 py-6 px-12 fade col-span-5 relative">
+      <Image src={ digico } alt="" class="relative top-0 left-0 max-w-full object-contain"/>
+    </div>
+    <div class=" bg-gray-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+      <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Technical Production</h3>
+      <p class="font-geist-mono text-sm font-light text-gray-100 leading-6">End-to-end A/V planning and execution to serve your event vision.  Experience to anticipate your audio challenges, and the skilled crew to run it.</p>
+    </div>
+    <div class="bg-gray-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+      <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Live Sound</h3>
+      <p class="font-geist-mono text-sm font-light leading-6 text-gray-100">Line arrays, hidden speakers within scenic walls, or speakers on the ground for a small event.  We'll scale the solution for your specific requirements.</p>
+    </div>
+    <div class="bg-gray-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+      <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Immersive Audio</h3>
+      <p class="font-geist-mono text-sm font-light text-gray-100 leading-6">360° surround sound design and implementation for experiential events and installations.</p>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-3 gap-1 max-w-7xl mx-auto bg-gray-900/60 mb-4 fade rounded-sm">
+    <div class="px-12 py-8 col-span-2 flex flex-col items-start">
+      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline pr-6 pb-1">Event Highlight</p>
+      <h4 class="font-geist-mono text-3xl mt-6 text-gray-100 font-light mb-4">Naturium Product Launch</h4>
+      <p class="font-geist-mono text-sm mb-8 text-gray-200 leading-5">This is a description of the event and what we delivered for it, and anything notable that's worth mentioning.</p>
+    </div>
+    <div class="px-4 py-8">
+      <Image class="relative top-0 left-0 w-full object-contain fade" src={ naturium } alt="" />
+    </div>
+  </section>
+
+  <section class="mb-10 grid grid-cols-3 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-gray-900/60 fade rounded-sm">
+    <div class="px-12 py-8 col-span-1 pr-4">
+      <Image class="relative top-0 left-0 w-full object-contain" src={ naturium } alt="" />
+    </div>
+    <div class="px-12 py-8 col-span-2 flex flex-col items-end">
+      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline-block pl-6 pb-1 mb-4 text-right float-right max-w-xl">Event Highlight</p>
+      <h4 class="font-geist-mono text-3xl mt-6 text-gray-100 font-light p-0 text-right mr-0 mb-4 clear-both">
+        Naturium Product Launch
+      </h4>
+      <p class="max-w-xl font-geist-mono text-sm mb-8 text-gray-200 leading-5 text-right">This is a description of the event and what we delivered for it, and anything notable that's worth mentioning.</p>
+
+    </div>
+  </section>
+
+  <section class="w-full max-w-5xl mx-auto p-2 mb-8 fade">
+    <div class="bg-gray-900/70 backdrop-blur-xl rounded-md py-4 px-8 grid grid-cols-12 gap-x-10 text-gray-300 text-center logos">
+      <div class="col-span-10 col-start-2 text-center font-geist-mono text-xs uppercase pt-2 py-4 mb-2">
+        Great Event Partnerships with:
+      </div>
+      <div class="col-span-2 px-4">
+        <img src="logos/riot-games.svg" class="-mt-1 opacity-60" alt="">
+      </div>
+      <div class="col-span-2 px-6 -mt-2">
+        <img src="logos/hulu.png" class="opacity-60" alt="">
+      </div>
+      <div class="col-span-2 px-4">
+        <img src="logos/amazon.png" class="-mt-1 opacity-60" alt="">
+      </div>
+      <div class="col-span-2 px-4">
+        <img src="logos/netflix.png" class="opacity-60" alt="">
+      </div>
+      <div class="col-span-2 px-12">
+        <img src="logos/apple.svg" class="-mt-2 opacity-60" alt="">
+      </div>
+      <div class="col-span-2 px-1">
+        <img src="logos/paramount.png" class="-mt-1 opacity-60" alt="">
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+  gsap.set('.fade', { opacity: 0 });
+
+  ScrollTrigger.batch('.fade', {
+    interval: 0.1,
+    batchMax: 4,
+    onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.25 }, overwrite: true }),
+    onLeave: batch => gsap.to(batch, { opacity: 0, y: -20, overwrite: true }),
+    onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.25, overwrite: true }),
+    onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: -20, overwrite: true })
+  });
+</script>
+
+<style>
+  .content p {
+    margin-bottom: 1.5rem;
+  }
+</style>

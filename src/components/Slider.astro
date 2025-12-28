@@ -2,53 +2,85 @@
 // Slider.astro
 import { Image } from 'astro:assets';
 import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
+import netflixEvent from '@assets/netflix-event.jpg';
+import outdoorEvent from '@assets/outdoor-event.jpg';
+import riotGames from '@assets/riot-games.jpg'
+import outdoorEventSound from '@assets/outdoor-event-sound.jpg';
 ---
-<section class="embla theme-light">
-  <div class="embla__viewport">
-    <div class="embla__container">
-      <div class="embla__slide">
-        <Image src={blurredPhoto} alt="">
-      </div>
-      <div class="embla__slide">
-        <Image src={blurredPhoto} alt="">
-      </div>
-      <div class="embla__slide">
-        <Image src={blurredPhoto} alt="">
-      </div>
-      <div class="embla__slide">
-        <Image src={blurredPhoto} alt="">
-      </div>
-      <div class="embla__slide">
-        <Image src={blurredPhoto} alt="">
+<div class="grid grid-cols-12 gap-10 max-w-7xl mx-auto mt-4">
+  <div class="col-span-4 flex flex-col justify-center -mt-7">
+    <h2 class="text-white heading font-geist-mono text-4xl tracking-tighter font-normal leading-14 align-middle justify-center">
+      audio production tailored for the event industry.
+  </div>
+  <div class="embla theme-light w-full max-w-7xl mx-auto mt-0 object-contain mb-4 col-span-8">
+    <div class="embla__viewport aspect-16/8 mt-2">
+      <div class="embla__container h-full">
+        <div class="embla__slide">
+          <Image src={ blurredPhoto } alt="" priority />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full flex">
+            <div class="max-w-7xl mx-auto text-right grow">
+              Caption of this photo
+            </div>
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ netflixEvent } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            A Netflix Event
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ outdoorEvent } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            A event that was outdoors
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ riotGames } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Riot Games had an event; we were at it.
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ outdoorEventSound } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Here is another outdoor event.
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="embla__controls">
-    <div class="embla__buttons">
-      <button class="embla__button embla__button--prev" type="button">
-        <svg class="embla__button__svg" viewBox="0 0 532 532">
-          <path
-            fill="currentColor"
-            d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"
-          ></path>
-        </svg>
-      </button>
+    <div class="embla__controls grid grid-cols-[auto_1fr] justify-between max-w-7xl mx-auto">
+      <div class="embla__buttons">
+        <button class="embla__button embla__button--prev" type="button">
+          <svg class="embla__button__svg" viewBox="0 0 532 532">
+            <path
+              fill="currentColor"
+              d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"
+            ></path>
+          </svg>
+        </button>
 
-      <button class="embla__button embla__button--next" type="button">
-        <svg class="embla__button__svg" viewBox="0 0 532 532">
-          <path
-            fill="currentColor"
-            d="M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0 22.928 22.947 206.395 206.507 229.332 229.454a35.065 35.065 0 0 1 10.326 25.126c0 9.2-3.393 18.26-10.326 25.2-45.865 45.901-206.404 206.564-229.332 229.52Z"
-          ></path>
-        </svg>
-      </button>
+        <button class="embla__button embla__button--next" type="button">
+          <svg class="embla__button__svg" viewBox="0 0 532 532">
+            <path
+              fill="currentColor"
+              d="M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0 22.928 22.947 206.395 206.507 229.332 229.454a35.065 35.065 0 0 1 10.326 25.126c0 9.2-3.393 18.26-10.326 25.2-45.865 45.901-206.404 206.564-229.332 229.52Z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="embla__dots"><button class="embla__dot"></button></div>
     </div>
-
-    <div class="embla__dots"><button class="embla__dot"></button></div>
   </div>
-</section>
+</div>
 
 <script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+  import { SplitText } from "gsap/SplitText";
+  import { CustomEase } from "gsap/CustomEase";
   import EmblaCarousel from 'embla-carousel';
   import { addPrevNextBtnsClickHandlers } from '@lib/EmblaCarouselArrowButtons';
   import type {
@@ -58,6 +90,23 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
   import { addDotBtnsAndClickHandlers } from '@lib/EmblaCarouselDotButton';
   import Autoplay from 'embla-carousel-autoplay';
 
+  gsap.registerPlugin(ScrollTrigger,ScrollSmoother,SplitText, CustomEase);
+
+  CustomEase.create("osmo-ease","0.625, 0.05, 0, 1");
+  SplitText.create('h2.heading', {
+    type: 'words',
+    mask: 'words',
+    autoSplit: true,
+    wordsClass: 'word',
+    onSplit(self) {
+      return gsap.fromTo(
+        self.words,
+        { yPercent: 80, alpha: 0, },
+        { duration: 0.6, yPercent: 0, stagger: 0.2, alpha: 1, ease: "osmo-ease", }
+      )
+    }
+  });
+
   const emblaNode = document.querySelector('.embla') as HTMLElement;
   const OPTIONS:EmblaOptionsType = { loop: true };
   const viewportNode = emblaNode.querySelector('.embla__viewport') as HTMLElement;
@@ -65,7 +114,7 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
   const nextBtnNode = emblaNode.querySelector('.embla__button--next') as HTMLElement;
   const dotsNode = emblaNode.querySelector('.embla__dots') as HTMLElement;
 
-  const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay({delay: 7000})])
+  const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay({delay: 6000})])
 
   const onNavButtonClick = (emblaApi: EmblaCarouselType): void => {
     const autoplay = emblaApi?.plugins()?.autoplay
@@ -96,18 +145,19 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
 
 <style>
   .embla {
-    max-width: 1100px;
+    width: 100%;
+    height: 100%;
     margin: auto;
-    padding-top: 3rem;
     --slide-height: 16rem;
     --slide-spacing: 1rem;
     --slide-size: 100%;
+    z-index: 5;
   }
 
   .embla__viewport {
     overflow: hidden;
-    aspect-ratio: 16/8;
-    box-shadow: 0px 0px 3rem rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
   }
 
   .embla__container {
@@ -121,6 +171,17 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
     flex: 0 0 var(--slide-size);
     min-width: 0;
     padding-left: var(--slide-spacing);
+    position: relative;
+
+    img {
+      position: absolute;
+      bottom: -10%;
+    }
+  }
+
+  .heading h2 .word {
+    background: black;
+    padding: .5rem 2rem;
   }
 
   .embla__slide__number {
@@ -136,15 +197,8 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
   }
 
   .embla__controls {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    justify-content: space-between;
     gap: 1rem;
-    margin-top: .2rem;
-    background: rgba(0,0,0,0.4);
-    border-radius: 10px;
-    padding: 0.6rem 1rem;
-    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.6rem;
   }
 
   .embla__buttons {
@@ -158,7 +212,6 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
     -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
     -webkit-appearance: none;
     appearance: none;
-    background-color: rgba(250,170,250,0.2);
     touch-action: manipulation;
     display: inline-flex;
     text-decoration: none;
@@ -167,8 +220,8 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
     padding: 0;
     margin: 0;
     box-shadow: inset 0 0 0 0.1rem rgba(255,255,255,0.8);
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.4rem;
+    height: 1.4rem;
     z-index: 1;
     border-radius: 50%;
     color: white;
@@ -182,8 +235,8 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
   }
 
   .embla__button__svg {
-    width: 35%;
-    height: 35%;
+    width: 30%;
+    height: 30%;
   }
 
   .embla__dots {
@@ -207,8 +260,8 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
     border: 0;
     padding: 0;
     margin: 0;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1rem;
+    height: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -217,8 +270,8 @@ import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
   }
   :global(.embla__dot:after) {
     box-shadow: inset 0 0 0 0.1rem rgba(255,255,255,0.5);
-    width: 1rem;
-    height: 1rem;
+    width: .8rem;
+    height: .8rem;
     border-radius: 50%;
     display: flex;
     align-items: center;

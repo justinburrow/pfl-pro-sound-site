@@ -14,13 +14,17 @@ import Background from '../components/Background.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>PFL - Pro Sound &amp; Stage Lighting</title>
 	</head>
-	<body>
-    <Header />
-      <main class="mt-20">
-        <slot />
-      </main>
-    <Footer />
-    <Background />
+	<body class="bg-black">
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <Header />
+        <main>
+          <slot />
+        </main>
+        <Background />
+        <Footer />
+      </div>
+    </div>
   </body>
 </html>
 
@@ -30,11 +34,19 @@ import Background from '../components/Background.astro';
 		margin: 0;
 		width: 100%;
 		height: 100%;
+    position: relative;
 	}
 </style>
 
 <script>
-  import Lenis from 'lenis';
-  const lenis = new Lenis({ lerp: 0.9 })
+  import { gsap } from "gsap";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+  gsap.registerPlugin(ScrollSmoother);
+  ScrollSmoother.create({
+    smooth: 0.8,
+    effects: true,
+    smoothTouch: 0.1
+  })
 
 </script>
