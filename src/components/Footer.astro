@@ -1,5 +1,8 @@
 ---
 // Footer.astro
+import { Image } from 'astro:assets';
+import logo from  '@assets/pfl-pro-sound-rect-logo.png';
+
 const d = new Date();
 const year = d.getFullYear();
 ---
@@ -43,11 +46,11 @@ const year = d.getFullYear();
       </a>
     </div>
     <div class="col-span-3 text-right">
-      <a href="/">
-        <h6 class="font-oswald relative font-normal text-5xl leading-7 opacity-45">
-          <span class="bg-white text-black py-1 px-3 mr-1">PFL</span> PRO SOUND
-        </h6>
-        <h6 class="font-geist-mono text-sm font-thin text-white lowercase mt-4 mr-8 tracking-wider opacity-45">
+      <a href="/" class="text-right">
+        <div class="flex justify-end">
+          <Image src={ logo } class="max-w-50 text-right w-full" alt="PFL Pro Sound" />
+        </div>
+        <h6 class="font-geist-mono text-sm font-thin text-white lowercase mt-2 tracking-wide opacity-45">
           www.pflprosound.com
         </h6>
       </a>

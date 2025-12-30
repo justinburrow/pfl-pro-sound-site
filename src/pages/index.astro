@@ -6,6 +6,8 @@ import Slider from '../components/Slider.astro'
 import digico from '@assets/digico.jpg';
 import naturium from '@assets/naturium.jpg';
 import Fortnite from '@assets/FORTNITE Premiere Reception-rs.webp';
+import Asher from '@assets/Asher - Paddington Bear Premiere-rs.webp';
+import Moca from '@assets/MOCA-rs.webp';
 ---
 
 <Layout>
@@ -33,25 +35,27 @@ import Fortnite from '@assets/FORTNITE Premiere Reception-rs.webp';
 
   <section class="grid grid-cols-3 gap-1 max-w-7xl mx-auto bg-gray-900/60 mb-4 fade rounded-sm">
     <div class="px-12 py-8 col-span-2 flex flex-col items-start">
-      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline pr-6 pb-1">Event Highlight</p>
-      <h4 class="font-geist-mono text-3xl mt-6 text-gray-100 font-light mb-4">Naturium Product Launch</h4>
-      <p class="font-geist-mono text-sm mb-8 text-gray-200 leading-5">This is a description of the event and what we delivered for it, and anything notable that's worth mentioning.</p>
+      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline pr-6 pb-1">Client Review</p>
+      <h4 class="font-geist-mono text-2xl mt-6 text-gray-100 font-light mb-1 uppercase">Museum of Contemporary Art, Los Angeles</h4>
+      <h5 class="mb-4 text-md text-gray-300 font-light p-0"><span class="font-bold">Amelia Charter</span> - Producer of Performance &amp; Programs</h5>
+      <p class="max-w-xlfont-geist-mono text-sm mb-8 text-gray-200 leading-6 italic">"PFL Pro Sound has been an exceptional partner in producing live music events at the Museum of Contemporary Art in Los Angeles. They are experts in immersive audio engineering and producing high quality sound. The PFL Pro Sound team members are all highly professional, easy to work with, and seamlessly elevate the production level of every show we work on together. John is especially a pleasure to work with and demonstrates enormous care and pride in his audio engineering and production work. We are so grateful to have PFL Pro Sound as a steady collaborator."</p>
     </div>
     <div class="px-4 py-8">
-      <Image class="relative top-0 left-0 w-full object-contain fade" src={ naturium } alt="" />
+      <Image class="relative top-0 left-0 w-full object-cover fade aspect-4/3" src={ Moca } alt="MOCA" />
     </div>
   </section>
 
   <section class="mb-10 grid grid-cols-3 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-gray-900/60 fade rounded-sm">
     <div class="px-12 py-8 col-span-1 pr-4">
-      <Image class="relative top-0 left-0 w-full object-contain" src={ naturium } alt="" />
+      <Image class="relative top-0 left-0 w-full object-cover aspect-4-3 fade" src={ Asher } alt="Asher - Paddington Bear Premiere" />
     </div>
     <div class="px-12 py-8 col-span-2 flex flex-col items-end">
-      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline-block pl-6 pb-1 mb-4 text-right float-right max-w-xl">Event Highlight</p>
-      <h4 class="font-geist-mono text-3xl mt-6 text-gray-100 font-light p-0 text-right mr-0 mb-4 clear-both">
-        Naturium Product Launch
+      <p class="font-oswald uppercase text-gray-300 text-xs font-normal border-sky-300/70 border-b inline-block pl-6 pb-1 mb-4 text-right float-right max-w-xl">Client Review</p>
+      <h4 class="font-geist-mono text-2xl mt-6 text-gray-100 font-light p-0 text-right mr-0 mb-1 clear-both uppercase">
+        Asher
       </h4>
-      <p class="max-w-xl font-geist-mono text-sm mb-8 text-gray-200 leading-5 text-right">This is a description of the event and what we delivered for it, and anything notable that's worth mentioning.</p>
+      <h5 class="mb-4 text-md text-gray-300 font-light p-0 text-right mr-0 clear-both"><span class="font-bold">Chris Downey</span> - President &amp; Executive Producer</h5>
+      <p class="max-w-xl font-geist-mono text-sm mb-8 text-gray-200 leading-6 text-right italic">"Working with PFL is seamless. From start to finish John and his team provide an excellent service for our performers, dancers, and cast members. In live immersive shows, it is imperative that the sound be on point. With PFL it is always on point. We never have to worry about how our show will sound with PFL."</p>
 
     </div>
   </section>
