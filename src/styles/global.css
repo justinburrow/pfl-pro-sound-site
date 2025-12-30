@@ -68,6 +68,20 @@
     --font-sans: 'Geist Mono', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-body: 'Geist Mono', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-mono: 'Geist Mono', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace';
+
+    --color-orange-peel-50: #fffcea;
+    --color-orange-peel-100: #fff4c5;
+    --color-orange-peel-200: #ffe885;
+    --color-orange-peel-300: #ffd646;
+    --color-orange-peel-400: #ffc21b;
+    --color-orange-peel-500: #ff9f00;
+    --color-orange-peel-600: #e27700;
+    --color-orange-peel-700: #bb5102;
+    --color-orange-peel-800: #983e08;
+    --color-orange-peel-900: #7c330b;
+    --color-orange-peel-950: #481900;
+
+
 }
 
 :root {
