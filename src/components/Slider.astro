@@ -1,12 +1,24 @@
 ---
 // Slider.astro
 import { Image } from 'astro:assets';
-import blurredPhoto from '@assets/background-photo-texture-blurred.jpg';
-import netflixEvent from '@assets/netflix-event.jpg';
-import outdoorEvent from '@assets/outdoor-event.jpg';
-import riotGames from '@assets/riot-games.jpg'
-import outdoorEventSound from '@assets/outdoor-event-sound.jpg';
+
+import Arcane from '@assets/slider/Arcane - Riot Games Showcase-rs.webp'
+import Evolve from '@assets/slider/Evolve 50 Private Event-rs.webp'
+import KidsChoice from '@assets/slider/Kids Choice Awards 2025 Pre:Post Party-rs.webp'
+import Moca2025 from '@assets/slider/MOCA 2025 Concert Stage-rs.webp'
+import NBC1 from '@assets/slider/NBC Orchestra Concert 1-rs.webp'
+import NBC2 from '@assets/slider/NBC Orchestra concert 2-rs.webp'
+import Netflix from '@assets/slider/Netflix Tadum 2025 at The Forum-rs.webp'
+import Paramount from '@assets/slider/Paramount Pictures Tree Lighting 2025-rs.webp'
+import ComicCon from '@assets/slider/SD ComicCon | Paramount+ Star Trek Experience-rs.webp'
+import Springsteen from '@assets/slider/Springsteen Performance - AFI Fest-rs.webp'
+import StrangerThings1 from '@assets/slider/Stranger Things 5 Premiere 1-rs.webp'
+import StrangerThings2 from '@assets/slider/Stranger Things 5 Premiere 2-rs.webp'
+import TCL1 from '@assets/slider/TCL One Battle After Another Premiere 1-rs.webp'
+import TCL2 from '@assets/slider/TCL One Battle After Another Premiere 2-rs.webp'
+import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
 ---
+
 <div class="grid grid-cols-12 gap-10 max-w-7xl mx-auto mt-4">
   <div class="col-span-4 flex flex-col justify-center -mt-7">
     <h2 class="text-white heading font-geist-mono text-4xl tracking-tighter font-normal leading-14 align-middle justify-center">
@@ -16,35 +28,95 @@ import outdoorEventSound from '@assets/outdoor-event-sound.jpg';
     <div class="embla__viewport aspect-16/8 mt-2">
       <div class="embla__container h-full">
         <div class="embla__slide">
-          <Image src={ blurredPhoto } alt="" priority />
+          <Image src={ Arcane } alt="" priority />
           <div class="embla__caption font-geist-mono text-xs text-white py-1 px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full flex">
             <div class="max-w-7xl mx-auto text-right grow">
-              Caption of this photo
+              Arcane - Riot Games Showcase
             </div>
           </div>
         </div>
         <div class="embla__slide">
-          <Image src={ netflixEvent } alt="" loading="lazy" />
+          <Image src={ Evolve } alt="" loading="lazy" />
           <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
-            A Netflix Event
+            Evolve 50 Private Event
           </div>
         </div>
         <div class="embla__slide">
-          <Image src={ outdoorEvent } alt="" loading="lazy" />
+          <Image src={ KidsChoice } alt="" loading="lazy" />
           <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
-            A event that was outdoors
+            Kids Choice Awards 2025 Pre/Post Party
           </div>
         </div>
         <div class="embla__slide">
-          <Image src={ riotGames } alt="" loading="lazy" />
+          <Image src={ Moca2025 } alt="" loading="lazy" />
           <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
-            Riot Games had an event; we were at it.
+            MOCA 2025 Concert Stage
           </div>
         </div>
         <div class="embla__slide">
-          <Image src={ outdoorEventSound } alt="" loading="lazy" />
+          <Image src={ NBC1 } alt="" loading="lazy" />
           <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
-            Here is another outdoor event.
+            NBC Orchestra Concert
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ NBC2 } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            NBC Orchestra Concert
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ Netflix } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Netflix Tadum 2025 at The Forum
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ Paramount } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Paramount Pictures Tree Lighting 2025
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ ComicCon } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            SD ComicCon - Paramount+ Star Trek Experience
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ Springsteen } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Springsteen Performance
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ StrangerThings1 } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Stranger Things 5 Premiere
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ StrangerThings2 } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Stranger Things 5 Premiere
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ TCL1 } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            TCL One Battle After Another Premiere
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ TCL2 } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            TCL One Battle After Another Premiere
+          </div>
+        </div>
+        <div class="embla__slide">
+          <Image src={ TheatrePop } alt="" loading="lazy" />
+          <div class="embla__caption font-geist-mono text-xs text-white py-1 text-right px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full">
+            Theatre Pop Up at The Biltmore
           </div>
         </div>
       </div>

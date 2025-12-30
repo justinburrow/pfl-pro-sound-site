@@ -1,0 +1,23 @@
+---
+// Slide.astro
+import { Image } from 'astro:assets';
+
+const images = await Astro.glob(
+  '/src/assets/slider/*.{jpeg,jpg,gif,png,webp}'
+).then((files) => {
+  return files.map((file) => file.default);
+});
+
+console.log(images);
+---
+{
+  images.map((img) => {
+    <div class="embla__slide">
+      <Image src={ img.src } alt=''
+      />
+      <div class="embla__caption font-geist-mono text-xs text-white py-1 px-8 bg-black opacity-70 absolute bottom-0 z-10 right-0 w-full flex">
+        <div class="max-w-7xl mx-auto text-right grow">xxx</div>
+      </div>
+    </div>
+  })
+}
