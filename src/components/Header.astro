@@ -3,7 +3,7 @@
 import { Image } from 'astro:assets';
 import logo from '@assets/pfl-pro-sound-rect-logo.png';
 ---
-<header class="w-full z-10 bg-brand-black-800/85 py-2">
+<header class="w-full z-10 bg-brand-black-800/85 px-4">
   <div class="flex mx-auto flex-row gap-10 relative max-w-7xl items-center py-2 px-0">
     <div class="text-brand-white-100 flex flex-row py-4 grow">
       <a href="/">
@@ -15,23 +15,31 @@ import logo from '@assets/pfl-pro-sound-rect-logo.png';
       <nav class="justify-end flex font-geist-mono font-bold text-sm text-brand-white-100 tracking-tight">
         <ul class="text-brand-white-100 flex gap-6 text-center list-none">
           <li>
-            <a href="/about-us" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-1 lowercase">
+            <a href="/about-us" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-2 lowercase hover:border-white transition duration-200">
               about us
             </a>
           </li>
           <!--<li>
-            <a href="/services" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-1 lowercase">
+            <a href="/services" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-2 lowercase">
               services
             </a>
           </li>
           <li>
-            <a href="/gallery" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-1 lowercase">
+            <a href="/gallery" class="border-transparent border bg-transparent text-center text-brand-white-100 rounded-sm px-2.5 py-2 lowercase">
               gallery
             </a>
           </li>-->
           <li>
-            <a href="/contact" class="border-brand-orange-500/80 border bg-brand-orange-500/80 text-center  text-brand-white-100 rounded-sm px-2.5 py-2 lowercase">
+            <a href="/contact" class="border-brand-orange-500/80 border bg-brand-orange-500/80 text-center  text-brand-white-100 rounded-sm px-2.5 py-2 lowercase hover:bg-brand-orange-500/60 transition-colors duration-200">
               contact
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/pflprosound/" target="_blank" class="text-right flex justify-self-end stroke-brand-white-100 hover:stroke-brand-orange-300">
+              <span class="flex">
+                <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class=""><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="leading-6 ml-1 sr-only">Instagram</span>
+              </span>
             </a>
           </li>
         </ul>

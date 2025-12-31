@@ -10,71 +10,71 @@ import Review1540 from '@assets/1540 - OBAA Premiere-rs.webp';
 ---
 
 <Layout>
-  <section class="w-full relative pb-16 mb-8 bg-brand-black-900/30 backdrop-blur-md mx-auto max-w-7xl p-6 rounded-sm mt-8 px-20 fade">
+  <section class="w-full relative pb-16 mb-8 bg-brand-black-900/60 backdrop-blur-md mx-auto max-w-7xl p-2 md:p-6 rounded-sm mt-8 px-2 md:px-4 lg:px-20 fade">
     <Slider />
   </section>
 
-  <section class="grid grid-cols-8 gap-1 max-w-7xl mx-auto mb-18 rounded-sm">
-    <div class="row-span-3 bg-brand-black-900/70 py-6 px-12 fade col-span-5 relative">
-      <Image src={ Fortnite } alt="FORTNITE Premiere Reception" class="relative top-0 left-0 max-w-full object-contain"/>
+  <section class="grid grid-cols-8 gap-1 max-w-7xl mx-auto mb-4 lg:mb-18 rounded-sm">
+    <div class="row-span-3 bg-brand-black-800/70 py-0 lg:py-6 px-12 fade col-span-5 relative collapse lg:visible flex items-end pr-10 lg:pr-4">
+      <Image src={ Fortnite } alt="FORTNITE Premiere Reception" class="relative top-0 max-w-full object-contain border border-brand-black-600 hidden lg:block"/>
     </div>
-    <div class=" bg-brand-black-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+    <div class=" bg-brand-black-800/70 py-6 px-8 fade col-span-12 rounded-xs border-b border-brand-black-600 lg:col-span-3">
       <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Technical Production</h3>
       <p class="font-geist-mono text-sm font-light text-gray-100 leading-6">End-to-end A/V planning and execution to serve your event vision.  Experience to anticipate your audio challenges, and the skilled crew to run it.</p>
     </div>
-    <div class="bg-brand-black-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+    <div class="bg-brand-black-800/70 py-6 px-8 fade col-span-12 rounded-xs border-b border-brand-black-600 lg:col-span-3">
       <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Live Sound</h3>
       <p class="font-geist-mono text-sm font-light leading-6 text-gray-100">Line arrays, hidden speakers within scenic walls, or speakers on the ground for a small event.  We'll scale the solution for your specific requirements.</p>
     </div>
-    <div class="bg-brand-black-900/70 py-6 px-8 fade col-span-3 rounded-xs">
+    <div class="bg-brand-black-800/70 py-6 px-8 fade col-span-12 rounded-xs lg:col-span-3">
       <h3 class="font-oswald uppercase text-gray-200 font-normal tracking text-xl mb-3 mt-6">Immersive Audio</h3>
       <p class="font-geist-mono text-sm font-light text-gray-100 leading-6">360° surround sound design and implementation for experiential events and installations.</p>
     </div>
   </section>
 
-  <section class="mb-10 grid grid-cols-3 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-brand-black-900/70 fade rounded-sm">
-    <div class="px-12 py-8 col-span-1 pr-4">
-      <Image class="relative top-0 left-0 w-full object-cover aspect-4-3 fade" src={ Review1540 } alt="1540 - OBAA Premiere" />
+  <section class="mb-10 grid grid-cols-6 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-brand-black-900/70 fade rounded-sm">
+    <div class="px-12 pt-2 pb-8 lg:pt-8 lg:pb-8 pr-10 lg:pr-4 col-span-6 lg:col-span-2 order-2 flex justify-end">
+      <Image class="relative top-0 w-full object-cover aspect-4-3 fade border border-brand-black-600 max-w-4/5 lg:max-w-none" src={ Review1540 } alt="1540 - OBAA Premiere" />
     </div>
-    <div class="px-12 py-8 col-span-2 flex flex-col items-end">
-      <p class="font-oswald uppercase text-brand-accent-100 text-xs font-normal border-brand-accent-300 border-b inline-block pl-6 pb-1 mb-2 text-right float-right max-w-xl">Client Review</p>
-      <h4 class="font-geist-mono text-2xl mt-6 text-brand-black-100 font-light p-0 text-right mr-0 mb-1 clear-both uppercase">
+    <div class="px-12 py-8 pb-2 lg:pb-8 col-span-6 lg:col-span-4 flex flex-col items-end">
+      <p class="font-oswald uppercase text-brand-black-200 text-xs font-normal border-brand-accent-300 border-b-2 inline-block pl-6 pb-1 mb-2 text-right float-right max-w-xl">Client Review</p>
+      <h4 class="font-geist-mono text-2xl mt-4 font-light p-0 text-right mr-0 mb-1 clear-both uppercase">
         1540 Productions
       </h4>
-      <p class="text-center font-geist-mono font-light text-xs mb-4"><a href="https://www.1540productions.com">www.1540productions.com</a></p>
-      <h5 class="mb-4 text-md text-gray-300 font-light p-0 text-right mr-0 clear-both"><span class="font-bold">Albert Murcia</span> - Production Manager</h5>
+      <p class="text-center font-geist-mono font-light text-brand-black-400 text-xs mb-4"><a href="https://www.1540productions.com">www.1540productions.com</a></p>
+      <h5 class="mb-4 text-sm text-brand-accent-300 font-light p-0 text-right mr-0 clear-both"><span class="font-bold">Albert Murcia</span> - Production Manager</h5>
       <p class="max-w-2xl font-geist-mono text-sm mb-8 text-brand-black-50 leading-6 text-right italic">"John and his team's attention to detail and ability to adapt to our production needs is incomparable. PFL is always my first and easiest call to make."</p>
     </div>
   </section>
 
-  <section class="grid grid-cols-3 gap-1 max-w-7xl mx-auto bg-brand-black-900/70 mb-4 fade rounded-sm">
-    <div class="px-12 py-8 col-span-2 flex flex-col items-start">
-      <p class="font-oswald uppercase text-brand-accent-100 text-xs font-normal border-brand-accent-300 border-b inline pr-6 pb-1">Client Review</p>
-      <h4 class="font-geist-mono text-2xl mt-6 text-brand-black-50 font-light mb-1 uppercase">Museum of Contemporary Art, Los Angeles</h4>
-      <h5 class="mb-4 text-md text-brand-black-200 font-light p-0"><span class="font-bold">Amelia Charter</span> - Producer of Performance &amp; Programs</h5>
+  <section class="mb-18 grid grid-cols-6 gap-1 max-w-7xl mx-auto bg-brand-black-800/70 lg:mb-10 fade rounded-sm">
+    <div class="px-12 py-8 pb-0 lg:pb-8 col-span-6 lg:col-span-4 flex flex-col items-start">
+      <p class="font-oswald uppercase text-brand-black-200 text-xs font-normal border-brand-accent-300 border-b-2 inline pr-6 pb-1">Client Review</p>
+      <h4 class="font-geist-mono text-2xl mt-4 font-light mb-1 uppercase">Museum of Contemporary Art, Los Angeles</h4>
+      <h5 class="mb-4 text-sm text-brand-accent-300 font-light p-0"><span class="font-bold">Amelia Charter</span> - Producer of Performance &amp; Programs</h5>
       <p class="max-w-2xl font-geist-mono text-sm mb-8 text-brand-black-50 leading-6 italic">"PFL Pro Sound has been an exceptional partner in producing live music events at the Museum of Contemporary Art in Los Angeles. They are experts in immersive audio engineering and producing high quality sound. The PFL Pro Sound team members are all highly professional, easy to work with, and seamlessly elevate the production level of every show we work on together. John is especially a pleasure to work with and demonstrates enormous care and pride in his audio engineering and production work. We are so grateful to have PFL Pro Sound as a steady collaborator."</p>
     </div>
-    <div class="px-4 py-8">
-      <Image class="relative top-0 left-0 w-full object-cover fade aspect-4/3" src={ Moca } alt="MOCA" />
+    <div class="px-4 pt-0 lg:pt-8 py-8 col-span-6 lg:col-span-2 flex items-start">
+      <Image class="relative top-0 left-0 w-full object-cover ml-8 lg:ml-0 fade aspect-4/3 border border-brand-black-600 max-w-4/5 lg:max-w-none" src={ Moca } alt="MOCA" />
     </div>
   </section>
 
-  <section class="mb-10 grid grid-cols-3 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-brand-black-900/70 fade rounded-sm">
-    <div class="px-12 py-8 col-span-1 pr-4">
-      <Image class="relative top-0 left-0 w-full object-cover aspect-4-3 fade" src={ Asher } alt="Asher - Paddington Bear Premiere" />
+  <section class="mb-10 grid grid-cols-6 gap-y-1 gap-x-4 max-w-7xl mx-auto bg-brand-black-800/70 fade rounded-sm lg:mb-4">
+    <div class="px-12 py-8 pt-2 lg:pt-8 col-span-6 lg:col-span-2 pr-10 lg:pr-4 order-2 relative flex justify-end">
+      <Image class="relative top-0 w-full object-cover aspect-4-3 fade border border-brand-black-600 max-w-4/5 lg:max-w-none" src={ Asher } alt="Asher - Paddington Bear Premiere" />
     </div>
-    <div class="px-12 py-8 col-span-2 flex flex-col items-end">
-      <p class="font-oswald uppercase text-brand-accent-100 text-xs font-normal border-brand-accent-300 border-b inline-block pl-6 pb-1 mb-4 text-right float-right max-w-xl">Client Review</p>
-      <h4 class="font-geist-mono text-2xl mt-6 text-gray-100 font-light p-0 text-right mr-0 mb-1 clear-both uppercase">
-        Asher
+    <div class="px-12 pt-8 pb-0 lg:pb-8 col-span-6 lg:col-span-4 flex flex-col items-end">
+      <p class="font-oswald uppercase text-brand-black-200 text-xs font-normal border-brand-accent-300 border-b-2 inline-block pl-6 pb-1 mb-4 text-right float-right max-w-xl">Client Review</p>
+      <h4 class="font-geist-mono text-2xl mt-4 font-light p-0 text-right mr-0 mb-1 clear-both uppercase">
+        Asher Entertainment
       </h4>
-      <h5 class="mb-4 text-md text-gray-300 font-light p-0 text-right mr-0 clear-both"><span class="font-bold">Chris Downey</span> - President &amp; Executive Producer</h5>
+      <h5 class="mb-4 text-sm text-brand-accent-300 font-light p-0 text-right mr-0 clear-both"><span class="font-bold">Chris Downey</span> - President &amp; Executive Producer</h5>
       <p class="max-w-xl font-geist-mono text-sm mb-8 text-gray-200 leading-6 text-right italic">"Working with PFL is seamless. From start to finish John and his team provide an excellent service for our performers, dancers, and cast members. In live immersive shows, it is imperative that the sound be on point. With PFL it is always on point. We never have to worry about how our show will sound with PFL."</p>
     </div>
   </section>
 
   <section class="w-full max-w-5xl mx-auto p-2 mb-8 fade">
-    <div class="bg-brand-black-900/70 backdrop-blur-lg rounded-md py-4 px-8 grid grid-cols-12 gap-x-10 text-gray-300/50 text-center logos">
+    <div class="bg-brand-black-800/70 backdrop-blur-lg rounded-md py-4 px-8 grid grid-cols-12 gap-x-10 text-gray-300/50 text-center logos">
       <div class="col-span-10 col-start-2 text-center font-geist-mono text-xs uppercase pt-2 py-4 mb-2">
         Great Event Partnerships with:
       </div>

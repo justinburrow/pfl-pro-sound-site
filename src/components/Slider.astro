@@ -19,12 +19,12 @@ import TCL2 from '@assets/slider/TCL One Battle After Another Premiere 2-rs.webp
 import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
 ---
 
-<div class="grid grid-cols-12 gap-10 max-w-7xl mx-auto mt-4">
-  <div class="col-span-4 flex flex-col justify-center -mt-7">
-    <h2 class="text-brand-white-100 heading font-geist-mono text-4xl tracking-tighter font-normal leading-14 align-middle justify-center">
+<div class="grid grid-cols-12 gap-2 md:gap-10 max-w-7xl mx-auto mt-4">
+  <div class="col-span-12 flex flex-col justify-center mt-0 lg:col-span-4">
+    <h2 class="text-brand-white-100 heading font-geist-mono text-3xl tracking-tighter font-normal leading-14 align-middle text-center justify-center lg:text-4xl px-2 lg:px-0">
       audio production tailored for the event industry.
   </div>
-  <div class="embla theme-light w-full max-w-7xl mx-auto mt-0 object-contain mb-4 col-span-8">
+  <div class="embla theme-light w-full max-w-7xl mx-auto mt-0 object-contain mb-4 col-span-12 lg:col-span-8">
     <div class="embla__viewport aspect-16/8 mt-2">
       <div class="embla__container h-full">
         <div class="embla__slide">
@@ -121,8 +121,8 @@ import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
         </div>
       </div>
     </div>
-    <div class="embla__controls grid grid-cols-[auto_1fr] justify-between max-w-7xl mx-auto">
-      <div class="embla__buttons">
+    <div class="embla__controls md:grid md:grid-cols-[auto_1fr] justify-between max-w-7xl mx-auto">
+      <div class="embla__buttons collapse md:visible">
         <button class="embla__button embla__button--prev" type="button">
           <svg class="embla__button__svg" viewBox="0 0 532 532">
             <path
@@ -142,7 +142,7 @@ import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
         </button>
       </div>
 
-      <div class="embla__dots"><button class="embla__dot"></button></div>
+      <div class="embla__dots justify-center md:justify-end"><button class="embla__dot"></button></div>
     </div>
   </div>
 </div>
@@ -220,8 +220,8 @@ import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
     width: 100%;
     height: 100%;
     margin: auto;
-    --slide-height: 16rem;
-    --slide-spacing: 1rem;
+    --slide-height: 18rem;
+    --slide-spacing: 2rem;
     --slide-size: 100%;
     z-index: 5;
   }
@@ -313,7 +313,6 @@ import TheatrePop from '@assets/slider/Theatre Pop Up at The Biltmore-rs.webp'
   .embla__dots {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
     align-items: center;
     margin-right: calc((1.6rem - 1rem) / 2 * -1);
     gap: .4rem;

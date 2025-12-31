@@ -46,8 +46,9 @@
   if (!container) throw new Error('Shader canvas container not found');
 
   const colors = [
-    '#ff9d009c',
-    '#c7ae5c6b'
+    '#ffbf00b8',
+    '#754800',
+    '#18110c'
   ].map(c => getShaderColorFromString(c));
 
   const uniforms = {
@@ -56,16 +57,16 @@
     u_colorsCount: colors.length,
     u_softness: .95,
     u_intensity: .40,
-    u_noise: .14,
+    u_noise: .15,
     u_shape: GrainGradientShapes.corners,
     u_noiseTexture: noiseTexture as HTMLImageElement,
-    u_fit: 1.5,
-    u_scale: 0.92,
+    u_fit: 1.7,
+    u_scale: 0.78,
     u_rotation: 95,
-    u_originX: .8,
-    u_originY: 0.3,
-    u_offsetX: 0,
-    u_offsetY: 0.1,
+    u_originX: .2,
+    u_originY: 0.1,
+    u_offsetX: -0.2,
+    u_offsetY: 0.3,
   };
 
   const shader = new ShaderMount(
@@ -73,6 +74,6 @@
     grainGradientFragmentShader,
     uniforms,
     { alpha: true },
-    .95 // speed
+    .65 // speed
   );
 </script>
