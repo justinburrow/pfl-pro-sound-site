@@ -12,7 +12,7 @@ import Background from '@components/Background.astro';
 	<head>
     <CommonHead />
 	</head>
-	<body class="bg-black antialiased">
+	<body class="bg-brand-black-800 antialiased">
     <div id="smooth-wrapper">
       <div id="smooth-content" class="flex min-h-screen flex-col">
         <Header />
@@ -42,7 +42,7 @@ import Background from '@components/Background.astro';
 
   gsap.registerPlugin(ScrollSmoother);
   ScrollSmoother.create({
-    smooth: 0.8,
+    smooth: .6,
     effects: true,
     smoothTouch: 0.1
   })

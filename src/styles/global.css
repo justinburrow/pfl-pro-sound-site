@@ -54,34 +54,60 @@
 
 @theme {
     /* main text color */
-    --color-body: var(--color-stone-600);
-    --color-body-subtle: var(--color-stone-500);
-
-    /* text heading colors */
-    --color-heading: var(--color-stone-900);
-
-    /* used for custom brand colors */
-    --color-fg-brand-subtle: var(--color-stone-200);
-    --color-fg-brand: var(--color-stone-950);
-    --color-fg-brand-strong: var(--color-stone-900);
+    --color-body: var(--color-brand-white-100);
+    --color-body-subtle: var(--color-black-200);
 
     --font-sans: 'Geist Mono', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-body: 'Geist Mono', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-mono: 'Geist Mono', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace';
 
-    --color-orange-peel-50: #fffcea;
-    --color-orange-peel-100: #fff4c5;
-    --color-orange-peel-200: #ffe885;
-    --color-orange-peel-300: #ffd646;
-    --color-orange-peel-400: #ffc21b;
-    --color-orange-peel-500: #ff9f00;
-    --color-orange-peel-600: #e27700;
-    --color-orange-peel-700: #bb5102;
-    --color-orange-peel-800: #983e08;
-    --color-orange-peel-900: #7c330b;
-    --color-orange-peel-950: #481900;
+    --color-brand-orange-50: #fffcea;
+    --color-brand-orange-100: #fff4c5;
+    --color-brand-orange-200: #ffe885;
+    --color-brand-orange-300: #ffd646;
+    --color-brand-orange-400: #ffc21b;
+    --color-brand-orange-500: #ff9f00; /* actual brand orange */
+    --color-brand-orange-600: #e27700;
+    --color-brand-orange-700: #bb5102;
+    --color-brand-orange-800: #983e08;
+    --color-brand-orange-900: #7c330b;
+    --color-brand-orange-950: #481900;
 
+  --color-brand-black-50: #eeeeee;
+  --color-brand-black-100: #dddddd;
+  --color-brand-black-200: #bbbbbd;
+  --color-brand-black-300: #9b9b9d;
+  --color-brand-black-400: #7c7c7f;
+  --color-brand-black-500: #5c5c5f;
+  --color-brand-black-600: #404043;
+  --color-brand-black-700: #262628;
+  --color-brand-black-800: #0b0b0c; /* actual brand black */
+  --color-brand-black-900: #070708;
+  --color-brand-black-950: #040404;
 
+    --color-brand-white-50: #f6f3ee;
+    --color-brand-white-100: #eee7dd; /* actual brand white */
+    --color-brand-white-200: #dacab1;
+    --color-brand-white-300: #bdaf99;
+    --color-brand-white-400: #9e927f;
+    --color-brand-white-500: #827869;
+    --color-brand-white-600: #686053;
+    --color-brand-white-700: #4f483e;
+    --color-brand-white-800: #343029;
+    --color-brand-white-900: #1e1b16;
+    --color-brand-white-950: #13110d;
+
+    --color-brand-accent-50: #f6e4e4;
+    --color-brand-accent-100: #eec9c8;
+    --color-brand-accent-200: #e2908d;
+    --color-brand-accent-300: #ce534d; /* actual brand accent - brick */
+    --color-brand-accent-400: #af4540;
+    --color-brand-accent-500: #943935;
+    --color-brand-accent-600: #7a2e2a;
+    --color-brand-accent-700: #5d211e;
+    --color-brand-accent-800: #451714;
+    --color-brand-accent-900: #2b0b0a;
+    --color-brand-accent-950: #1f0605;
 }
 
 :root {
