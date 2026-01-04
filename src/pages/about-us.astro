@@ -3,11 +3,58 @@
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
 import { Image } from 'astro:assets';
+import JohnMixing from '@assets/John-mixing-Chance-the-Rapper-at-MOCA-Grand.webp';
+import JohnProfile from '@assets/John-mixing-Danny-Elfman-Orchestra-2023-Netflix-FYC.webp'
 ---
 
 <Layout>
-  <section class="w-full max-w-7xl mx-auto p-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade">
+  <section class="w-full max-w-7xl mx-auto px-10 py-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade">
+    <div class="grid grid-cols-6 gap-y-4 gap-x-10 w-full">
+      <h1 class="font-oswald font-thinner text-4xl uppercase mb-6 border-b border-brand-white-50 text-brand-white-100 pb-3 col-span-full mt-2">
+        <span class="font-semibold">About</span> PFL Pro Sound
+      </h1>
+      <div class="order-2 col-span-full lg:order-1 lg:col-span-3">
+        <h2 class="font-geist-mono text-lg font-semibold mb-8 leading-7">
+          Sherman Oaks, CA-based PFL Pro Sound provides creative audio solutions tailored specifically for the event industry.
+        </h2>
+        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
+          Whether it's corporate presentations or music concerts, movie premieres or immersive experiences, however simple or complex your needs are, we will team up with you to make your event come to life in the most creative, logical, & fiscal route possible.
+        </p>
+        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
+          Every one of our clients' visions are unique. We deploy line arrays & hide speakers in scenic walls.  We can do a simple set up of speakers on the ground, or create a 360° surround immersive audio experience.  We provide all the tools & qualified crew members needed to help make your event successful.
+        </p>
+        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
+          Additionally, we can oversee all aspects of technical needs to ease your work load.   If you are looking for full production from the ground up we can take care of all of these details for you using our vendor partners for lighting & video, allowing you to keep your interaction to one AV vendor.  We'll assist at every technical step so you can focus your energy on a successful event.
+        </p>
+      </div>
+      <div class="order-1 col-span-full lg:order-2 lg:col-span-3 mb-8 lg:mb-0">
+        <Image
+          class="w-full object-contain border border-brand-white-50/40 p-12 lg:p-2 mx-auto lg:max-w-none"
+          src={ JohnMixing }
+          alt="John Wilson of PFL Pro Sound mixing Chance the Rapper at MOCA Grand"
+        />
+      </div>
+    </div>
 
+    <div class="grid grid-cols-6 gap-y-4 gap-x-10 w-full mt-16">
+      <div class="col-span-full md:col-span-2">
+        <Image
+          class="w-full object-contain border border-brand-white-50/40 p-2 lg:p-2"
+          src={ JohnProfile}
+          alt="John Wilson, owner of PFL Pro Sound"
+        />
+      </div>
+      <div class="col-span-full md:col-span-4 md:max-w-2xl">
+        <h3 class="font-geist-mono text-sm font-light mb-8 leading-7">
+          <span class="font-bold">Owner John Wilson</span> has spent over 25 years in the audio industry.</h3>
+        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
+          Before creating PFL Pro Sound, John partnered as an A1 with various production companies mixing corporate event for 15|40 Productions, Paramount Pictures, Fox, Apple, Netflix, Google, Hulu, & Amazon, as well as mixed for multiple touring artists.
+        </p>
+        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
+          John's background as a musician helped develop the necessary skills to anticipate, troubleshoot, & mix with intent.  His philosophy has always been to eliminate potential distractions before they happen.  PFL Pro Sound was created with all of this in mind.
+        </p>
+      </div>
+    </div>
   </section>
 </Layout>
 
