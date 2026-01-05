@@ -2,20 +2,25 @@
 // contact.astro
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
-import { Image } from 'astro:assets';
 ---
 
 <Layout>
   <section class="w-full max-w-7xl mx-auto p-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade rounded-sm">
-    <form class="max-w-3xl mx-auto mt-12" action="https://submit-form.com/vTPitFu1Z">
+    <form class="max-w-3xl mx-auto mt-12" id="contact-form" action="https://submit-form.com/vTPitFu1Z">
       <div class="mb-5 grid grid-cols-2 gap-x-8">
         <div>
           <label for="firstname" class="block mb-2.5 text-sm font-medium text-heading">First Name</label>
-          <input type="text" name="first name" id="firstname" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Alex" required />
+          <input type="text" name="first-name" id="firstname" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Alex" required />
         </div>
         <div>
           <label for="lastname" class="block mb-2.5 text-sm font-medium text-heading">Last Name</label>
-          <input type="text" name="last name" id="lastname" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Smith" required />
+          <input type="text" name="last-name" id="lastname" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Smith" required />
+        </div>
+      </div>
+      <div class="mb-5">
+        <label for="company" class="block mb-2.5 text-sm font-medium text-heading">Company Name</label>
+        <div class="relative">
+          <input type="text" id="company" name="company" class="block w-full pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="ACME Widget Corporation" required />
         </div>
       </div>
       <div class="mb-5">
@@ -33,23 +38,42 @@ import { Image } from 'astro:assets';
             <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                 <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.427 14.768 17.2 13.542a1.733 1.733 0 0 0-2.45 0l-.613.613a1.732 1.732 0 0 1-2.45 0l-1.838-1.84a1.735 1.735 0 0 1 0-2.452l.612-.613a1.735 1.735 0 0 0 0-2.452L9.237 5.572a1.6 1.6 0 0 0-2.45 0c-3.223 3.2-1.702 6.896 1.519 10.117 3.22 3.221 6.914 4.745 10.12 1.535a1.601 1.601 0 0 0 0-2.456Z"/></svg>
             </div>
-            <input type="text" name="tel" id="phone-input" class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="888-555-1234" required />
+            <input type="text" name="tel" id="phone-input" class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body" placeholder="888-555-1234" required />
         </div>
       </div>
       <div class="mb-5">
         <label for="message" class="block mb-2.5 text-sm font-medium text-heading">Your message:</label>
-        <textarea id="message" name="message" rows="4" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Please provide some details about what you're looking for"></textarea>
+        <textarea id="message" name="message" rows="12" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Please provide details about what you're looking for - dates, budget, requirements - it'll help us get back to you efficiently."></textarea>
       </div>
-      <div class="text-right">
-        <button type="submit" class="border-brand-orange-500/80 border bg-brand-orange-500/80 text-center text-brand-white-100 rounded-sm px-2.5 py-2 lowercase hover:cursor-pointer hover:bg-brand-orange-500/60 font-bold transition-colors duration-200 leading-5 text-sm focus:outline-none">Submit</button>
+      <div class="flex gapx-6">
+        <div class="mb-5 grow text-right flex justify-end pr-8">
+          <div class="g-recaptcha" data-sitekey="6LeKY0AsAAAAALeoefEWnKHRRWkF9PTNHipd7G2Z" data-callback="callback"></div>
+        </div>
+        <div class="text-right col-span-1">
+          <button type="submit" id="submit-button" class="border-brand-orange-500/80 border disabled:opacity-40 bg-brand-orange-500/80 text-center text-brand-white-100 rounded-sm px-2.5 py-2 lowercase hover:cursor-pointer hover:bg-brand-orange-500/60 font-bold transition-colors duration-200 leading-5 text-sm focus:outline-none" disabled="true" >Submit</button>
+
+          <script type="text/javascript">
+            function callback() {
+              const submitButton = document.getElementById("submit-button");
+              submitButton.removeAttribute("disabled");
+            }
+          </script>
+        </div>
       </div>
+      <input
+        type="hidden"
+        name="_redirect"
+        id="redirect"
+      />
+      <input type="hidden" name="_email.subject" value="NEW: website contact form submission" />
     </form>
   </section>
 </Layout>
 
 <style>
 </style>
-
+<script is:inline src="https://www.google.com/recaptcha/api.js" async></script>
 <script>
-  import { gsap } from "gsap";
+  const redirect = document.getElementById('redirect') as HTMLFormElement;
+  redirect.value = document.location.origin + '/thanks'
 </script>
