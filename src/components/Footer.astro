@@ -9,7 +9,7 @@ const year = d.getFullYear();
 
 <footer class="w-full bg-brand-black-800/85 pt-10 mt-10 pb-2 px-4">
   <div class="max-w-7xl mx-auto py-2 px-4 fade text-brand-white-100 grid grid-cols-6">
-    <div class="col-span-3 lg:col-span-1 md:text-right font-geist-mono text-xs font-thin leading-6 lowercase">
+    <div class="col-span-2 lg:col-span-1 lg:text-right font-geist-mono text-xs font-thin leading-6 lowercase">
       <ul>
         <li>
           <a href="/">- Home</a>
@@ -23,18 +23,21 @@ const year = d.getFullYear();
         <li>
           <a href="/gallery">- Gallery</a>
         </li>-->
+        <li class="lg:hidden">
+          <a href="/contact">- Contact</a>
+        </li>
       </ul>
     </div>
-    <div class="col-span-3 lg:col-span-1 md:text-right font-geist-mono text-xs font-bold lowercase">
+    <div class="hidden lg:visible col-span-2 lg:col-span-1 md:text-right font-geist-mono text-xs font-bold lowercase">
       <ul class="w-full">
         <li class="text-right">
           <a href="/contact">- Contact</a>
         </li>
       </ul>
     </div>
-    <div class="mt-4 col-span-3 lg:col-span-1 lg:mt-0 md:text-right font-geist-mono text-xs font-thin lowercase">
+    <div class="mt-2 sm:mt-4 col-span-0 lg:col-span-1 lg:mt-0 md:text-right font-geist-mono text-xs font-thin lowercase">
       <ul>
-        <li class="text-right -mt-1">
+        <li class="lg:text-right -mt-1">
           <a href="https://www.instagram.com/pflprosound/" target="_blank" class="text-left md:text-right md:justify-self-end inline-block">
             <span class="flex">
               <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#ffffff"><path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8C3 5.23858 5.23858 3 8 3H16C18.7614 3 21 5.23858 21 8V16C21 18.7614 18.7614 21 16 21H8C5.23858 21 3 18.7614 3 16Z" stroke="#ffffff" stroke-width="1.5"></path><path d="M17.5 6.51L17.51 6.49889" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -45,7 +48,7 @@ const year = d.getFullYear();
       </ul>
       </a>
     </div>
-    <div class="mt-4 lg:mt-0 col-span-3 lg:col-span-3 text-right">
+    <div class="mt-2 md:mt-0 col-span-6 lg:col-span-3 text-right">
       <a href="/" class="text-right">
         <div class="flex justify-end">
           <Image src={ logo } class="max-w-50 text-right w-full" alt="PFL Pro Sound" />
@@ -55,8 +58,8 @@ const year = d.getFullYear();
         </h6>
       </a>
     </div>
-    <div class="col-span-6">
-      <p class="font-geist-mono text-xs font-normal text-brand-white-100 mt-16 pt-3 text-center opacity-45 border-t border-brand-white/45">&#169;{ year } <a href="/">PFL Pro Sound, LLC</a>.  All rights reserved.</>
+    <div class="col-span-full">
+      <p class="font-geist-mono text-[2.4vw] sm:text-xs font-normal text-brand-white-100 mt-12 md:mt-16 pt-3 px-4 text-center opacity-45 border-t border-brand-white/45">&#169;{ year } <a href="/">PFL Pro Sound, LLC</a>.  All rights reserved.</>
     </div>
   </div>
 </footer>
