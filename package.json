@@ -35,7 +35,8 @@
     "tailwind-merge": "^3",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^8.0.16"
   },
   "devDependencies": {
     "embla-carousel": "^8.6.0",
