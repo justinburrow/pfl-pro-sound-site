@@ -17,6 +17,9 @@ importers:
       '@astrojs/vercel':
         specifier: ^10.0.8
         version: 10.0.8(astro@6.4.4(@types/node@25.0.2)(@vercel/functions@3.6.2)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.53.3)(sass-embedded@1.100.0)(sass@1.94.2)(tsx@4.22.4)(yaml@2.9.0))(react@19.2.7)(rollup@4.53.3)(svelte@5.56.2)
+      '@liiift-studio/deploy-vercel-from-sanity':
+        specifier: ^1.0.8
+        version: 1.0.8(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))
       '@paper-design/shaders':
         specifier: ^0.0.68
         version: 0.0.68
@@ -1940,6 +1943,12 @@ packages:
 
   '@lezer/lr@1.4.10':
     resolution: {integrity: sha512-rnCpTIBafOx4mRp43xOxDJbFipJm/c0cia/V5TiGlhmMa+wsSdoGmUN3w5Bqrks/09Q/D4tNAmWaT8p6NRi77A==}
+
+  '@liiift-studio/deploy-vercel-from-sanity@1.0.8':
+    resolution: {integrity: sha512-x8DubMgi7dMUW7qGz+48ctKLdnNVcqCKFhx5+5XCywhnEQaRZlr1x5Zxsb7+Rk3eU5cHdVvX0oMou31alL6eOg==}
+    peerDependencies:
+      react: '>=18'
+      sanity: '>=3'
 
   '@mapbox/node-pre-gyp@2.0.3':
     resolution: {integrity: sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg==}
@@ -9053,6 +9062,11 @@ snapshots:
     dependencies:
       '@lezer/common': 1.5.2
 
+  '@liiift-studio/deploy-vercel-from-sanity@1.0.8(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))':
+    dependencies:
+      react: 19.2.7
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+
   '@mapbox/node-pre-gyp@2.0.3':
     dependencies:
       consola: 3.4.2
@@ -10133,7 +10147,7 @@ snapshots:
       '@sanity/color': 3.0.6
       '@sanity/icons': 3.7.4(react@19.2.7)
       csstype: 3.2.3
-      motion: 12.23.26(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      motion: 12.40.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       react: 19.2.7
       react-compiler-runtime: 1.0.0(react@19.2.7)
       react-dom: 19.2.7(react@19.2.7)

@@ -1,5 +1,6 @@
 // sanity.config.ts
 import { defineConfig, isDev } from 'sanity';
+import { vercelDeploy } from '@liiift-studio/deploy-vercel-from-sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemas';
@@ -39,9 +40,10 @@ export default defineConfig({
   plugins: [
     visionTool({
       defaultDataset: 'production',
-      defaultApiVersion: 'v2021-10-21',
+      defaultApiVersion: 'v2026-03-01',
       ...(isDev ? devOnlyPlugins : []),
     }),
+    vercelDeploy({ title: 'Deploy', name: 'vercel-deploy' }),
     structureTool({
       structure: (S, context) => {
         return S.list()
