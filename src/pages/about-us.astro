@@ -2,58 +2,65 @@
 // about-us.astro
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
-import { Image } from 'astro:assets';
-import JohnMixing from '@assets/John-mixing-Chance-the-Rapper-at-MOCA-Grand.webp';
-import JohnProfile from '@assets/John-mixing-Danny-Elfman-Orchestra-2023-Netflix-FYC.webp'
+import { sanityClient } from "sanity:client";
+import { PortableText } from "astro-portabletext";
+import Paragraph from "../components/Paragraph.astro";
+import { urlForImage } from '../sanity/lib/url-for-image'
+import {ABOUT_QUERY} from '../lib/sanity'
+
+const aboutContent = await sanityClient.fetch(ABOUT_QUERY);
+
+const introBlockImageUrl = urlForImage(aboutContent.introBlock.image)
+const ownerBlockImageUrl = urlForImage(aboutContent.ownerBlock.image)
+
+// Owner Block Heading - the initial few words colored with the Accent Color
+const ACCENT_WORDS = 3;
+const words = (aboutContent.ownerBlock.heading ?? "").trim().split(/\s+/);
+const accent = words.slice(0, ACCENT_WORDS).join(" ");
+const tail   = words.slice(ACCENT_WORDS).join(" ");
+
+
+
+const components = {
+  block: { normal: Paragraph },
+};
+//console.log(aboutContent);
 ---
 
 <Layout>
   <section class="w-full max-w-7xl mx-auto px-6 lg:px-10 py-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade">
     <div class="grid grid-cols-6 gap-y-4 gap-x-10 w-full">
       <h1 class="font-oswald font-thinner text-4xl uppercase mb-6 border-b border-brand-white-50 text-brand-white-50 pb-3 col-span-full mt-2 fade">
-        <span class="font-semibold text-brand-accent-300">About</span> PFL Pro Sound
-      </h1>
+        <span class="font-semibold text-brand-accent-300">{aboutContent.headingAccent}</span> {aboutContent.headingCopy}</h1>
       <div class="order-2 col-span-full lg:order-1 lg:col-span-3">
         <h2 class="font-geist-mono text-lg font-semibold mb-8 leading-7 fade">
-          Sherman Oaks, CA-based PFL Pro Sound provides creative audio solutions tailored specifically for the event industry.
+          {aboutContent.introBlock.heading}
         </h2>
-        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
-          Whether it's corporate presentations or music concerts, movie premieres or immersive experiences, however simple or complex your needs are, we will team up with you to make your event come to life in the most creative, logical, & fiscal route possible.
-        </p>
-        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
-          Every one of our clients' visions are unique. We deploy line arrays & hide speakers in scenic walls.  We can do a simple set up of speakers on the ground, or create a 360° surround immersive audio experience.  We provide all the tools & qualified crew members needed to help make your event successful.
-        </p>
-        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
-          Additionally, we can oversee all aspects of technical needs to ease your work load.   If you are looking for full production from the ground up we can take care of all of these details for you using our vendor partners for lighting & video, allowing you to keep your interaction to one AV vendor.  We'll assist at every technical step so you can focus your energy on a successful event.
-        </p>
+        <PortableText value={aboutContent.introBlock.body} components={components} />
       </div>
       <div class="order-1 col-span-full lg:order-2 lg:col-span-3 mb-8 lg:mb-0 fade">
-        <Image
+        <img
           class="w-full border border-brand-white-50/30 p-2 aspect-video lg:aspect-square object-cover object-top lg:max-w-none"
-          src={ JohnMixing }
-          alt="John Wilson of PFL Pro Sound mixing Chance the Rapper at MOCA Grand"
+          src={introBlockImageUrl.url()}
+          alt={aboutContent.introBlock.image.alt}
         />
       </div>
     </div>
 
     <div class="grid grid-cols-6 gap-y-4 gap-x-10 w-full mt-16">
       <div class="col-span-full md:col-span-2 fade">
-        <Image
+        <img
           class="w-full object-contain border border-brand-white-50/30 p-2 lg:p-2"
-          src={ JohnProfile}
+          src={ownerBlockImageUrl.url()}
           alt="John Wilson, owner of PFL Pro Sound"
+          alt={aboutContent.ownerBlock.image.alt}
         />
       </div>
       <div class="col-span-full md:col-span-4 md:max-w-2xl fade">
         <h3 class="font-geist-mono text-lg font-normal mb-8 leading-7">
-          <span class="font-bold text-brand-accent-200">Owner John Wilson</span> has spent over 25 years in the audio industry.
+          <span class="font-bold text-brand-accent-200">{accent}</span>{tail && ` ${tail}`}
         </h3>
-        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
-          Before creating PFL Pro Sound, John partnered as an A1 with various production companies mixing corporate event for 15|40 Productions, Paramount Pictures, Fox, Apple, Netflix, Google, Hulu, & Amazon, as well as mixed for multiple touring artists.
-        </p>
-        <p class="font-geist-mono text-sm font-light mb-6 leading-7">
-          John's background as a musician helped develop the necessary skills to anticipate, troubleshoot, & mix with intent.  His philosophy has always been to eliminate potential distractions before they happen.  PFL Pro Sound was created with all of this in mind.
-        </p>
+        <PortableText value={aboutContent.ownerBlock.body} components={components} />
       </div>
     </div>
   </section>
