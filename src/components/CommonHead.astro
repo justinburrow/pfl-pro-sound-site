@@ -1,9 +1,15 @@
 ---
 import { ClientRouter } from "astro:transitions";
+interface Props {
+  title?: string,
+  settings?: any
+}
+
+const { settings } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={ Astro.generator } />
-<title>PFL Pro Sound</title>
+<title>{ settings.title }</title>

@@ -1,12 +1,16 @@
 ---
-// contact.astro
+import { sanityClient } from "sanity:client";
 import Layout from '../layouts/Layout.astro';
 import "../styles/global.css";
+import {CONTACT_QUERY} from '../lib/sanity'
+
+const contactContent = await sanityClient.fetch(CONTACT_QUERY);
+const formSubmit = `https://submit-form.com/${contactContent.formId}`
 ---
 
 <Layout>
   <section class="w-full max-w-7xl mx-auto p-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade rounded-sm">
-    <form class="max-w-3xl mx-auto mt-12" id="contact-form" action="https://submit-form.com/vTPitFu1Z">
+    <form class="max-w-3xl mx-auto mt-12" id="contact-form" action={formSubmit}>
       <div class="mb-5 grid grid-cols-2 gap-x-8">
         <div>
           <label for="firstname" class="block mb-2.5 text-sm font-medium text-heading">First Name</label>
