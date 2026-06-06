@@ -25,7 +25,7 @@ importers:
         version: 4.0.2
       '@sanity/astro':
         specifier: ^3.4.0
-        version: 3.4.0(832b913c9b8d10e45358a21f29f252e2)
+        version: 3.4.0(5db6a39e74d15dff065c20e2ae619505)
       '@sanity/client':
         specifier: ^7.22.1
         version: 7.22.1
@@ -37,19 +37,22 @@ importers:
         version: 2.1.1
       '@sanity/orderable-document-list':
         specifier: ^1.5.1
-        version: 1.5.1(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 1.5.1(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@sanity/ui':
         specifier: ^3.2.0
         version: 3.2.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@sanity/vision':
         specifier: ^5.30.0
-        version: 5.30.0(@babel/runtime@7.29.7)(@codemirror/lint@6.9.6)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 5.30.0(@babel/runtime@7.29.7)(@codemirror/lint@6.9.6)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@tabler/icons':
         specifier: ^3.44.0
         version: 3.44.0
       '@tailwindcss/forms':
         specifier: ^0.5.11
         version: 0.5.11(tailwindcss@4.3.0)
+      '@tailwindcss/postcss':
+        specifier: ^4.3.0
+        version: 4.3.0
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@7.3.5(@types/node@25.0.2)(jiti@2.7.0)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(tsx@4.22.4)(yaml@2.9.0))
@@ -92,6 +95,9 @@ importers:
       lucide-react:
         specifier: ^0.556.0
         version: 0.556.0(react@19.2.7)
+      postcss:
+        specifier: ^8.5.15
+        version: 8.5.15
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -103,10 +109,10 @@ importers:
         version: 19.2.7
       sanity:
         specifier: ^5.30.0
-        version: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+        version: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
       sanity-plugin-mux-input:
         specifier: ^2.19.0
-        version: 2.19.0(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+        version: 2.19.0(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -3211,6 +3217,9 @@ packages:
   '@tailwindcss/postcss@4.1.18':
     resolution: {integrity: sha512-Ce0GFnzAOuPyfV5SxjXGn0CubwGcuDB0zcdaPuCSzAa/2vII24JTkH+I6jcbXLb1ctjZMZZI6OjDaLPJQL1S0g==}
 
+  '@tailwindcss/postcss@4.3.0':
+    resolution: {integrity: sha512-Jm05Tjx+9yCLGv5qw1c+84Psds8MnyrEQYCB+FFk2lgGiUjlRqdxke4mVTuYrj2xnVZqKim2Apr5ySuQRYAw/w==}
+
   '@tailwindcss/vite@4.3.0':
     resolution: {integrity: sha512-t6J3OrB5Fc0ExuhohouH0fWUGMYL6PTLhW+E7zIk/pdbnJARZDCwjBznFnkh5ynRnIRSI4YjtTH0t6USjJISrw==}
     peerDependencies:
@@ -4140,10 +4149,6 @@ packages:
   end-of-stream@1.4.5:
     resolution: {integrity: sha512-ooEGc6HP26xXq/N+GCGOT0JKCLDGrq2bQUZrQ7gyrJiZANJ/8YDTxTpQBXGMn+WbIQXNVpyWymm7KYVICQnyOg==}
 
-  enhanced-resolve@5.18.4:
-    resolution: {integrity: sha512-LgQMM4WXU3QI+SYgEc2liRgznaD5ojbmY3sb8LxyguVkIg5FxdpTkvk72te2R38/TGKxH634oLxXRGY6d7AP+Q==}
-    engines: {node: '>=10.13.0'}
-
   enhanced-resolve@5.22.2:
     resolution: {integrity: sha512-0rxICaFZ7NQho/sHely2bvOPRP0Eu2B0NZ9zM54YvRvWMn7jfz3DmnOZDR9LlXDdDcqntAVc6Hfy4gr/tdH/Ag==}
     engines: {node: '>=10.13.0'}
@@ -4868,10 +4873,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  jiti@2.6.1:
-    resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
-    hasBin: true
-
   jiti@2.7.0:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
@@ -5504,13 +5505,13 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.1.11:
-    resolution: {integrity: sha512-v+KEsUv2ps74PaSKv0gHTxTCgMXOIfBEbaqa6w6ISIGC7ZsvHN4N9oJ8d4cmf0n5oTzQz2SLmThbQWhjd/8eKg==}
-    engines: {node: ^18 || >=20}
+  nanoid@3.3.12:
+    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.1.6:
-    resolution: {integrity: sha512-c7+7RQ+dMB5dPwwCp4ee1/iV/q2P6aK1mTZcfr1BTuVlyW9hJYiMPybJCcnBlQtuSmTIWNeazm/zqNoZSSElBg==}
+  nanoid@5.1.11:
+    resolution: {integrity: sha512-v+KEsUv2ps74PaSKv0gHTxTCgMXOIfBEbaqa6w6ISIGC7ZsvHN4N9oJ8d4cmf0n5oTzQz2SLmThbQWhjd/8eKg==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -5799,6 +5800,10 @@ packages:
 
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
+
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
+    engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==}
@@ -6583,10 +6588,6 @@ packages:
 
   tailwindcss@4.3.0:
     resolution: {integrity: sha512-y6nxMGB1nMW9R6k96e5gdIFzcfL/gTJRNaqGes1YvkLnPVXzWgbqFF2yLC0T8G774n24cx3Pe8XrKoniCOAH+Q==}
-
-  tapable@2.3.0:
-    resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
-    engines: {node: '>=6'}
 
   tapable@2.3.3:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
@@ -8566,9 +8567,9 @@ snapshots:
     dependencies:
       '@csstools/css-tokenizer': 4.0.0
 
-  '@csstools/css-syntax-patches-for-csstree@1.0.14(postcss@8.5.6)':
+  '@csstools/css-syntax-patches-for-csstree@1.0.14(postcss@8.5.15)':
     dependencies:
-      postcss: 8.5.6
+      postcss: 8.5.15
 
   '@csstools/css-syntax-patches-for-csstree@1.1.5(css-tree@3.2.1)':
     optionalDependencies:
@@ -9797,7 +9798,7 @@ snapshots:
 
   '@sanity/asset-utils@2.3.0': {}
 
-  '@sanity/astro@3.4.0(832b913c9b8d10e45358a21f29f252e2)':
+  '@sanity/astro@3.4.0(5db6a39e74d15dff065c20e2ae619505)':
     dependencies:
       '@sanity/client': 7.22.1
       '@sanity/visual-editing': 5.4.3(@emotion/is-prop-valid@1.4.0)(@sanity/client@7.22.1)(@sanity/types@5.30.0(@types/react@19.2.16))(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(svelte@5.56.2)(typescript@6.0.3)
@@ -9806,7 +9807,7 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       react-is: 19.2.7
-      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -9819,7 +9820,7 @@ snapshots:
 
   '@sanity/bifur-client@1.0.0':
     dependencies:
-      nanoid: 5.1.6
+      nanoid: 5.1.11
       rxjs: 7.8.2
 
   '@sanity/blueprints-parser@0.4.0': {}
@@ -9898,7 +9899,7 @@ snapshots:
       - terser
       - yaml
 
-  '@sanity/cli@6.7.2(@noble/hashes@2.2.0)(@types/node@25.0.2)(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(sass-embedded@1.100.0)(sass@1.94.2)(typescript@6.0.3)(xstate@5.32.0)':
+  '@sanity/cli@6.7.2(@noble/hashes@2.2.0)(@types/node@25.0.2)(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(sass-embedded@1.100.0)(sass@1.94.2)(typescript@6.0.3)(xstate@5.32.0)':
     dependencies:
       '@oclif/core': 4.11.4
       '@oclif/plugin-help': 6.2.50
@@ -9933,12 +9934,12 @@ snapshots:
       gunzip-maybe: 1.4.2
       import-meta-resolve: 4.2.0
       is-installed-globally: 1.0.0
-      isomorphic-dompurify: 2.34.0(postcss@8.5.6)
+      isomorphic-dompurify: 2.34.0(postcss@8.5.15)
       json5: 2.2.3
       jsonc-parser: 3.3.1
       lodash-es: 4.18.1
       minimist: 1.2.8
-      nanoid: 5.1.6
+      nanoid: 5.1.11
       oneline: 2.0.0
       open: 11.0.0
       p-map: 7.0.4
@@ -10180,7 +10181,7 @@ snapshots:
       hotscript: 1.0.13
       lodash: 4.17.21
       mendoza: 3.0.8
-      nanoid: 5.1.6
+      nanoid: 5.1.11
       rxjs: 7.8.2
     optionalDependencies:
       xstate: 5.32.0
@@ -10212,7 +10213,7 @@ snapshots:
       - '@types/react'
       - supports-color
 
-  '@sanity/orderable-document-list@1.5.1(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
+  '@sanity/orderable-document-list@1.5.1(@emotion/is-prop-valid@1.4.0)(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
     dependencies:
       '@hello-pangea/dnd': 18.0.1(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@sanity/icons': 3.7.4(react@19.2.7)
@@ -10221,8 +10222,8 @@ snapshots:
       lexorank: 1.0.5
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
-      sanity-plugin-utils: 1.8.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      sanity-plugin-utils: 1.8.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -10428,7 +10429,7 @@ snapshots:
       '@types/uuid': 8.3.4
       uuid: 8.3.2
 
-  '@sanity/vision@5.30.0(@babel/runtime@7.29.7)(@codemirror/lint@6.9.6)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
+  '@sanity/vision@5.30.0(@babel/runtime@7.29.7)(@codemirror/lint@6.9.6)(@codemirror/theme-one-dark@6.1.3)(@emotion/is-prop-valid@1.4.0)(codemirror@6.0.2)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
     dependencies:
       '@codemirror/autocomplete': 6.20.3
       '@codemirror/commands': 6.10.3
@@ -10454,7 +10455,7 @@ snapshots:
       react: 19.2.7
       react-rx: 4.2.2(react@19.2.7)(rxjs@7.8.2)
       rxjs: 7.8.2
-      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     transitivePeerDependencies:
       - '@babel/runtime'
@@ -10625,8 +10626,8 @@ snapshots:
   '@tailwindcss/node@4.1.18':
     dependencies:
       '@jridgewell/remapping': 2.3.5
-      enhanced-resolve: 5.18.4
-      jiti: 2.6.1
+      enhanced-resolve: 5.22.2
+      jiti: 2.7.0
       lightningcss: 1.30.2
       magic-string: 0.30.21
       source-map-js: 1.2.1
@@ -10636,7 +10637,7 @@ snapshots:
     dependencies:
       '@jridgewell/remapping': 2.3.5
       enhanced-resolve: 5.22.2
-      jiti: 2.6.1
+      jiti: 2.7.0
       lightningcss: 1.32.0
       magic-string: 0.30.21
       source-map-js: 1.2.1
@@ -10751,6 +10752,14 @@ snapshots:
       '@tailwindcss/oxide': 4.1.18
       postcss: 8.5.6
       tailwindcss: 4.1.18
+
+  '@tailwindcss/postcss@4.3.0':
+    dependencies:
+      '@alloc/quick-lru': 5.2.0
+      '@tailwindcss/node': 4.3.0
+      '@tailwindcss/oxide': 4.3.0
+      postcss: 8.5.15
+      tailwindcss: 4.3.0
 
   '@tailwindcss/vite@4.3.0(vite@7.3.5(@types/node@25.0.2)(jiti@2.7.0)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(tsx@4.22.4)(yaml@2.9.0))':
     dependencies:
@@ -11557,10 +11566,10 @@ snapshots:
       '@asamuzakjp/css-color': 3.2.0
       rrweb-cssom: 0.8.0
 
-  cssstyle@5.3.4(postcss@8.5.6):
+  cssstyle@5.3.4(postcss@8.5.15):
     dependencies:
       '@asamuzakjp/css-color': 4.1.0
-      '@csstools/css-syntax-patches-for-csstree': 1.0.14(postcss@8.5.6)
+      '@csstools/css-syntax-patches-for-csstree': 1.0.14(postcss@8.5.15)
       css-tree: 3.1.0
     transitivePeerDependencies:
       - postcss
@@ -11722,11 +11731,6 @@ snapshots:
   end-of-stream@1.4.5:
     dependencies:
       once: 1.4.0
-
-  enhanced-resolve@5.18.4:
-    dependencies:
-      graceful-fs: 4.2.11
-      tapable: 2.3.0
 
   enhanced-resolve@5.22.2:
     dependencies:
@@ -12528,10 +12532,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  isomorphic-dompurify@2.34.0(postcss@8.5.6):
+  isomorphic-dompurify@2.34.0(postcss@8.5.15):
     dependencies:
       dompurify: 3.3.1
-      jsdom: 27.3.0(postcss@8.5.6)
+      jsdom: 27.3.0(postcss@8.5.15)
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -12544,8 +12548,6 @@ snapshots:
       async: 3.2.6
       filelist: 1.0.4
       picocolors: 1.1.1
-
-  jiti@2.6.1: {}
 
   jiti@2.7.0: {}
 
@@ -12587,11 +12589,11 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  jsdom@27.3.0(postcss@8.5.6):
+  jsdom@27.3.0(postcss@8.5.15):
     dependencies:
       '@acemir/cssom': 0.9.29
       '@asamuzakjp/dom-selector': 6.7.6
-      cssstyle: 5.3.4(postcss@8.5.6)
+      cssstyle: 5.3.4(postcss@8.5.15)
       data-urls: 6.0.0
       decimal.js: 10.6.0
       html-encoding-sniffer: 4.0.0
@@ -13308,9 +13310,9 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  nanoid@5.1.11: {}
+  nanoid@3.3.12: {}
 
-  nanoid@5.1.6: {}
+  nanoid@5.1.11: {}
 
   neotraverse@0.6.18: {}
 
@@ -13596,6 +13598,12 @@ snapshots:
 
   postcss-value-parser@4.2.0:
     optional: true
+
+  postcss@8.5.15:
+    dependencies:
+      nanoid: 3.3.12
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
 
   postcss@8.5.6:
     dependencies:
@@ -14016,7 +14024,7 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sanity-plugin-mux-input@2.19.0(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
+  sanity-plugin-mux-input@2.19.0(@emotion/is-prop-valid@1.4.0)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
     dependencies:
       '@mux/mux-player-react': 3.10.1(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@mux/upchunk': 3.5.0
@@ -14031,7 +14039,7 @@ snapshots:
       react-is: 19.2.7
       react-rx: 4.2.2(react@19.2.7)(rxjs@7.8.2)
       rxjs: 7.8.2
-      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
       scroll-into-view-if-needed: 3.1.0
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       suspend-react: 0.1.3(react@19.2.7)
@@ -14044,7 +14052,7 @@ snapshots:
       - '@types/react-dom'
       - react-dom
 
-  sanity-plugin-utils@1.8.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
+  sanity-plugin-utils@1.8.0(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.7(react@19.2.7))(react-is@19.2.7)(react@19.2.7)(rxjs@7.8.2)(sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3))(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)):
     dependencies:
       '@sanity/icons': 3.7.4(react@19.2.7)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -14052,14 +14060,14 @@ snapshots:
       react: 19.2.7
       react-fast-compare: 3.2.2
       rxjs: 7.8.2
-      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
+      sanity: 5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3)
       styled-components: 6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
       - react-dom
       - react-is
 
-  sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3):
+  sanity@5.30.0(@emotion/is-prop-valid@1.4.0)(@noble/hashes@2.2.0)(@oclif/core@4.11.4)(@sanity/cli-core@1.3.4(@noble/hashes@2.2.0)(@types/node@25.0.2)(lightningcss@1.32.0)(sass-embedded@1.100.0)(sass@1.94.2)(yaml@2.9.0))(@types/node@25.0.2)(@types/react-dom@19.2.3(@types/react@19.2.16))(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(prismjs@1.30.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass-embedded@1.100.0)(sass@1.94.2)(styled-components@6.4.2(css-to-react-native@3.2.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@6.0.3):
     dependencies:
       '@algorithm.ts/lcs': 4.0.6
       '@date-fns/tz': 1.4.1
@@ -14083,7 +14091,7 @@ snapshots:
       '@rexxars/react-json-inspector': 9.0.1(react@19.2.7)
       '@sanity/asset-utils': 2.3.0
       '@sanity/bifur-client': 1.0.0
-      '@sanity/cli': 6.7.2(@noble/hashes@2.2.0)(@types/node@25.0.2)(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.6)(sass-embedded@1.100.0)(sass@1.94.2)(typescript@6.0.3)(xstate@5.32.0)
+      '@sanity/cli': 6.7.2(@noble/hashes@2.2.0)(@types/node@25.0.2)(@types/react@19.2.16)(jiti@2.7.0)(lightningcss@1.32.0)(postcss@8.5.15)(sass-embedded@1.100.0)(sass@1.94.2)(typescript@6.0.3)(xstate@5.32.0)
       '@sanity/client': 7.22.1
       '@sanity/color': 3.0.6
       '@sanity/comlink': 4.0.1
@@ -14593,8 +14601,6 @@ snapshots:
   tailwindcss@4.1.18: {}
 
   tailwindcss@4.3.0: {}
-
-  tapable@2.3.0: {}
 
   tapable@2.3.3: {}
 
