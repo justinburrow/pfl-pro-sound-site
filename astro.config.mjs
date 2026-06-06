@@ -19,11 +19,12 @@ export default defineConfig({
       dataset: 'production',
       useCdn: false,
       studioBasePath: '/admin',
+      apiVersion: '2026-03-01',
+      // log server-side Sanity requests
+      logClientRequests: 'dev',
       stega: {
         studioUrl: '/admin',
       },
-      // log server-side Sanity requests
-      logClientRequests: 'dev',
     }),
     react(),
     metaTags(),
