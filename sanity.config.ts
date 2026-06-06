@@ -1,5 +1,5 @@
 // sanity.config.ts
-import { defineConfig } from 'sanity';
+import { defineConfig, isDev } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemas';
@@ -29,6 +29,8 @@ const singletonActions = new Set([
   'restore',
 ]);
 
+const devOnlyPlugins = [visionTool()];
+
 export default defineConfig({
   name: 'pfl-pro-sound',
   title: 'PFL Pro Sound',
@@ -38,6 +40,7 @@ export default defineConfig({
     visionTool({
       defaultDataset: 'production',
       defaultApiVersion: 'v2021-10-21',
+      ...(isDev ? devOnlyPlugins : []),
     }),
     structureTool({
       structure: (S, context) => {
