@@ -22,6 +22,7 @@ select option{background:#1f2937}
 .tab.active{background:#374151;border-color:#6b7280}
 .tab-close{color:#9ca3af;font-size:16px;line-height:1;padding:0 2px;background:none;border:none}
 .tab-close:hover{color:#f87171}
+.tab.drag-over{border-color:#f97316;background:#2d1f0e}
 #btn-new-tab{background:#1f2937;color:#9ca3af;border:1px solid #374151;font-size:16px;padding:2px 10px;border-radius:4px}
 #btn-new-tab:hover{background:#374151}
 
@@ -171,6 +172,7 @@ canvas{display:block}
       </div>
       <button class="sb-btn" id="btn-load-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Load Layout</button>
       <button class="sb-btn" id="btn-export-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export as PDF</button>
+      <button class="sb-btn" id="btn-export-totals" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export Totals Only</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tools</div>
@@ -535,6 +537,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-load-pdf').addEventListener('click', () => document.getElementById('file-pdf-input').click());
   document.getElementById('file-pdf-input').addEventListener('change', onLoadPDF);
   document.getElementById('btn-export-pdf').addEventListener('click', exportPDF);
+  document.getElementById('btn-export-totals').addEventListener('click', exportTotalsOnly);
   document.getElementById('btn-save').addEventListener('click', saveLS);
   document.getElementById('btn-save-as').addEventListener('click', saveAs);
   document.getElementById('btn-load-project').addEventListener('click', () => document.getElementById('file-cplan-input').click());
@@ -592,20 +595,25 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // Props
+  document.getElementById('ip-label').addEventListener('focus', () => { pushUndo(); });
   document.getElementById('ip-label').addEventListener('input', e => {
-    const it = S.items.find(i=>i.id===selectedId); if(it){ pushUndo(); it.label=e.target.value; render(); }
+    const it = S.items.find(i=>i.id===selectedId); if(it){ it.label=e.target.value; render(); }
   });
   document.getElementById('ip-color').addEventListener('input', e => {
     { pushUndo(); const col=e.target.value; const ids=selectedIds.size?selectedIds:new Set([selectedId]); S.items.forEach(i=>{ if(ids.has(i.id)) i.color=col; }); render(); }
   });
+  document.getElementById('ip-size').addEventListener('mousedown', () => { pushUndo(); });
   document.getElementById('ip-size').addEventListener('input', e => {
-    const it = S.items.find(i=>i.id===selectedId); if(it){ pushUndo(); it.size=+e.target.value; render(); }
+    const ids=selectedIds.size?selectedIds:new Set([selectedId]); const sz=+e.target.value;
+    if(ids.size){ S.items.forEach(i=>{ if(ids.has(i.id)) i.size=sz; }); render(); }
   });
+  document.getElementById('ip-tb-w').addEventListener('mousedown', () => { pushUndo(); });
   document.getElementById('ip-tb-w').addEventListener('input', e => {
-    const it=S.items.find(i=>i.id===selectedId); if(it&&it.type==='textbox'){pushUndo();it.w=Math.max(40,+e.target.value);render();}
+    const it=S.items.find(i=>i.id===selectedId); if(it&&it.type==='textbox'){it.w=Math.max(40,+e.target.value);render();}
   });
+  document.getElementById('ip-tb-h').addEventListener('mousedown', () => { pushUndo(); });
   document.getElementById('ip-tb-h').addEventListener('input', e => {
-    const it=S.items.find(i=>i.id===selectedId); if(it&&it.type==='textbox'){pushUndo();it.h=Math.max(30,+e.target.value);render();}
+    const it=S.items.find(i=>i.id===selectedId); if(it&&it.type==='textbox'){it.h=Math.max(30,+e.target.value);render();}
   });
   document.getElementById('ip-delete').addEventListener('click', deleteSelected);
   document.getElementById('cp-color').addEventListener('input', e => {
@@ -688,6 +696,17 @@ function fitView() {
 }
 
 // ─── Undo ─────────────────────────────────────────────────────────────────────
+function itemsInsideBox(box) {
+  const bx=box.x, by=box.y, bw=(box.w||200)/2, bh=(box.h||120)/2;
+  return S.items.filter(it=>it.id!==box.id && it.type!=='textbox' &&
+    it.x>=bx-bw && it.x<=bx+bw && it.y>=by-bh && it.y<=by+bh);
+}
+function containingBox(item) {
+  return S.items.find(b=>b.type==='textbox' && b.id!==item.id &&
+    item.x>=b.x-(b.w||200)/2 && item.x<=b.x+(b.w||200)/2 &&
+    item.y>=b.y-(b.h||120)/2 && item.y<=b.y+(b.h||120)/2);
+}
+
 function toggleDropdown(id) {
   const dd = document.getElementById(id);
   const btn = dd.querySelector('.sb-dropdown-btn');
@@ -800,12 +819,45 @@ function loadCurrent() {
   if(gs){ gs.value = S.globalSize||20; document.getElementById('global-size-val').textContent = S.globalSize||20; }
   undoStack = []; selectedId = null; selType = null; selectedIds.clear();
 }
+let _tabDragIdx = null;
 function renderTabs() {
   const c = document.getElementById('tabs-container');
   c.innerHTML = '';
   tabs.forEach((t,i) => {
     const div = document.createElement('div');
     div.className = 'tab' + (i===activeTab?' active':'');
+    div.draggable = true;
+
+    div.addEventListener('dragstart', e => {
+      _tabDragIdx = i;
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    div.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      document.querySelectorAll('.tab').forEach(d=>d.classList.remove('drag-over'));
+      div.classList.add('drag-over');
+    });
+    div.addEventListener('dragleave', () => div.classList.remove('drag-over'));
+    div.addEventListener('drop', e => {
+      e.preventDefault();
+      div.classList.remove('drag-over');
+      if(_tabDragIdx===null || _tabDragIdx===i) return;
+      saveCurrent();
+      const moved = tabs.splice(_tabDragIdx, 1)[0];
+      const target = _tabDragIdx < i ? i-1 : i;
+      tabs.splice(target, 0, moved);
+      activeTab = target;
+      _tabDragIdx = null;
+      loadCurrent();
+      renderTabs();
+      render(); updateProps(); updateSchedule(); updateTotals();
+    });
+    div.addEventListener('dragend', () => {
+      _tabDragIdx = null;
+      document.querySelectorAll('.tab').forEach(d=>d.classList.remove('drag-over'));
+    });
+
     const name = document.createElement('span');
     name.textContent = t.name;
     name.style.cursor = 'text';
@@ -1671,7 +1723,12 @@ function onMouseDown(e) {
       selectedId=it.id; selType='item';
       pushUndo();
       const allIds = inMulti ? selectedIds : new Set([it.id]);
-      const groupItems = S.items.filter(i=>allIds.has(i.id));
+      let groupItems = S.items.filter(i=>allIds.has(i.id));
+      // If dragging a textbox, lock all contained items into the group
+      if(!inMulti && it.type==='textbox'){
+        const contained = itemsInsideBox(it);
+        contained.forEach(c=>{ if(!groupItems.find(g=>g.id===c.id)) groupItems.push(c); });
+      }
       const startPositions = groupItems.map(i=>({item:i,ix:i.x,iy:i.y}));
       drag={type:'item',item:it,startX:cx,startY:cy,startIx:it.x,startIy:it.y,group:startPositions};
       updateProps(); render(); return;
@@ -1789,6 +1846,7 @@ function onMouseMove(e) {
   }
 
   if(drag){
+    drag.moved=true;
     if(drag.type==='item'){
       const coord=toCoord(cx,cy);
       const dxC=coord.x-toCoord(drag.startX,drag.startY).x;
@@ -1836,6 +1894,17 @@ function onMouseMove(e) {
             if(Math.abs(dragBot-otherTop)<thresh) guides.push({y:otherTop,snapToY:otherTop-dragH/2});
           }
         });
+      }
+      // Snap to other items inside the same legend box (Y alignment)
+      if(drag.item.type!=='textbox'){
+        const box=containingBox({...drag.item,x:newX,y:newY});
+        if(box){
+          const siblings=itemsInsideBox(box).filter(s=>s.id!==drag.item.id);
+          siblings.forEach(s=>{
+            const thresh=10/V.zoom;
+            if(Math.abs(s.y-newY)<thresh) guides.push({y:s.y,snapToY:s.y});
+          });
+        }
       }
       drag.guides=guides;
       const snapGuideX=guides.find(g=>g.x!==undefined);
@@ -1923,6 +1992,10 @@ function onMouseUp(e) {
   panState=null;
   if(drag){
     if(drag.type==='item'||drag.type==='resize') dirtyLaneCache();
+    // If pushUndo was called on mousedown but no movement occurred, pop it back off
+    if(!drag.moved && (drag.type==='item'||drag.type==='waypoint'||drag.type==='resize')){
+      undoStack.pop();
+    }
     drag=null;
   }
 }
@@ -2364,12 +2437,18 @@ function exportPDF() {
   const cW=parseFloat(canvas.style.width),cH=parseFloat(canvas.style.height);
   const scale=Math.min(W/cW,H/cH);
   doc.addImage(img,'JPEG',(W-cW*scale)/2,(H-cH*scale)/2,cW*scale,cH*scale);
-
-  // ── Page 2: Cable Schedule & Totals ──────────────────────────────────────────
-  doc.addPage();
+  // Header bar over page 1
   const planName = tabs[activeTab].name || 'Plan';
   const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   const L=36, R=W-36, T=36;
+  doc.setFillColor(15,23,42); doc.rect(L,T,R-L,22,'F');
+  doc.setFontSize(13); doc.setTextColor(255,255,255);
+  doc.text(planName+'  |  Audio Layout', L+6, T+14);
+  doc.setFontSize(9); doc.setTextColor(180,180,180);
+  doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, T+14, {align:'right'});
+
+  // ── Page 2: Cable Schedule & Totals ──────────────────────────────────────────
+  doc.addPage();
 
   // Sanitize text — replace Unicode symbols jsPDF can't render
   function safe(str) {
@@ -2386,9 +2465,9 @@ function exportPDF() {
   // Header bar full width
   doc.setFillColor(15,23,42); doc.rect(L,T,R-L,22,'F');
   doc.setFontSize(13); doc.setTextColor(255,255,255);
-  doc.text('PFL Pro Sound LLC  |  Cable Schedule', L+6, T+14);
+  doc.text(safe(planName)+'  |  Cable Schedule', L+6, T+14);
   doc.setFontSize(9); doc.setTextColor(180,180,180);
-  doc.text(safe(planName)+'   '+dateStr, R-6, T+14, {align:'right'});
+  doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, T+14, {align:'right'});
 
   // Two column layout
   // Left col: Cable Runs   Right col: Totals + Adapters
@@ -2419,18 +2498,25 @@ function exportPDF() {
     if(ly + needed > H - 30) {
       doc.addPage();
       ly = 36;
-      // reprint left col header on continuation pages
-      doc.setFillColor(15,23,42); doc.rect(L,ly,lW,13,'F');
-      doc.setFontSize(8); doc.setTextColor(200,200,200);
+      // Full header bar on continuation pages
+      doc.setFillColor(15,23,42); doc.rect(L,ly,R-L,22,'F');
+      doc.setFontSize(13); doc.setTextColor(255,255,255);
+      doc.text(safe(planName)+'  |  Cable Schedule', L+6, ly+14);
+      doc.setFontSize(9); doc.setTextColor(180,180,180);
+      doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, ly+14, {align:'right'});
+      ly += 26;
+      doc.setFillColor(30,41,59); doc.rect(L,ly,R-L,13,'F');
+      doc.setFontSize(8); doc.setTextColor(148,163,184);
       doc.text('CABLE RUNS (continued)', L+4, ly+9);
       ly += 17;
       ly = colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}], L, lW, ly);
     }
   }
 
-  // ── LEFT: Cable Runs ──────────────────────────────────────────────────────
+  // ── LEFT: Cable Runs ─────────────────────────────────────────────────────────
+  const schedPage = doc.internal.getCurrentPageInfo().pageNumber; // always page 2
   ly = secHdr('CABLE RUNS', L, lW, ly);
-  ly = colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:58},{t:'To',o:138},{t:'Length',o:218},{t:'Notes',o:278}], L, lW, ly);
+  ly = colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}], L, lW, ly);
 
   S.cables.forEach((c,i) => {
     checkLeftPage(11);
@@ -2446,10 +2532,10 @@ function exportPDF() {
     doc.setFillColor(...(i%2===0?[255,255,255]:[248,250,252]));
     doc.rect(L,ly,lW,10,'F');
     doc.setFontSize(7.5); doc.setTextColor(30,30,30);
-    doc.text(String(i+1),                              L+2,   ly+7);
-    doc.text(safe(def.label).substring(0,14),           L+18,  ly+7);
-    doc.text(safe((from?.label||'?').substring(0,16)), L+90,  ly+7);
-    doc.text(safe((to?.label||'?').substring(0,16)),   L+168, ly+7);
+    doc.text(String(i+1),                             L+2,   ly+7);
+    doc.text(safe(def.label).substring(0,14),          L+18,  ly+7);
+    doc.text(safe(from?.label||'?').substring(0,18),  L+90,  ly+7);
+    doc.text(safe(to?.label||'?').substring(0,18),    L+168, ly+7);
     doc.text(safe(lenStr),                             L+248, ly+7);
     doc.setTextColor(110,110,110);
     doc.text(safe(notes),                              L+308, ly+7);
@@ -2461,7 +2547,8 @@ function exportPDF() {
     doc.text('No cables',L+4,ly+7);ly+=12;
   }
 
-  // ── RIGHT: Cable Totals ───────────────────────────────────────────────────
+  // ── RIGHT: Cable Totals — jump back to schedPage so totals always appear top-right of page 2 ──
+  doc.setPage(schedPage);
   ry = secHdr('CABLE TOTALS', rX, rW, ry);
   ry = colHdr([{t:'Type',o:2},{t:'Length',o:80},{t:'Qty',o:140}], rX, rW, ry);
 
@@ -2520,10 +2607,155 @@ function exportPDF() {
     doc.setPage(p);
     doc.setFontSize(7.5);doc.setTextColor(150,150,150);
     doc.text('PFL Pro Sound LLC  |  '+safe(planName), L, H-14);
-    doc.text('Page '+p+' of '+pageCount, R, H-14, {align:'right'});
+    if(p>1) doc.text('Page '+p+' of '+pageCount, R, H-14, {align:'right'});
   }
 
   doc.save((safe(planName)||'plan')+'.pdf');
+}
+
+function exportTotalsOnly() {
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'pt',format:'letter'});
+  const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+  const planName = tabs[activeTab].name || 'Plan';
+  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const L=36, R=W-36, T=36;
+
+  function safe(str) {
+    return (str||'')
+      .replace(/\u2192/g,'->').replace(/\u2190/g,'<-')
+      .replace(/\u00d7/g,'x').replace(/\u00e9/g,'e')
+      .replace(/[\u2018\u2019]/g,"'")
+      .replace(/[\u201c\u201d]/g,'"')
+      .replace(/\u2013/g,'-').replace(/\u2014/g,'--')
+      .replace(/[^\x00-\x7f]/g,'?')
+      .replace(/\n/g,' / ').replace(/\r/g,'');
+  }
+
+  function drawPageHeader() {
+    const y=doc.internal.getCurrentPageInfo().pageNumber===1?T:36;
+    doc.setFillColor(15,23,42); doc.rect(L,y,R-L,22,'F');
+    doc.setFontSize(13); doc.setTextColor(255,255,255);
+    doc.text(safe(planName)+'  |  Cable Schedule', L+6, y+14);
+    doc.setFontSize(9); doc.setTextColor(180,180,180);
+    doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, y+14, {align:'right'});
+    return y+26;
+  }
+
+  const colGap=14;
+  const lW=Math.round((R-L)*0.62);
+  const rX=L+lW+colGap;
+  const rW=R-rX;
+
+  function secHdr(title,x,w,y){ doc.setFillColor(30,41,59);doc.rect(x,y,w,13,'F');doc.setFontSize(8);doc.setTextColor(148,163,184);doc.text(title,x+4,y+9);return y+17; }
+  function colHdr(cols,x,w,y){ doc.setFillColor(241,245,249);doc.rect(x,y,w,12,'F');doc.setFontSize(7.5);doc.setTextColor(71,85,105);doc.setFont(undefined,'bold');cols.forEach(c=>doc.text(c.t,x+c.o,y+8.5));doc.setFont(undefined,'normal');return y+13; }
+
+  let startY = drawPageHeader();
+  let ly=startY, ry=startY;
+
+  function checkLeftPage(needed) {
+    if(ly+needed>H-30){
+      doc.addPage();
+      const ny=drawPageHeader();
+      ly=ny;
+      doc.setFillColor(30,41,59); doc.rect(L,ly,R-L,13,'F');
+      doc.setFontSize(8); doc.setTextColor(148,163,184);
+      doc.text('CABLE RUNS (continued)', L+4, ly+9);
+      ly+=17;
+      ly=colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}],L,lW,ly);
+    }
+  }
+
+  // ── LEFT: Cable Runs ─────────────────────────────────────────────────────
+  const schedPage = doc.internal.getCurrentPageInfo().pageNumber;
+  ly=secHdr('CABLE RUNS',L,lW,ly);
+  ly=colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}],L,lW,ly);
+  let cableNum=0;
+  S.cables.forEach(c=>{
+    checkLeftPage(11);
+    const from=cableEndpt(c,'from');
+    const to=cableEndpt(c,'to');
+    const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
+    const ft=calcCableLength(c);
+    const pieces=[...(c.combo||getBestCombo(ft,c.type))].sort((a,b)=>b-a);
+    const total=pieces.reduce((s,v)=>s+v,0);
+    const lenStr=def.adapter?'2ft fixed':(!S.scale.ppf&&!c.manualFt?'?':pieces.length>1?total+'ft ('+pieces.join('+')+'ft)':total+'ft'+(c.manualFt?'*':''));
+    const warn=!def.adapter&&S.scale.ppf&&total>def.limit;
+    doc.setFillColor(...(cableNum%2===0?[255,255,255]:[248,250,252]));
+    doc.rect(L,ly,lW,10,'F');
+    doc.setFontSize(7.5); doc.setTextColor(30,30,30);
+    doc.text(String(++cableNum),L+2,ly+7);
+    const rgb=(c.color||'#888888').replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+    doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+    doc.text(safe(def.label).substring(0,14),L+18,ly+7);
+    doc.setTextColor(30,30,30);
+    doc.text(safe(from?.label||'?').substring(0,18),L+90,ly+7);
+    doc.text(safe(to?.label||'?').substring(0,18),L+168,ly+7);
+    doc.text(safe(lenStr),L+248,ly+7);
+    doc.setTextColor(110,110,110);
+    if(c.manualFt) doc.text('manual',L+308,ly+7);
+    if(warn){ doc.setTextColor(180,100,0); doc.text('exceeds '+def.limit+'ft limit',L+308,ly+7); }
+    ly+=11;
+  });
+
+  // ── RIGHT: Totals — jump back to schedPage so it's always top-right ──────
+  doc.setPage(schedPage);
+  ry=secHdr('CABLE TOTALS',rX,rW,ry);
+  ry=colHdr([{t:'Type',o:2},{t:'Length',o:80},{t:'Qty',o:130}],rX,rW,ry);
+  const totGroups={};
+  S.cables.forEach(c=>{
+    const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
+    if(def.adapter) return;
+    const ft=calcCableLength(c);
+    const pieces=[...(c.combo||getBestCombo(ft,c.type))].sort((a,b)=>b-a);
+    pieces.forEach(p=>{ const k=c.type+'|'+p; if(!totGroups[k])totGroups[k]={type:c.type,len:p,qty:0,color:c.color||'#888888'}; totGroups[k].qty++; });
+  });
+  Object.values(totGroups).forEach((g,gi)=>{
+    if(ry+10>H-30) return;
+    doc.setFillColor(...(gi%2===0?[255,255,255]:[248,250,252]));
+    doc.rect(rX,ry,rW,10,'F');
+    doc.setFontSize(7.5);
+    const rgb=(g.color||'#888888').replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+    doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+    doc.text(safe((CABLE_DEFS[g.type]||CABLE_DEFS.custom).label),rX+2,ry+7);
+    doc.setTextColor(30,30,30);
+    doc.text(g.len+'ft',rX+80,ry+7);
+    doc.setFont(undefined,'bold'); doc.text(String(g.qty),rX+130,ry+7); doc.setFont(undefined,'normal');
+    ry+=11;
+  });
+
+  // Adapter totals
+  const adpItems=S.items.filter(it=>ITEM_DEFS[it.type]?.adapter);
+  if(adpItems.length){
+    ry+=6;
+    ry=secHdr('ADAPTERS',rX,rW,ry);
+    ry=colHdr([{t:'Type',o:2},{t:'Qty',o:120}],rX,rW,ry);
+    const adpMap={};
+    adpItems.forEach(it=>{ adpMap[it.type]=adpMap[it.type]||{label:ITEM_DEFS[it.type].label,qty:0,color:it.color||'#888888'}; adpMap[it.type].qty++; });
+    Object.values(adpMap).forEach((g,gi)=>{
+      if(ry+10>H-30) return;
+      doc.setFillColor(...(gi%2===0?[255,255,255]:[248,250,252]));
+      doc.rect(rX,ry,rW,10,'F');
+      doc.setFontSize(7.5);
+      const rgb=(g.color||'#888888').replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+      doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+      doc.text(safe(g.label),rX+2,ry+7);
+      doc.setTextColor(30,30,30);
+      doc.setFont(undefined,'bold'); doc.text(String(g.qty),rX+120,ry+7); doc.setFont(undefined,'normal');
+      ry+=11;
+    });
+  }
+
+  // Footer on all pages
+  const pageCount=doc.internal.getNumberOfPages();
+  for(let p=1;p<=pageCount;p++){
+    doc.setPage(p);
+    doc.setFontSize(7.5); doc.setTextColor(150,150,150);
+    doc.text('PFL Pro Sound LLC  |  '+safe(planName), L, H-14);
+    if(pageCount>1) doc.text('Page '+p+' of '+pageCount, R, H-14, {align:'right'});
+  }
+
+  doc.save((safe(planName)||'plan')+' - totals.pdf');
 }
 
 </script>
