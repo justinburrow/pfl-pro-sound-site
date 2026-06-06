@@ -1,0 +1,20 @@
+---
+import { urlForImage } from '../sanity/lib/url-for-image';
+const { items } = Astro.props;
+---
+<section class="testimonials bg-transparent">
+  {items.map((item: any) => (
+    <div class="mb-18 grid grid-cols-6 gap-1 max-w-7xl mx-auto bg-brand-black-800/70 lg:mb-10 fade rounded-sm">
+      <div class="px-12 pt-2 pb-8 lg:pt-8 lg:pb-8 pr-10 lg:pr-4 col-span-6 lg:col-span-2 order-2 flex justify-end">
+        <img class="relative top-0 w-full object-cover aspect-4-3 fade border border-brand-black-600 max-w-4/5 lg:max-w-none" src={urlForImage(item.image).url()} alt={item.image.alt} />
+      </div>
+      <div class="px-12 py-8 pb-0 lg:pb-8 col-span-6 lg:col-span-4 flex flex-col items-start">
+        <p class="font-oswald uppercase text-brand-black-200 text-xs font-normal border-brand-accent-300 border-b-2 inline pr-6 pb-1">Client Review</p>
+        <h4 class="font-geist-mono text-2xl mt-4 font-light mb-1 uppercase">{item.clientName}</h4>
+        <h5 class="mb-4 text-sm text-brand-accent-300 font-light p-0"><span class="font-bold">{item.reviewerName}</span> - {item.reviewerTitle}</h5>
+        <p class="max-w-2xl font-geist-mono text-sm mb-8 text-brand-black-50 leading-6 italic">"{item.quote}"</p>
+      </div>
+    </div>
+  ))}
+</section>
+
