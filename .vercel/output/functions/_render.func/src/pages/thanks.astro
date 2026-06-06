@@ -1,0 +1,24 @@
+---
+// thanks.astro
+import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+import { sanityClient } from "sanity:client";
+import {THANKS_QUERY} from '../lib/sanity'
+
+const thanksContent = await sanityClient.fetch(THANKS_QUERY);
+
+---
+
+<Layout>
+  <section class="w-full max-w-7xl mx-auto p-6 pb-16 my-8 bg-gray-900/50 backdrop-blur-2xl fade">
+    <h1 class="font-oswald text-3xl uppercase">{thanksContent.heading}</h1>
+    <p class="font-geist-mono text-sm font-thin mt-12">{thanksContent.copy}</p>
+  </section>
+</Layout>
+
+<style>
+</style>
+
+<script>
+  import { gsap } from "gsap";
+</script>

@@ -1,0 +1,79 @@
+---
+import Layout from '@layouts/Layout.astro';
+import "@styles/global.css";
+import GallerySection from '../components/GallerySection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ImageText from '../components/ImageText.astro';
+import { sanityClient } from "sanity:client";
+import { HOME_QUERY } from "../lib/sanity";
+import { BRANDPARTNER_QUERY } from "../lib/sanity";
+
+const { home, events, testimonials } = await sanityClient.fetch(HOME_QUERY);
+const brandPartners = await sanityClient.fetch(BRANDPARTNER_QUERY);
+console.log(home.testimonials);
+
+const sectionComponents = {
+  testimonialsSection: TestimonialsSection,
+  servicesSection: ServicesSection,
+  imageText: ImageText,
+} as const;
+
+const extraProps = {
+  gallerySection: { items: events },
+  testimonialsSection: { items: home.testimonials },
+  servicesSection: { image: home.servicesImage}
+} as const;
+---
+
+<Layout>
+  <section class="w-full relative pb-16 mb-8 bg-brand-black-900/60 backdrop-blur-md mx-auto max-w-7xl p-2 md:p-6 rounded-sm mt-8 px-2 md:px-4 lg:px-20 fade">
+    <GallerySection heroHeadline={home.heroHeadline} items={home.events} />
+  </section>
+
+  {home.sections?.map((section: any) => {
+    const Section = sectionComponents[section._type as keyof typeof sectionComponents];
+    if (!Section) return null;
+    const extra = extraProps[section._type as keyof typeof extraProps] ?? {};
+    return <Section {...section} {...extra} />;
+  })}
+
+  <section class="w-full max-w-5xl mx-auto p-2 mb-8 fade">
+    <div class="bg-brand-black-800/70 backdrop-blur-lg rounded-md py-4 px-8 grid grid-cols-12 gap-x-2 md:gap-x-10  text-center logos align-middle">
+      <div class="col-span-10 col-start-2 text-center font-bold font-geist-mono text-xs uppercase pt-2 py-4 mb-2 text-brand-white">
+        PFL Pro Sound has provided support for:
+      </div>
+      {brandPartners?.map((bp: any) => (
+        <div class="col-span-4 md:col-span-2 px-4 sm:px-8 md:px-2 flex align-middle justify-center max-w-[25vw] sm:max-w-[20vw]">
+          <img class="-mt-2 object-contain max-h-15 opacity-60" src={bp.src} alt={bp.brandPartnerName} loading="lazy" />
+        </div>
+      ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { ScrollSmoother } from "gsap/ScrollSmoother";
+  import { SplitText } from "gsap/SplitText";
+
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+  gsap.set('.fade', { opacity: 0 });
+
+  ScrollTrigger.batch('.fade', {
+    interval: 0.1,
+    batchMax: 4,
+    onEnter: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: { each: 0.25 }, overwrite: true }),
+    onLeave: batch => gsap.to(batch, { opacity: 0, y: -20, overwrite: true }),
+    onEnterBack: batch => gsap.to(batch, { opacity: 1, y: 0, stagger: 0.25, overwrite: true }),
+    onLeaveBack: batch => gsap.to(batch, { opacity: 0, y: -20, overwrite: true })
+  });
+</script>
+
+<style>
+  .content p {
+    margin-bottom: 1.5rem;
+  }
+</style>
