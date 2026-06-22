@@ -25,6 +25,15 @@ select option{background:#1f2937}
 .tab.drag-over{border-color:#f97316;background:#2d1f0e}
 #btn-new-tab{background:#1f2937;color:#9ca3af;border:1px solid #374151;font-size:16px;padding:2px 10px;border-radius:4px}
 #btn-new-tab:hover{background:#374151}
+#btn-summary-tab{background:#1f2937;color:#9ca3af;border:1px solid #374151;font-size:12px;padding:3px 12px;border-radius:4px;cursor:pointer;margin-left:6px;white-space:nowrap}
+#btn-summary-tab:hover{background:#14532d;color:#86efac;border-color:#16a34a}
+#btn-summary-tab.active{background:#14532d !important;border-bottom-color:#16a34a !important;color:#4ade80 !important}
+#summary-view{display:none;flex-direction:column;flex:1;min-height:0;background:#111827;overflow:hidden}
+#summary-view table{border-collapse:collapse;width:100%;font-size:12px;color:#e5e7eb}
+#summary-view th{background:#0f172a;color:#9ca3af;font-weight:600;padding:6px 8px;text-align:left;position:sticky;top:0;z-index:1}
+#summary-view td{padding:4px 8px;border-bottom:1px solid #1a2035;vertical-align:middle}
+#summary-view .sum-section{background:#1a2035;color:#6b7280;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:4px 8px}
+#summary-view textarea{width:100%;box-sizing:border-box;background:#0f172a;color:#e5e7eb;border:1px solid #1f2937;border-radius:3px;padding:3px 5px;font-size:11px;resize:vertical;min-height:26px;font-family:inherit;line-height:1.4}
 
 /* Body row: sidebar | right-col */
 #body-row{display:flex;flex:1;min-height:0;overflow:hidden}
@@ -98,7 +107,9 @@ canvas{display:block}
 #cable-schedule{border-top:1px solid #374151;padding:8px;flex:1;overflow-y:auto;min-height:60px}
 #cable-schedule h3{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 #cable-schedule{flex:1}
-#cable-totals{border-top:1px solid #374151;padding:8px;flex-shrink:0}
+#item-totals{padding:8px;height:160px;overflow-y:auto;flex-shrink:0}#item-totals-drag{height:6px;background:#111827;border-top:1px solid #374151;border-bottom:1px solid #374151;cursor:ns-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center}#item-totals-drag:hover{background:#1f2937}
+#item-totals h3{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+#cable-totals{padding:8px;height:160px;overflow-y:auto;flex-shrink:0}#cable-totals-drag{height:6px;background:#111827;border-top:1px solid #374151;border-bottom:1px solid #374151;cursor:ns-resize;flex-shrink:0;display:flex;align-items:center;justify-content:center}#cable-totals-drag:hover{background:#1f2937}
 #cable-totals h3{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
 .totals-table{width:100%;border-collapse:collapse;font-size:11px}
 .totals-table th{color:#6b7280;font-weight:600;font-size:10px;text-align:left;padding:2px 4px;border-bottom:1px solid #374151}
@@ -166,13 +177,12 @@ canvas{display:block}
         <button class="sb-dropdown-btn" onclick="toggleDropdown('dd-project')">Project <span class="arrow">▼</span></button>
         <div class="sb-dropdown-menu">
           <button class="sb-dropdown-item" id="btn-load-project">Load Project</button>
-          <button class="sb-dropdown-item" id="btn-save">Save Project <span class="kbd">⌘S</span></button>
-          <button class="sb-dropdown-item" id="btn-save-as">Save As…</button>
+          <button class="sb-dropdown-item" id="btn-save-as">Save As… <span class="kbd">⌘S</span></button>
         </div>
       </div>
-      <button class="sb-btn" id="btn-load-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Load Layout</button>
-      <button class="sb-btn" id="btn-export-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export as PDF</button>
-      <button class="sb-btn" id="btn-export-totals" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export Totals Only</button>
+      <button class="sb-btn" id="btn-load-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Import Layout</button>
+      <button class="sb-btn" id="btn-export-pdf" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export Layout PDF</button>
+      <button class="sb-btn" id="btn-export-totals" style="background:#1a3a2a;border-color:#2d6a4f;color:#6ee7b7">Export Cable List</button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Tools</div>
@@ -283,6 +293,7 @@ canvas{display:block}
         <canvas id="canvas" tabindex="0" width="2400" height="1716" style="width: 1200px; height: 858px; cursor: crosshair;"></canvas>
       </div>
       <div id="props">
+        <button id="btn-summary-tab" style="display:block;width:calc(100% - 16px);margin:8px 8px 4px;background:#1f2937;color:#6ee7b7;border:1px solid #2d6a4f;border-radius:4px;padding:5px 8px;font-size:12px;font-weight:600;cursor:pointer;text-align:left;flex-shrink:0">&#9776; All Gear Summary</button>
         <div id="props-header">Properties</div>
         <div id="props-content">
           <div id="no-selection" style="color: rgb(75, 85, 99); font-size: 12px; margin-top: 20px; text-align: center;">Select an item or cable</div>
@@ -298,7 +309,8 @@ canvas{display:block}
               <div class="prop-row"><label>Box Height</label><input type="number" id="ip-tb-h" min="30" max="3000" step="10" value="150"></div>
               <div style="font-size:10px;color:#4b5563;margin-top:-4px;margin-bottom:6px">Drag bottom-right corner to resize</div>
             </div>
-            <button id="ip-delete" style="width:100%;background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:4px;padding:5px;margin-top:4px;cursor:pointer">⊟ Delete Item</button>
+            <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:#9ca3af;margin-top:8px;cursor:pointer"><input type="checkbox" id="ip-exclude-totals"> Exclude from totals</label>
+            <button id="ip-delete" style="width:100%;background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:4px;padding:5px;margin-top:6px;cursor:pointer">⊟ Delete Item</button>
           </div>
           <div id="cable-props" style="display:none">
             <div class="prop-row"><label>Type</label><input id="cp-type" readonly=""></div>
@@ -345,6 +357,15 @@ D80 → NL8→NL2 from D80</span><span style="font-size: 10px; color: rgb(156, 1
 6' x 6' area → P</span><span style="font-size: 10px; color: rgb(156, 163, 175);">100ft</span></div><div class="sched-row" style="border-left-color: rgb(192, 132, 252);"><span style="font-weight: 600;">XLR: P → P</span><span style="font-size: 10px; color: rgb(156, 163, 175);">25ft</span></div><div class="sched-row" style="border-left-color: rgb(192, 132, 252);"><span style="font-weight: 600;">XLR: AUDIO BOH 
 6' x 6' area → P</span><span style="font-size: 10px; color: rgb(156, 163, 175);">100ft</span></div><div class="sched-row" style="border-left-color: rgb(192, 132, 252);"><span style="font-weight: 600;">XLR: P → P</span><span style="font-size: 10px; color: rgb(156, 163, 175);">25ft</span></div></div>
         </div>
+        <div id="item-totals-drag" title="Drag to resize"><div style="width:28px;height:2px;background:#374151;border-radius:1px"></div></div>
+        <div id="item-totals">
+          <h3>Item Totals</h3>
+          <table class="totals-table">
+            <thead><tr><th>Label</th><th>Qty</th></tr></thead>
+            <tbody id="item-totals-body"><tr><td colspan="2" style="color:#6b7280;font-style:italic">No items</td></tr></tbody>
+          </table>
+        </div>
+        <div id="cable-totals-drag" title="Drag to resize"><div style="width:28px;height:2px;background:#374151;border-radius:1px"></div></div>
         <div id="cable-totals">
           <h3>Cable Totals</h3>
           <table class="totals-table">
@@ -358,8 +379,34 @@ D80 → NL8→NL2 from D80</span><span style="font-size: 10px; color: rgb(156, 1
   </div><!-- /right-col -->
 </div><!-- /body-row -->
 
+<!-- Summary view -->
+<div id="summary-view">
+  <div style="background:#0f172a;border-bottom:1px solid #374151;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0">
+    <span style="color:#f97316;font-weight:700;font-size:13px">&#9776; Gear Summary</span>
+    <button id="btn-summary-refresh" style="background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:4px;padding:3px 12px;font-size:12px;cursor:pointer">&#8635; Refresh</button>
+    <button id="btn-summary-export-pdf" style="background:#14532d;color:#6ee7b7;border:1px solid #16a34a;border-radius:4px;padding:3px 12px;font-size:12px;cursor:pointer">&#11015; Export PDF</button>
+    <span id="summary-last-updated" style="color:#6b7280;font-size:11px;flex:1;text-align:right"></span>
+  </div>
+  <div style="flex:1;overflow:auto;padding:16px">
+    <div id="summary-table-wrap"></div>
+  </div>
+</div>
+
 <input type="file" id="file-pdf-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none">
 <input type="file" id="file-cplan-input" accept=".cplan,.json" style="display:none">
+
+<!-- Save dialog -->
+<div id="save-dialog" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;align-items:center;justify-content:center">
+  <div style="background:#1f2937;border:1px solid #374151;border-radius:8px;padding:24px;min-width:340px;box-shadow:0 8px 32px #000">
+    <div style="color:#e5e7eb;font-weight:700;font-size:14px;margin-bottom:14px">Save Plan</div>
+    <label style="color:#9ca3af;font-size:11px;display:block;margin-bottom:4px">Plan Name</label>
+    <input id="save-dialog-name" type="text" style="width:100%;box-sizing:border-box;background:#111827;color:#e5e7eb;border:1px solid #374151;border-radius:4px;padding:7px 9px;font-size:13px;margin-bottom:16px;font-family:inherit">
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button id="save-dialog-cancel" style="background:#1f2937;color:#9ca3af;border:1px solid #374151;border-radius:4px;padding:6px 14px;font-size:12px;cursor:pointer">Cancel</button>
+      <button id="save-dialog-ok" style="background:#f97316;color:#7c2d12;border:1px solid #7c2d12;border-radius:4px;padding:6px 16px;font-size:12px;font-weight:700;cursor:pointer">Save File…</button>
+    </div>
+  </div>
+</div>
 
 <script>
 
@@ -437,8 +484,8 @@ const COORD_W = 1600, COORD_H = 1000;
 
 const CABLE_DEFS = {
   xlr:    {label:'XLR',           color:'#c084fc', limit:100,  stock:[10,25,50,100]},
-  nl4:    {label:'NL4',           color:'#fb923c', limit:200,  stock:[10,25,50,100,200]},
-  nl8:    {label:'NL8',           color:'#f97316', limit:200,  stock:[10,25,50,100,200]},
+  nl4:    {label:'NL4',           color:'#fb923c', limit:100,  stock:[10,25,50,100]},
+  nl8:    {label:'NL8',           color:'#f97316', limit:100,  stock:[10,25,50,100]},
   nl4nl2: {label:'NL4→NL2',       color:'#fbbf24', limit:2,    stock:[2], adapter:true, legs:2},
   nl8nl4: {label:'NL8→NL4',       color:'#d97706', limit:2,    stock:[2], adapter:true, legs:2},
   nl8nl2: {label:'NL8→NL2×4',     color:'#92400e', limit:2,    stock:[2], adapter:true, legs:4},
@@ -519,11 +566,12 @@ window.addEventListener('DOMContentLoaded', () => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   resizeCanvas();
   restoreFromLS();
+  loadSummaryNotes();
   renderTabs();
   setTool('select');
   render();
   updateProps();
-  updateSchedule(); updateTotals();
+  updateSchedule(); updateTotals(); updateItemTotals();
 
   // Keyboard shortcuts
   document.addEventListener('keydown', onKey, true);
@@ -538,7 +586,6 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('file-pdf-input').addEventListener('change', onLoadPDF);
   document.getElementById('btn-export-pdf').addEventListener('click', exportPDF);
   document.getElementById('btn-export-totals').addEventListener('click', exportTotalsOnly);
-  document.getElementById('btn-save').addEventListener('click', saveLS);
   document.getElementById('btn-save-as').addEventListener('click', saveAs);
   document.getElementById('btn-load-project').addEventListener('click', () => document.getElementById('file-cplan-input').click());
   document.getElementById('file-cplan-input').addEventListener('change', onLoadProject);
@@ -588,6 +635,53 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   document.getElementById('cable-type-select').addEventListener('change', onCableTypeChange);
   document.getElementById('btn-new-tab').addEventListener('click', addTab);
+  document.getElementById('btn-summary-tab').addEventListener('click', () => { if(summaryActive) hideSummary(); else showSummary(); });
+
+  // Item-totals drag-to-resize
+  (function(){
+    let itDrag=null;
+    document.getElementById('item-totals-drag').addEventListener('mousedown',e=>{
+      e.preventDefault();
+      const panel=document.getElementById('item-totals');
+      itDrag={startY:e.clientY,startH:panel.offsetHeight};
+      document.addEventListener('mousemove',onMove);
+      document.addEventListener('mouseup',onUp);
+    });
+    function onMove(e){
+      if(!itDrag) return;
+      const newH=Math.max(60,itDrag.startH+(itDrag.startY-e.clientY));
+      document.getElementById('item-totals').style.height=newH+'px';
+    }
+    function onUp(){
+      itDrag=null;
+      document.removeEventListener('mousemove',onMove);
+      document.removeEventListener('mouseup',onUp);
+    }
+  })();
+
+  // Cable-totals drag-to-resize
+  (function(){
+    let ctDrag=null;
+    document.getElementById('cable-totals-drag').addEventListener('mousedown',e=>{
+      e.preventDefault();
+      const panel=document.getElementById('cable-totals');
+      ctDrag={startY:e.clientY,startH:panel.offsetHeight};
+      document.addEventListener('mousemove',onMove);
+      document.addEventListener('mouseup',onUp);
+    });
+    function onMove(e){
+      if(!ctDrag) return;
+      const newH=Math.max(60,ctDrag.startH+(ctDrag.startY-e.clientY));
+      document.getElementById('cable-totals').style.height=newH+'px';
+    }
+    function onUp(){
+      ctDrag=null;
+      document.removeEventListener('mousemove',onMove);
+      document.removeEventListener('mouseup',onUp);
+    }
+  })();
+  document.getElementById('btn-summary-refresh').addEventListener('click', buildSummary);
+  document.getElementById('btn-summary-export-pdf').addEventListener('click', exportSummaryPDF);
   document.getElementById('global-size').addEventListener('input', e => {
     S.globalSize = +e.target.value;
     document.getElementById('global-size-val').textContent = e.target.value;
@@ -596,6 +690,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Props
   document.getElementById('ip-label').addEventListener('focus', () => { pushUndo(); });
+  document.getElementById('ip-exclude-totals').addEventListener('change', e => {
+    const it=S.items.find(i=>i.id===selectedId); if(!it) return;
+    pushUndo(); it.excludeTotals=e.target.checked; updateItemTotals(); if(summaryActive){ flushProps(); buildSummary(); }
+  });
   document.getElementById('ip-label').addEventListener('input', e => {
     const it = S.items.find(i=>i.id===selectedId); if(it){ it.label=e.target.value; render(); }
   });
@@ -628,13 +726,13 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cp-manual-ft').addEventListener('change', e => {
     const c=S.cables.find(c=>c.id===selectedId); if(!c) return;
     pushUndo(); c.manualFt=+e.target.value||null; c.combo=null;
-    updateProps(); render(); updateSchedule(); updateTotals();
+    updateProps(); render(); updateSchedule(); updateTotals(); updateItemTotals();
   });
   document.getElementById('cp-manual-clear').addEventListener('click', () => {
     const c=S.cables.find(ca=>ca.id===selectedId); if(!c) return;
     pushUndo(); c.manualFt=null; c.combo=null;
     document.getElementById('cp-manual-ft').value='';
-    updateProps(); render(); updateSchedule(); updateTotals();
+    updateProps(); render(); updateSchedule(); updateTotals(); updateItemTotals();
   });
   document.getElementById('cp-delete').addEventListener('click', deleteSelected);
 
@@ -731,12 +829,13 @@ function undo() {
   S = JSON.parse(undoStack.pop());
   selectedId = null; selType = null; selectedIds.clear();
   dirtyLaneCache();
-  render(); updateProps(); updateSchedule(); updateTotals();
+  render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
 }
 
 
 function saveLS() {
   _unsavedChanges = false;
+  if(window.location.protocol === 'file:') return; // don't overwrite hosted-site localStorage from local file
   const data = buildSaveData();
   try {
     localStorage.setItem(LS_KEY, JSON.stringify(data));
@@ -775,7 +874,185 @@ function buildSaveData() {
     pdfGrey: t.pdfGrey || 0,
   })), activeTab };
 }
+// ─── Gear Summary ────────────────────────────────────────────────────────────
+let summaryNotes = {};
+let summaryActive = false;
+
+function loadSummaryNotes() {
+  try { const n=localStorage.getItem('pflCP_summaryNotes'); if(n) summaryNotes=JSON.parse(n); } catch(e) {}
+}
+function saveSummaryNotes() {
+  try { localStorage.setItem('pflCP_summaryNotes', JSON.stringify(summaryNotes)); } catch(e) {}
+}
+
+function getTabCounts(tab) {
+  const Sd = tab.S || {items:[],cables:[],scale:{ppf:null},nextId:1,globalSize:20};
+  const items = Sd.items || [];
+  const cables = Sd.cables || [];
+  const ppf = Sd.scale?.ppf || null;
+
+  const itemCounts = {};
+  items.forEach(it => {
+    if(it.type==='textbox'||it.type==='textlabel') return;
+    if(it.excludeTotals) return;
+    const lbl = (it.label || ITEM_DEFS[it.type]?.label || it.type).trim();
+    const key = it.type+'|'+lbl;
+    if(!itemCounts[key]) itemCounts[key]={label:lbl,type:it.type,color:it.color,count:0};
+    itemCounts[key].count++;
+  });
+
+  const cableCounts = {};
+  cables.forEach(c => {
+    const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
+    if(def.adapter) return;
+    let pieces;
+    if(c.manualFt>0) {
+      pieces=[...(c.combo||getBestCombo(+c.manualFt,c.type))];
+    } else if(ppf) {
+      let pts=[];
+      if(c.fromPos) pts.push({x:c.fromPos.x,y:c.fromPos.y});
+      else { const it=items.find(i=>i.id===c.fromId); if(it) pts.push({x:it.x,y:it.y}); }
+      pts.push(...(c.waypoints||[]));
+      const toIt=items.find(i=>i.id===c.toId);
+      if(toIt) pts.push({x:toIt.x,y:toIt.y});
+      if(pts.length<2) return;
+      let coordLen=0;
+      for(let i=1;i<pts.length;i++) coordLen+=Math.hypot(pts[i].x-pts[i-1].x,pts[i].y-pts[i-1].y);
+      const ft=coordLen/ppf+(+(c.height||0));
+      pieces=[...(c.combo||getBestCombo(ft,c.type))];
+    } else {
+      const key=def.label+'|?ft';
+      if(!cableCounts[key]) cableCounts[key]={label:def.label,len:'?ft',color:c.color,count:0};
+      cableCounts[key].count++; return;
+    }
+    pieces.forEach(len=>{
+      const key=def.label+'|'+len+'ft';
+      if(!cableCounts[key]) cableCounts[key]={label:def.label,len:len+'ft',color:c.color,count:0};
+      cableCounts[key].count++;
+    });
+  });
+
+  const adapterCounts = {};
+  items.forEach(it=>{
+    const def=ITEM_DEFS[it.type];
+    if(!def?.adapter) return;
+    if(!adapterCounts[it.type]) adapterCounts[it.type]={label:def.label,color:it.color||def.color,count:0};
+    adapterCounts[it.type].count++;
+  });
+
+  return {itemCounts,cableCounts,adapterCounts};
+}
+
+function buildSummary() {
+  saveCurrent();
+  const updated = document.getElementById('summary-last-updated');
+  if(updated) updated.textContent='Updated '+new Date().toLocaleTimeString();
+
+  const allItemKeys=new Set(), allCableKeys=new Set(), allAdapterKeys=new Set();
+  const tabData=tabs.map(t=>{
+    const d=getTabCounts(t);
+    Object.keys(d.itemCounts).forEach(k=>allItemKeys.add(k));
+    Object.keys(d.cableCounts).forEach(k=>allCableKeys.add(k));
+    Object.keys(d.adapterCounts).forEach(k=>allAdapterKeys.add(k));
+    return d;
+  });
+
+  const itemKeys=[...allItemKeys].sort();
+  const cableKeys=[...allCableKeys].sort((a,b)=>{
+    const [la]=a.split('|'), [lb]=b.split('|');
+    if(la!==lb) return la.localeCompare(lb);
+    return parseInt(a.split('|')[1])-parseInt(b.split('|')[1]);
+  });
+  const adapterKeys=[...allAdapterKeys].sort();
+
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  const thCols=tabs.map((t,i)=>`<th style="text-align:center;min-width:55px">${esc(t.name||'Plan '+(i+1))}</th>`).join('');
+  let html=`<table><thead><tr>
+    <th style="min-width:160px">Label / Type</th>
+    <th style="text-align:center;color:#f97316;min-width:55px">Total</th>${thCols}
+    <th style="min-width:220px">Notes</th>
+  </tr></thead><tbody>`;
+
+  function noteTA(noteKey){
+    const val=esc(summaryNotes[noteKey]||'');
+    return `<textarea data-notekey="${esc(noteKey)}" rows="1">${val}</textarea>`;
+  }
+  function countCells(perTab){
+    return perTab.map(n=>`<td style="text-align:center">${n||'—'}</td>`).join('');
+  }
+
+  // Build item keys set — keyed as type|label
+  const hasItems = itemKeys.length > 0;
+  if(hasItems){
+    html+=`<tr><td class="sum-section" colspan="${tabs.length+3}">ITEMS</td></tr>`;
+    ITEM_GROUPS.forEach(grp=>{
+      // find all keys in this group
+      const grpKeys=itemKeys.filter(k=>grp.types.includes(k.split('|')[0]));
+      if(!grpKeys.length) return;
+      html+=`<tr><td colspan="${tabs.length+3}" style="color:#4b5563;font-size:10px;padding:3px 8px;background:#0f172a;letter-spacing:.3px">${esc(grp.label)}</td></tr>`;
+      grpKeys.sort((a,b)=>a.split('|')[1].localeCompare(b.split('|')[1])).forEach(key=>{
+        const perTab=tabData.map(d=>d.itemCounts[key]?.count||0);
+        const total=perTab.reduce((s,v)=>s+v,0);
+        const color=tabData.map(d=>d.itemCounts[key]?.color).find(c=>c)||'#e5e7eb';
+        const lbl=key.split('|')[1];
+        const nk='item|'+key;
+        html+=`<tr><td style="color:${color};font-weight:600;padding-left:16px">${esc(lbl)}</td><td style="text-align:center;font-weight:700;color:#f97316">${total}</td>${countCells(perTab)}<td>${noteTA(nk)}</td></tr>`;
+      });
+    });
+  }
+  if(cableKeys.length){
+    html+=`<tr><td class="sum-section" colspan="${tabs.length+3}">CABLES</td></tr>`;
+    cableKeys.forEach(key=>{
+      const [typeLabel,lenStr]=key.split('|');
+      const perTab=tabData.map(d=>d.cableCounts[key]?.count||0);
+      const total=perTab.reduce((s,v)=>s+v,0);
+      const color=tabData.map(d=>d.cableCounts[key]?.color).find(c=>c)||'#e5e7eb';
+      const nk='cable|'+key;
+      html+=`<tr><td style="color:${color}"><span style="font-weight:600">${esc(typeLabel)}</span> ${esc(lenStr)}</td><td style="text-align:center;font-weight:700;color:#f97316">${total}</td>${countCells(perTab)}<td>${noteTA(nk)}</td></tr>`;
+    });
+  }
+  if(adapterKeys.length){
+    html+=`<tr><td class="sum-section" colspan="${tabs.length+3}">ADAPTERS</td></tr>`;
+    adapterKeys.forEach(key=>{
+      const perTab=tabData.map(d=>d.adapterCounts[key]?.count||0);
+      const total=perTab.reduce((s,v)=>s+v,0);
+      const color=tabData.map(d=>d.adapterCounts[key]?.color).find(c=>c)||'#e5e7eb';
+      const label=tabData.map(d=>d.adapterCounts[key]?.label).find(l=>l)||key;
+      const nk='adapter|'+key;
+      html+=`<tr><td style="color:${color};font-weight:600">${esc(label)}</td><td style="text-align:center;font-weight:700;color:#f97316">${total}</td>${countCells(perTab)}<td>${noteTA(nk)}</td></tr>`;
+    });
+  }
+  if(!hasItems&&!cableKeys.length&&!adapterKeys.length){
+    html+=`<tr><td colspan="${tabs.length+3}" style="color:#6b7280;font-style:italic;padding:16px">No items or cables yet — add some gear to your plan tabs first.</td></tr>`;
+  }
+  html+='</tbody></table>';
+
+  const wrap=document.getElementById('summary-table-wrap');
+  wrap.innerHTML=html;
+  wrap.querySelectorAll('textarea[data-notekey]').forEach(ta=>{
+    ta.addEventListener('input',()=>{ summaryNotes[ta.dataset.notekey]=ta.value; saveSummaryNotes(); });
+    ta.addEventListener('keydown',e=>e.stopPropagation());
+  });
+}
+
+function showSummary() {
+  flushProps();
+  summaryActive=true;
+  document.getElementById('body-row').style.display='none';
+  document.getElementById('summary-view').style.display='flex';
+  document.getElementById('btn-summary-tab').classList.add('active');
+  buildSummary();
+}
+function hideSummary() {
+  summaryActive=false;
+  document.getElementById('summary-view').style.display='none';
+  document.getElementById('body-row').style.display='flex';
+  document.getElementById('btn-summary-tab').classList.remove('active');
+}
+
 function restoreFromLS() {
+  if(window.location.protocol === 'file:') return; // local file always starts blank
   try {
     const raw = localStorage.getItem(LS_KEY);
     if(!raw) return;
@@ -851,7 +1128,7 @@ function renderTabs() {
       _tabDragIdx = null;
       loadCurrent();
       renderTabs();
-      render(); updateProps(); updateSchedule(); updateTotals();
+      render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
     });
     div.addEventListener('dragend', () => {
       _tabDragIdx = null;
@@ -875,29 +1152,32 @@ function renderTabs() {
   });
 }
 function switchTab(i) {
-  if(i===activeTab) return;
+  if(i===activeTab) { if(summaryActive) hideSummary(); return; }
+  if(summaryActive) hideSummary();
   saveCurrent();
   activeTab = i;
   loadCurrent();
   renderTabs();
-  render(); updateProps(); updateSchedule(); updateTotals();
+  render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
 }
 function addTab() {
+  if(summaryActive) hideSummary();
   saveCurrent();
   tabs.push({name:'Plan '+(tabs.length+1), S:null, view:null, coordW:COORD_W, coordH:COORD_H, pdfData:null, pdfGrey:0, fileHandle:null});
   activeTab = tabs.length-1;
   loadCurrent();
   renderTabs();
-  render(); updateProps(); updateSchedule(); updateTotals();
+  render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
 }
 function closeTab(i) {
   if(tabs.length===1) { alert('Cannot close the last tab.'); return; }
   if(!confirm('Close this tab?')) return;
+  if(summaryActive) hideSummary();
   tabs.splice(i,1);
   if(activeTab>=tabs.length) activeTab=tabs.length-1;
   loadCurrent();
   renderTabs();
-  render(); updateProps(); updateSchedule(); updateTotals();
+  render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
 }
 
 // ─── PDF ──────────────────────────────────────────────────────────────────────
@@ -945,6 +1225,17 @@ function loadPDFImage(src) {
 }
 
 // ─── Rendering ────────────────────────────────────────────────────────────────
+// ─── Item type groups ────────────────────────────────────────────────────────
+const ITEM_GROUPS = [
+  {label:'Speakers',       types:['speaker']},
+  {label:'Amplifiers',     types:['amp']},
+  {label:'FOH Consoles',   types:['foh']},
+  {label:'I/O Boxes',      types:['iobox']},
+  {label:'WiFi APs',       types:['ap']},
+  {label:'Power Drops',    types:['powerdrop']},
+  {label:'Adapters',       types:['nl4nl2','nl8nl4','nl8nl2','cattail']},
+];
+
 // Lane cache — rebuilt only when cables/items change, not on every render
 let _laneCache = new Map();
 let _laneCacheDirty = true;
@@ -1013,6 +1304,13 @@ function render() {
     ctx.fillRect(p1.x,p1.y,p2.x-p1.x,p2.y-p1.y);
   }
 
+  // Legend boxes drawn first, behind cables
+  S.items.forEach(it => {
+    if(it.type !== 'textbox') return;
+    if(!isItemShown(it)) return;
+    drawItem(it);
+  });
+
   // Cables — segment-by-segment parallel stacking (ported from V1)
   if(cablesVisible) {
     const cablesToDraw = spotlightId
@@ -1026,8 +1324,9 @@ function render() {
     drawInProgressCable();
   }
 
-  // Items (adapter items hidden with cables)
+  // All other items on top of cables
   S.items.forEach(it => {
+    if(it.type === 'textbox') return;
     if(ITEM_DEFS[it.type]?.adapter && (!cablesVisible || V.zoom < fitZoom * 1.92)) return;
     if(!isItemShown(it)) return;
     drawItem(it);
@@ -1299,9 +1598,10 @@ function drawCableStack(c) {
 
   // 1. Compute per-segment lane offsets from cache (built once per render)
   const segs=[];
+  const laneW=Math.max(LANE_W, 7/V.zoom); // at least 7px screen separation at any zoom
   for(let i=0;i<pts.length-1;i++){
     const {lane,nx,ny}=_laneCache.get(`${c.id}-${i}`)||{lane:0,nx:0,ny:1};
-    segs.push({ox:lane*LANE_W*nx, oy:lane*LANE_W*ny, dx:pts[i+1].x-pts[i].x, dy:pts[i+1].y-pts[i].y});
+    segs.push({ox:lane*laneW*nx, oy:lane*laneW*ny, dx:pts[i+1].x-pts[i].x, dy:pts[i+1].y-pts[i].y});
   }
 
   // 2. Build offset polyline using miter joins at interior waypoints
@@ -1560,9 +1860,10 @@ function cableOffsetScreenPts(c) {
   const coordPts=cablePts(c);
   if(coordPts.length<2) return null;
   const segs=[];
+  const laneW=Math.max(LANE_W, 7/V.zoom);
   for(let k=0;k<coordPts.length-1;k++){
     const r=_laneCache.get(`${c.id}-${k}`)||{lane:0,nx:0,ny:1};
-    segs.push({ox:r.lane*LANE_W*r.nx,oy:r.lane*LANE_W*r.ny,dx:coordPts[k+1].x-coordPts[k].x,dy:coordPts[k+1].y-coordPts[k].y});
+    segs.push({ox:r.lane*laneW*r.nx,oy:r.lane*laneW*r.ny,dx:coordPts[k+1].x-coordPts[k].x,dy:coordPts[k+1].y-coordPts[k].y});
   }
   function miterPt(idx){
     const p=segs[idx-1],n=segs[idx];
@@ -1686,17 +1987,18 @@ function onMouseDown(e) {
       return;
     }
     } // end !metaKey block
-    // Textbox resize handle
-    if(selectedId && selType==='item') {
-      const selIt=S.items.find(i=>i.id===selectedId);
-      if(selIt&&selIt.type==='textbox'){
-        const sp=toCanvas(selIt.x,selIt.y);
-        const tw=(selIt.w||200)*V.zoom, th=(selIt.h||120)*V.zoom;
+    // Textbox resize handle — checked before hitItem so corner always wins over body drag
+    {
+      const textboxes=S.items.filter(i=>i.type==='textbox');
+      for(const tb of textboxes){
+        const sp=toCanvas(tb.x,tb.y);
+        const tw=(tb.w||200)*V.zoom, th=(tb.h||120)*V.zoom;
         const hx=sp.x+tw/2, hy=sp.y+th/2;
-        if(Math.abs(cx-hx)<14&&Math.abs(cy-hy)<14){
+        if(Math.abs(cx-hx)<20&&Math.abs(cy-hy)<20){
+          selectedId=tb.id; selType='item';
           pushUndo();
-          drag={type:'resize',item:selIt,startX:cx,startY:cy,startW:selIt.w||200,startH:selIt.h||120};
-          return;
+          drag={type:'resize',item:tb,startX:cx,startY:cy,startW:tb.w||200,startH:tb.h||120,startTLX:tb.x-(tb.w||200)/2,startTLY:tb.y-(tb.h||120)/2};
+          updateProps(); render(); return;
         }
       }
     }
@@ -1776,7 +2078,7 @@ function onMouseDown(e) {
     const def=ITEM_DEFS[tool];
     const newItem={id:S.nextId++,type:tool,x:coord.x,y:coord.y,label:def.label,color:def.color,size:S.globalSize,...(tool==='textbox'?{w:200,h:120}:{})};
     S.items.push(newItem);
-    render(); updateSchedule(); updateTotals();
+    render(); updateSchedule(); updateTotals(); updateItemTotals();
     const lbl=prompt('Name this item:',newItem.label);
     if(lbl!==null&&lbl.trim()!==''){newItem.label=lbl.trim();render();updateSchedule();}
     selectedId=newItem.id; selType='item'; selectedIds=new Set([newItem.id]); updateProps(); setTool('select'); render();
@@ -1823,7 +2125,7 @@ function onMouseDown(e) {
           height:0,labelT:0.85,combo:null,adapterInput:0,adapterLegs:[]
         });
         cableInProgress=null;
-        setTool('select'); render(); updateSchedule(); updateTotals();
+        setTool('select'); render(); updateSchedule(); updateTotals(); updateItemTotals();
       } else if(!it) {
         // Add waypoint — free angle by default, hold Shift to snap H/V
         const prevPt = cableInProgress.waypoints.length
@@ -1933,8 +2235,11 @@ function onMouseMove(e) {
     }
     if(drag.type==='resize'){
       const dxc=(cx-drag.startX)/V.zoom, dyc=(cy-drag.startY)/V.zoom;
-      drag.item.w=Math.max(40,drag.startW+dxc);
-      drag.item.h=Math.max(30,drag.startH+dyc);
+      const newW=Math.max(40,drag.startW+dxc);
+      const newH=Math.max(30,drag.startH+dyc);
+      drag.item.w=newW; drag.item.h=newH;
+      drag.item.x=drag.startTLX+newW/2;
+      drag.item.y=drag.startTLY+newH/2;
       render(); return;
     }
     if(drag.type==='label'){
@@ -2022,14 +2327,16 @@ function onWheel(e) {
 function onKey(e) {
   if(e.metaKey||e.ctrlKey||e.altKey) {
     if(e.key==='z'){ e.preventDefault(); undo(); return; }
-    if(e.key==='s'){ e.preventDefault(); saveLS(); return; }
+    if(e.key==='s'){ e.preventDefault(); saveAs(); return; }
     if(e.key==='c'){
+      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
       e.preventDefault();
       const ids = selectedIds.size ? selectedIds : (selectedId && selType==='item' ? new Set([selectedId]) : new Set());
       clipboard = S.items.filter(i=>ids.has(i.id)).map(i=>JSON.parse(JSON.stringify(i)));
       return;
     }
     if(e.key==='v'){
+      if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
       e.preventDefault();
       if(!clipboard.length) return;
       pushUndo();
@@ -2038,7 +2345,7 @@ function onKey(e) {
       newItems.forEach(i=>S.items.push(i));
       selectedIds = new Set(newItems.map(i=>i.id));
       selectedId = newItems[newItems.length-1].id; selType='item';
-      setTool('select'); updateProps(); render(); updateSchedule(); updateTotals();
+      setTool('select'); updateProps(); render(); updateSchedule(); updateTotals(); updateItemTotals();
       return;
     }
     return;
@@ -2089,7 +2396,7 @@ function deleteSelected(){
     S.cables=S.cables.filter(c=>c.id!==selectedId);
   }
   selectedId=null;selType=null;selectedIds.clear();
-  render();updateProps();updateSchedule(); updateTotals();
+  render();updateProps();updateSchedule(); updateTotals(); updateItemTotals();
 }
 
 // ─── Length calculation ───────────────────────────────────────────────────────
@@ -2173,7 +2480,8 @@ function updateProps() {
     const it=S.items.find(i=>i.id===selectedId);
     if(!it){selectedId=null;selType=null;noSel.style.display='';return;}
     ip.style.display='';
-    document.getElementById('ip-type').value=ITEM_DEFS[it.type]?.label||it.type;
+    document.getElementById('ip-type').value=ITEM_DEFS[it.type]?.label||it.type||'Unknown';
+    document.getElementById('ip-exclude-totals').checked=!!it.excludeTotals;
     document.getElementById('ip-label').value=it.label||'';
     document.getElementById('ip-color').value=it.color||'#ffffff';
     document.getElementById('ip-size').value=it.size||S.globalSize;
@@ -2237,7 +2545,7 @@ function updateProps() {
             const btn=document.createElement('button');
             btn.className='combo-btn'+(JSON.stringify(c.combo)===JSON.stringify(combo)?' combo-active':'');
             btn.textContent=combo.join('+')+' ft';
-            btn.addEventListener('click',()=>{ pushUndo();c.combo=[...combo].sort((a,b)=>b-a);updateProps();render();updateSchedule();updateTotals(); });
+            btn.addEventListener('click',()=>{ pushUndo();c.combo=[...combo].sort((a,b)=>b-a);updateProps();render();updateSchedule();updateTotals();updateItemTotals();updateItemTotals(); });
             combosDiv.appendChild(btn);
           });
         } else {
@@ -2261,6 +2569,37 @@ function updateAdapterSummary(c, def) {
 }
 
 // ─── Cable schedule ───────────────────────────────────────────────────────────
+function updateItemTotals() {
+  const tbody = document.getElementById('item-totals-body');
+  if(!tbody) return;
+  tbody.innerHTML = '';
+  let hasAny = false;
+  ITEM_GROUPS.forEach(grp => {
+    const counts = {};
+    S.items.forEach(it => {
+      if(!grp.types.includes(it.type)) return;
+      if(it.excludeTotals) return;
+      const key = (it.label || ITEM_DEFS[it.type]?.label || it.type).trim();
+      if(!counts[key]) counts[key] = {label:key, color:it.color, count:0};
+      counts[key].count++;
+    });
+    const entries = Object.values(counts).sort((a,b) => a.label.localeCompare(b.label));
+    if(!entries.length) return;
+    hasAny = true;
+    const hdr = document.createElement('tr');
+    hdr.innerHTML = `<td colspan="2" style="color:#6b7280;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding-top:6px;border-top:1px solid #374151">${grp.label}</td>`;
+    tbody.appendChild(hdr);
+    entries.forEach(e => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td style="color:${e.color};font-weight:600;padding-left:6px">${e.label}</td><td>${e.count}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+  if(!hasAny) {
+    tbody.innerHTML = '<tr><td colspan="2" style="color:#6b7280;font-style:italic">No items</td></tr>';
+  }
+}
+
 function updateSchedule() {
   const el=document.getElementById('sched-list');
   el.innerHTML='';
@@ -2279,11 +2618,15 @@ function updateSchedule() {
       right.textContent='2ft adapter';
     } else if(!S.scale.ppf){
       right.textContent='?ft';
+    } else if(!S.scale.ppf && !c.manualFt) {
+      right.textContent='?ft';
     } else {
+      const lbl=getLengthLabel(c);
       const ft=calcCableLength(c);
-      const snapped=snapToStock(ft,def.stock);
-      if(snapped>def.limit){right.textContent='⚠ '+snapped+'ft';right.className='sched-warn';}
-      else right.textContent=snapped+'ft';
+      const pieces=[...(c.combo||getBestCombo(ft,c.type))];
+      const total=pieces.reduce((s,v)=>s+v,0);
+      if(total>def.limit){right.textContent='⚠ '+lbl;right.className='sched-warn';}
+      else right.textContent=lbl;
     }
     row.appendChild(left);row.appendChild(right);el.appendChild(row);
   });
@@ -2360,23 +2703,114 @@ function updateScaleInfoMeasured(distPx, ft) {
 }
 
 // ─── Save / Load ──────────────────────────────────────────────────────────────
+function showSaveDialog() {
+  return new Promise(resolve => {
+    const overlay = document.getElementById('save-dialog');
+    const nameInput = document.getElementById('save-dialog-name');
+    nameInput.value = tabs[activeTab].name || 'Plan 1';
+    overlay.style.display = 'flex';
+    setTimeout(() => { nameInput.focus(); nameInput.select(); }, 50);
+    function onOk() {
+      const n = nameInput.value.trim();
+      if(n) { tabs[activeTab].name = n; renderTabs(); }
+      overlay.style.display = 'none'; cleanup(); resolve(true);
+    }
+    function onCancel() { overlay.style.display = 'none'; cleanup(); resolve(false); }
+    function onKey(e) { if(e.key==='Enter') onOk(); if(e.key==='Escape') onCancel(); e.stopPropagation(); }
+    function cleanup() {
+      document.getElementById('save-dialog-ok').removeEventListener('click', onOk);
+      document.getElementById('save-dialog-cancel').removeEventListener('click', onCancel);
+      nameInput.removeEventListener('keydown', onKey);
+    }
+    document.getElementById('save-dialog-ok').addEventListener('click', onOk);
+    document.getElementById('save-dialog-cancel').addEventListener('click', onCancel);
+    nameInput.addEventListener('keydown', onKey);
+  });
+}
+
+function flushProps() {
+  // Explicitly sync visible prop fields into S before saving, in case input events are pending
+  if(selType==='item' && selectedId) {
+    const it=S.items.find(i=>i.id===selectedId);
+    if(it) it.label=document.getElementById('ip-label').value;
+  } else if(selType==='cable' && selectedId) {
+    const c=S.cables.find(ca=>ca.id===selectedId);
+    if(c){
+      c.height=+document.getElementById('cp-height').value||0;
+      const mi=document.getElementById('cp-manual-ft');
+      if(mi && mi.value.trim()) c.manualFt=+mi.value; else delete c.manualFt;
+    }
+  }
+}
+
+let _lastSaveHandle = null; // remembers last saved file handle for startIn
+
+// Persist file handle across sessions via IndexedDB (localStorage can't store FileSystemFileHandle)
+(function(){
+  const DB='pflCP_meta', STORE='kv', KEY='lastSaveHandle';
+  function openDB(cb){
+    const req=indexedDB.open(DB,1);
+    req.onupgradeneeded=e=>e.target.result.createObjectStore(STORE);
+    req.onsuccess=e=>cb(e.target.result);
+    req.onerror=()=>{};
+  }
+  window._saveSaveHandle=function(fh){
+    openDB(db=>{
+      try{db.transaction(STORE,'readwrite').objectStore(STORE).put(fh,KEY);}catch(e){}
+    });
+  };
+  window._loadSaveHandle=function(cb){
+    openDB(db=>{
+      const req=db.transaction(STORE,'readonly').objectStore(STORE).get(KEY);
+      req.onsuccess=e=>cb(e.target.result||null);
+      req.onerror=()=>cb(null);
+    });
+  };
+  // Load on startup
+  window._loadSaveHandle(fh=>{ if(fh) _lastSaveHandle=fh; });
+})();
+
 async function saveAs() {
+  const confirmed = await showSaveDialog();
+  if(!confirmed) return;
+  flushProps();
   saveCurrent();
   const t = tabs[activeTab];
   const singleTab = { version:3, tabs:[{name:t.name,S:t.S,view:t.view,coordW:t.coordW||COORD_W,coordH:t.coordH||COORD_H,pdfData:t.pdfData||null,pdfGrey:t.pdfGrey||0}], activeTab:0 };
   const filename = (t.name||'plan')+'.cplan';
+  let saved = false;
   if(window.showSaveFilePicker) {
     try {
-      const fh=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'Cable Plan',accept:{'application/json':['.cplan']}}]});
-      tabs[activeTab].fileHandle=fh;
-      fileHandle=fh;
+      const pickerOpts={suggestedName:filename,types:[{description:'Cable Plan',accept:{'application/json':['.cplan']}}]};
+      if(_lastSaveHandle) pickerOpts.startIn=_lastSaveHandle;
+      const fh=await window.showSaveFilePicker(pickerOpts);
+      tabs[activeTab].fileHandle=fh; fileHandle=fh;
+      _lastSaveHandle=fh; window._saveSaveHandle(fh);
       const w=await fh.createWritable();
       await w.write(JSON.stringify(singleTab,null,2));
       await w.close();
+      saved = true;
     } catch(e) {}
   } else {
     const blob=new Blob([JSON.stringify(singleTab,null,2)],{type:'application/json'});
     const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
+    saved = true;
+  }
+  if(saved) {
+    _unsavedChanges = false;
+    saveLS();
+    const ddBtn = document.querySelector('#dd-project .sb-dropdown-btn');
+    if(ddBtn && !ddBtn._flashing) {
+      ddBtn._flashing = true;
+      const origHTML = ddBtn.innerHTML;
+      ddBtn.innerHTML = '✓ Saved <span class="arrow">▼</span>';
+      ddBtn.style.background = '#f97316'; ddBtn.style.color = '#7c2d12'; ddBtn.style.borderColor = '#7c2d12';
+      setTimeout(() => {
+        ddBtn.innerHTML = origHTML;
+        ddBtn.style.background = ''; ddBtn.style.color = ''; ddBtn.style.borderColor = '';
+        ddBtn._flashing = false;
+      }, 1200);
+    }
   }
 }
 
@@ -2405,7 +2839,7 @@ async function onLoadProject(e) {
     renderTabs();
     render();
     updateProps();
-    updateSchedule(); updateTotals();
+    updateSchedule(); updateTotals(); updateItemTotals();
   } catch(err){ console.error('onLoadProject error:', err); alert('Error loading file: '+err.message); }
 }
 
@@ -2417,18 +2851,16 @@ function newPlan() {
   loadCurrent();
   renderTabs();
   pdfImg=null;
-  render();updateProps();updateSchedule(); updateTotals();
+  render();updateProps();updateSchedule(); updateTotals(); updateItemTotals();
 }
 
-// ─── Export PDF ───────────────────────────────────────────────────────────────
+// ─── Export Layout PDF (layout image only) ───────────────────────────────────────────
 function exportPDF() {
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({orientation:'landscape',unit:'pt',format:'letter'});
   const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
 
-  // Page 1: canvas snapshot
   const tmp=document.createElement('canvas');
-  const dpr=window.devicePixelRatio||1;
   tmp.width=canvas.width;tmp.height=canvas.height;
   const tctx=tmp.getContext('2d');
   tctx.fillStyle='#111827';tctx.fillRect(0,0,tmp.width,tmp.height);
@@ -2437,21 +2869,17 @@ function exportPDF() {
   const cW=parseFloat(canvas.style.width),cH=parseFloat(canvas.style.height);
   const scale=Math.min(W/cW,H/cH);
   doc.addImage(img,'JPEG',(W-cW*scale)/2,(H-cH*scale)/2,cW*scale,cH*scale);
-  // Header bar over page 1
-  const planName = tabs[activeTab].name || 'Plan';
-  const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  const L=36, R=W-36, T=36;
-  doc.setFillColor(15,23,42); doc.rect(L,T,R-L,22,'F');
-  doc.setFontSize(13); doc.setTextColor(255,255,255);
-  doc.text(planName+'  |  Audio Layout', L+6, T+14);
-  doc.setFontSize(9); doc.setTextColor(180,180,180);
-  doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, T+14, {align:'right'});
 
-  // ── Page 2: Cable Schedule & Totals ──────────────────────────────────────────
-  doc.addPage();
+  const planName=tabs[activeTab].name||'Plan';
+  const dateStr=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const L=36,R=W-36,T=36;
+  doc.setFillColor(15,23,42);doc.rect(L,T,R-L,22,'F');
+  doc.setFontSize(13);doc.setTextColor(255,255,255);
+  doc.text(planName+'  |  Audio Layout',L+6,T+14);
+  doc.setFontSize(9);doc.setTextColor(180,180,180);
+  doc.text('PFL Pro Sound LLC  |  '+dateStr,R-6,T+14,{align:'right'});
 
-  // Sanitize text — replace Unicode symbols jsPDF can't render
-  function safe(str) {
+  function safe(str){
     return (str||'')
       .replace(/\u2192/g,'->').replace(/\u2190/g,'<-')
       .replace(/\u00d7/g,'x').replace(/\u00e9/g,'e')
@@ -2462,155 +2890,158 @@ function exportPDF() {
       .replace(/\n/g,' / ').replace(/\r/g,'');
   }
 
-  // Header bar full width
-  doc.setFillColor(15,23,42); doc.rect(L,T,R-L,22,'F');
-  doc.setFontSize(13); doc.setTextColor(255,255,255);
-  doc.text(safe(planName)+'  |  Cable Schedule', L+6, T+14);
-  doc.setFontSize(9); doc.setTextColor(180,180,180);
-  doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, T+14, {align:'right'});
+  doc.setFontSize(7.5);doc.setTextColor(150,150,150);
+  doc.text('PFL Pro Sound LLC  |  '+safe(planName),L,H-14);
 
-  // Two column layout
-  // Left col: Cable Runs   Right col: Totals + Adapters
-  const colGap = 14;
-  const lW = Math.round((R-L)*0.62);   // left col width
-  const rX = L + lW + colGap;           // right col x start
-  const rW = R - rX;                    // right col width
+  doc.save((safe(planName)||'plan')+'_layout.pdf');
+}
 
-  let ly = T + 32;   // left col y
-  let ry = T + 32;   // right col y
+function exportSummaryPDF() {
+  const {jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'landscape',unit:'pt',format:'letter'});
+  const W=doc.internal.pageSize.getWidth(),H=doc.internal.pageSize.getHeight();
+  const dateStr=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const L=36,R=W-36,T=36;
 
-  function secHdr(title, x, w, y) {
-    doc.setFillColor(30,41,59); doc.rect(x,y,w,13,'F');
+  function safe(str){
+    return (str||'')
+      .replace(/\u2192/g,'->').replace(/\u2190/g,'<-')
+      .replace(/\u00d7/g,'x').replace(/\u00e9/g,'e')
+      .replace(/[\u2018\u2019]/g,"'")
+      .replace(/[\u201c\u201d]/g,'"')
+      .replace(/\u2013/g,'-').replace(/\u2014/g,'--')
+      .replace(/[^\x00-\x7f]/g,'?').replace(/\n/g,' / ').replace(/\r/g,'');
+  }
+
+  function drawHeader(){
+    const y=T;
+    doc.setFillColor(15,23,42); doc.rect(L,y,R-L,22,'F');
+    doc.setFontSize(13); doc.setTextColor(255,255,255);
+    doc.text('All Gear Summary',L+6,y+14);
+    doc.setFontSize(9); doc.setTextColor(180,180,180);
+    doc.text('PFL Pro Sound LLC  |  '+dateStr,R-6,y+14,{align:'right'});
+    return y+30;
+  }
+
+  // Collect data (reuse buildSummary logic)
+  flushProps(); saveCurrent();
+  const allItemKeys=new Set(),allCableKeys=new Set(),allAdapterKeys=new Set();
+  const tabData=tabs.map(t=>{
+    const d=getTabCounts(t);
+    Object.keys(d.itemCounts).forEach(k=>allItemKeys.add(k));
+    Object.keys(d.cableCounts).forEach(k=>allCableKeys.add(k));
+    Object.keys(d.adapterCounts).forEach(k=>allAdapterKeys.add(k));
+    return d;
+  });
+  const itemKeys=[...allItemKeys];
+  const cableKeys=[...allCableKeys].sort((a,b)=>{
+    const [la]=a.split('|'),[lb]=b.split('|');
+    if(la!==lb) return la.localeCompare(lb);
+    return parseInt(a.split('|')[1])-parseInt(b.split('|')[1]);
+  });
+  const adapterKeys=[...allAdapterKeys].sort();
+  const tabNames=tabs.map((t,i)=>safe(t.name||'Plan '+(i+1)));
+
+  let y=drawHeader();
+  const pageBottom=H-30;
+
+  function checkPage(needed){
+    if(y+needed>pageBottom){ doc.addPage(); y=drawHeader(); }
+  }
+
+  function secHdr(title){
+    checkPage(16);
+    doc.setFillColor(30,41,59); doc.rect(L,y,R-L,13,'F');
     doc.setFontSize(8); doc.setTextColor(148,163,184);
-    doc.text(title, x+4, y+9);
-    return y+17;
+    doc.text(title,L+4,y+9); y+=17;
   }
 
-  function colHdr(cols, x, w, y) {
-    doc.setFillColor(241,245,249); doc.rect(x,y,w,12,'F');
-    doc.setFontSize(7.5); doc.setTextColor(71,85,105); doc.setFont(undefined,'bold');
-    cols.forEach(c => doc.text(c.t, x+c.o, y+8.5));
-    doc.setFont(undefined,'normal');
-    return y+13;
+  function grpHdr(title){
+    checkPage(13);
+    doc.setFillColor(15,23,42); doc.rect(L,y,R-L,11,'F');
+    doc.setFontSize(7); doc.setTextColor(100,116,139);
+    doc.text(title.toUpperCase(),L+4,y+8); y+=13;
   }
 
-  function checkLeftPage(needed) {
-    if(ly + needed > H - 30) {
-      doc.addPage();
-      ly = 36;
-      // Full header bar on continuation pages
-      doc.setFillColor(15,23,42); doc.rect(L,ly,R-L,22,'F');
-      doc.setFontSize(13); doc.setTextColor(255,255,255);
-      doc.text(safe(planName)+'  |  Cable Schedule', L+6, ly+14);
-      doc.setFontSize(9); doc.setTextColor(180,180,180);
-      doc.text('PFL Pro Sound LLC  |  '+dateStr, R-6, ly+14, {align:'right'});
-      ly += 26;
-      doc.setFillColor(30,41,59); doc.rect(L,ly,R-L,13,'F');
-      doc.setFontSize(8); doc.setTextColor(148,163,184);
-      doc.text('CABLE RUNS (continued)', L+4, ly+9);
-      ly += 17;
-      ly = colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}], L, lW, ly);
-    }
+  // Column layout: Label(fixed) | Total | tab1 | tab2 | ... | Notes
+  const labelW=160, totalW=40, notesW=160;
+  const tabW=Math.min(55, Math.max(35, Math.floor((R-L-labelW-totalW-notesW)/Math.max(tabs.length,1))));
+  const tabsBlockW=tabW*tabs.length;
+  const xLabel=L, xTotal=L+labelW, xTabs=xTotal+totalW, xNotes=xTabs+tabsBlockW;
+
+  function colHdrs(){
+    checkPage(13);
+    doc.setFillColor(241,245,249); doc.rect(L,y,R-L,12,'F');
+    doc.setFontSize(7); doc.setTextColor(71,85,105); doc.setFont(undefined,'bold');
+    doc.text('Label / Type',xLabel+3,y+8.5);
+    doc.text('Total',xTotal+2,y+8.5);
+    tabNames.forEach((n,i)=>doc.text(n.substring(0,8),xTabs+i*tabW+2,y+8.5));
+    doc.text('Notes',xNotes+3,y+8.5);
+    doc.setFont(undefined,'normal'); y+=13;
   }
 
-  // ── LEFT: Cable Runs ─────────────────────────────────────────────────────────
-  const schedPage = doc.internal.getCurrentPageInfo().pageNumber; // always page 2
-  ly = secHdr('CABLE RUNS', L, lW, ly);
-  ly = colHdr([{t:'#',o:2},{t:'Type',o:18},{t:'From',o:90},{t:'To',o:168},{t:'Length',o:248},{t:'Notes',o:308}], L, lW, ly);
-
-  S.cables.forEach((c,i) => {
-    checkLeftPage(11);
-    const from = cableEndpt(c,'from');
-    const to   = cableEndpt(c,'to');
-    const def  = CABLE_DEFS[c.type]||CABLE_DEFS.custom;
-    const ft   = calcCableLength(c);
-    const pieces = [...(c.combo||getBestCombo(ft,c.type))].sort((a,b)=>b-a);
-    const total  = pieces.reduce((s,v)=>s+v,0);
-    const lenStr = def.adapter ? '2ft fixed' : (!S.scale.ppf&&!c.manualFt ? '?' :
-                    pieces.length>1 ? total+'ft ('+pieces.join('+')+'ft)' : total+'ft'+(c.manualFt?'*':''));
-    const notes  = c.manualFt ? 'manual' : (c.height ? '+'+c.height+'ft height add' : '');
-    doc.setFillColor(...(i%2===0?[255,255,255]:[248,250,252]));
-    doc.rect(L,ly,lW,10,'F');
-    doc.setFontSize(7.5); doc.setTextColor(30,30,30);
-    doc.text(String(i+1),                             L+2,   ly+7);
-    doc.text(safe(def.label).substring(0,14),          L+18,  ly+7);
-    doc.text(safe(from?.label||'?').substring(0,18),  L+90,  ly+7);
-    doc.text(safe(to?.label||'?').substring(0,18),    L+168, ly+7);
-    doc.text(safe(lenStr),                             L+248, ly+7);
+  function dataRow(label,color,total,perTab,noteKey,indent){
+    checkPage(11);
+    const even=(Math.floor((y-T)/11))%2===0;
+    doc.setFillColor(...(even?[255,255,255]:[248,250,252]));
+    doc.rect(L,y,R-L,10,'F');
+    doc.setFontSize(7.5);
+    const rgb=(color||'#e5e7eb').replace('#','').match(/.{2}/g).map(x=>parseInt(x,16));
+    doc.setTextColor(rgb[0],rgb[1],rgb[2]);
+    doc.text(safe(label).substring(0,28),xLabel+(indent?10:3),y+7);
+    doc.setTextColor(249,115,22);
+    doc.text(String(total),xTotal+2,y+7);
+    doc.setTextColor(60,60,60);
+    perTab.forEach((n,i)=>doc.text(n?String(n):'--',xTabs+i*tabW+2,y+7));
+    const note=safe(summaryNotes[noteKey]||'');
     doc.setTextColor(110,110,110);
-    doc.text(safe(notes),                              L+308, ly+7);
-    doc.setTextColor(30,30,30);
-    ly += 11;
-  });
-  if(!S.cables.length){
-    doc.setFontSize(7.5);doc.setTextColor(150,150,150);
-    doc.text('No cables',L+4,ly+7);ly+=12;
+    if(note) doc.text(note.substring(0,30),xNotes+3,y+7);
+    y+=10;
   }
 
-  // ── RIGHT: Cable Totals — jump back to schedPage so totals always appear top-right of page 2 ──
-  doc.setPage(schedPage);
-  ry = secHdr('CABLE TOTALS', rX, rW, ry);
-  ry = colHdr([{t:'Type',o:2},{t:'Length',o:80},{t:'Qty',o:140}], rX, rW, ry);
-
-  const totMap={};
-  S.cables.forEach(c=>{
-    const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
-    if(def.adapter||(!S.scale.ppf&&!c.manualFt)) return;
-    const ft=calcCableLength(c);
-    const pieces=[...(c.combo||getBestCombo(ft,c.type))].sort((a,b)=>b-a);
-    pieces.forEach(len=>{
-      const key=def.label+'|'+len;
-      totMap[key]=totMap[key]||{label:def.label,len:len+'ft',count:0};
-      totMap[key].count++;
+  // ITEMS
+  if(itemKeys.length){
+    secHdr('ITEMS'); colHdrs();
+    ITEM_GROUPS.forEach(grp=>{
+      const grpKeys=itemKeys.filter(k=>grp.types.includes(k.split('|')[0]));
+      if(!grpKeys.length) return;
+      grpHdr(grp.label);
+      grpKeys.sort((a,b)=>a.split('|')[1].localeCompare(b.split('|')[1])).forEach(key=>{
+        const perTab=tabData.map(d=>d.itemCounts[key]?.count||0);
+        const total=perTab.reduce((s,v)=>s+v,0);
+        const color=tabData.map(d=>d.itemCounts[key]?.color).find(c=>c)||'#e5e7eb';
+        dataRow(key.split('|')[1],color,total,perTab,'item|'+key,true);
+      });
     });
-  });
-  const totEntries=Object.values(totMap).sort((a,b)=>a.label.localeCompare(b.label)||parseInt(b.len)-parseInt(a.len));
-  totEntries.forEach((e,i)=>{
-    doc.setFillColor(...(i%2===0?[255,255,255]:[248,250,252]));
-    doc.rect(rX,ry,rW,10,'F');
-    doc.setFontSize(7.5);doc.setTextColor(30,30,30);
-    doc.text(safe(e.label),rX+2,ry+7);
-    doc.text(e.len,rX+80,ry+7);
-    doc.setFont(undefined,'bold');doc.text(String(e.count),rX+140,ry+7);doc.setFont(undefined,'normal');
-    ry+=11;
-  });
-  if(!totEntries.length){
-    doc.setFontSize(7.5);doc.setTextColor(150,150,150);
-    doc.text('No scale set',rX+2,ry+7);ry+=12;
+    y+=6;
   }
 
-  // ── RIGHT: Adapter Totals ─────────────────────────────────────────────────
-  const adpItems=S.items.filter(it=>ITEM_DEFS[it.type]?.adapter);
-  if(adpItems.length){
-    ry+=8;
-    ry=secHdr('ADAPTER TOTALS',rX,rW,ry);
-    ry=colHdr([{t:'Type',o:2},{t:'Qty',o:120}],rX,rW,ry);
-    const adpMap={};
-    adpItems.forEach(it=>{
-      const def=ITEM_DEFS[it.type];
-      adpMap[it.type]=adpMap[it.type]||{label:def.label,count:0};
-      adpMap[it.type].count++;
+  // CABLES
+  if(cableKeys.length){
+    secHdr('CABLES'); colHdrs();
+    cableKeys.forEach(key=>{
+      const [typeLabel,lenStr]=key.split('|');
+      const perTab=tabData.map(d=>d.cableCounts[key]?.count||0);
+      const total=perTab.reduce((s,v)=>s+v,0);
+      const color=tabData.map(d=>d.cableCounts[key]?.color).find(c=>c)||'#e5e7eb';
+      dataRow(typeLabel+' '+lenStr,color,total,perTab,'cable|'+key,false);
     });
-    Object.values(adpMap).forEach((e,i)=>{
-      doc.setFillColor(...(i%2===0?[255,255,255]:[248,250,252]));
-      doc.rect(rX,ry,rW,10,'F');
-      doc.setFontSize(7.5);doc.setTextColor(30,30,30);
-      doc.text(safe(e.label),rX+2,ry+7);
-      doc.setFont(undefined,'bold');doc.text(String(e.count),rX+120,ry+7);doc.setFont(undefined,'normal');
-      ry+=11;
+    y+=6;
+  }
+
+  // ADAPTERS
+  if(adapterKeys.length){
+    secHdr('ADAPTERS'); colHdrs();
+    adapterKeys.forEach(key=>{
+      const perTab=tabData.map(d=>d.adapterCounts[key]?.count||0);
+      const total=perTab.reduce((s,v)=>s+v,0);
+      const color=tabData.map(d=>d.adapterCounts[key]?.color).find(c=>c)||'#e5e7eb';
+      const label=tabData.map(d=>d.adapterCounts[key]?.label).find(l=>l)||key;
+      dataRow(label,color,total,perTab,'adapter|'+key,false);
     });
   }
 
-  // Footer on all pages
-  const pageCount=doc.internal.getNumberOfPages();
-  for(let p=1;p<=pageCount;p++){
-    doc.setPage(p);
-    doc.setFontSize(7.5);doc.setTextColor(150,150,150);
-    doc.text('PFL Pro Sound LLC  |  '+safe(planName), L, H-14);
-    if(p>1) doc.text('Page '+p+' of '+pageCount, R, H-14, {align:'right'});
-  }
-
-  doc.save((safe(planName)||'plan')+'.pdf');
+  doc.save('PFL_Gear_Summary.pdf');
 }
 
 function exportTotalsOnly() {
