@@ -33,7 +33,7 @@ select option{background:#1f2937}
 #summary-view th{background:#0f172a;color:#9ca3af;font-weight:600;padding:6px 8px;text-align:left;position:sticky;top:0;z-index:1}
 #summary-view td{padding:4px 8px;border-bottom:1px solid #1a2035;vertical-align:middle}
 #summary-view .sum-section{background:#1a2035;color:#6b7280;font-size:10px;text-transform:uppercase;letter-spacing:.5px;padding:4px 8px}
-#summary-view textarea{width:100%;box-sizing:border-box;background:#0f172a;color:#e5e7eb;border:1px solid #1f2937;border-radius:3px;padding:3px 5px;font-size:11px;resize:vertical;min-height:26px;font-family:inherit;line-height:1.4}
+#summary-view textarea{width:100%;box-sizing:border-box;background:#0f172a;color:#e5e7eb;border:1px solid #1f2937;border-radius:3px;padding:3px 5px;font-size:11px;resize:vertical;min-height:26px;font-family:inherit;line-height:1.4}#summary-view tr.sum-highlighted td{background:#1e3a5f !important;border-bottom-color:#2563eb}#summary-view tr.sum-highlighted textarea{background:#1e3a5f}
 
 /* Body row: sidebar | right-col */
 #body-row{display:flex;flex:1;min-height:0;overflow:hidden}
@@ -116,7 +116,7 @@ canvas{display:block}
 .totals-table td{padding:2px 4px;color:#e5e7eb}
 .totals-table td:last-child{text-align:right;font-weight:700;color:#f97316}
 .totals-table tr:nth-child(even) td{background:rgba(255,255,255,0.03)}
-.sched-row{font-size:11px;color:#d1d5db;padding:4px 6px;margin-bottom:4px;border-left:3px solid #6b7280;background:#111827;display:flex;flex-direction:column;gap:2px;border-radius:0 3px 3px 0}
+.sched-row{font-size:11px;color:#d1d5db;padding:4px 6px;margin-bottom:4px;border-left:3px solid #6b7280;background:#111827;display:flex;flex-direction:column;gap:2px;border-radius:0 3px 3px 0;cursor:pointer}.sched-row:hover{background:#1a2035}.sched-row.sched-hl{background:#1e3a5f !important;border-left-width:5px}#totals-body tr{cursor:pointer}#totals-body tr:hover td{background:#1a2035}#totals-body tr.totals-hl td{background:#1e3a5f}#item-totals-body tr.item-hl td{background:#1e3a5f !important}#item-totals-body tr[data-itype]{cursor:pointer}#item-totals-body tr[data-itype]:hover td{background:#1a2035}
 .sched-warn{color:#fbbf24}
 .combo-btn{background:#1e3a5f;color:#93c5fd;border:1px solid #3b82f6;border-radius:3px;padding:2px 6px;font-size:11px;margin:2px 2px 2px 0;cursor:pointer}
 .combo-btn:hover{background:#1d4ed8}
@@ -188,6 +188,7 @@ canvas{display:block}
       <div class="sidebar-label">Tools</div>
       <button class="tool-btn active" data-tool="select" id="tool-select">Select/Move <span class="kbd">V</span></button>
       <button class="tool-btn" data-tool="scale" id="tool-scale">Set Scale <span class="kbd">S</span></button>
+      <button class="tool-btn" data-tool="measure" id="tool-measure">Measure <span class="kbd">M</span></button>
       <button class="tool-btn" data-tool="color" id="tool-color">Color <span class="kbd">X</span></button>
     </div>
     <div class="sidebar-section">
@@ -228,7 +229,7 @@ canvas{display:block}
       <div class="sidebar-label">PDF Greyscale <span id="grey-val">100</span>%</div>
       <input type="range" id="pdfGrey" min="0" max="100" value="0">
     </div>
-    <div id="keyboard-hint">V select · S scale · X color<br>F foh · A amp · K spk · I io<br>P pwr · W ap · C cable<br>Cable: click to place turns<br>Shift+click: snap H/V<br>Alt+drag / mid-mouse: pan<br>Cmd+scroll: zoom · Cmd+Z: undo</div>
+    <div id="keyboard-hint">V select · S scale · M measure · X color<br>F foh · A amp · K spk · I io<br>P pwr · W ap · C cable<br>Cable: click to place turns<br>Shift+click: snap H/V<br>Alt+drag / mid-mouse: pan<br>Cmd+scroll: zoom · Cmd+Z: undo</div>
   </div>
 
   <!-- Right column -->
@@ -298,7 +299,18 @@ canvas{display:block}
         <div id="props-content">
           <div id="no-selection" style="color: rgb(75, 85, 99); font-size: 12px; margin-top: 20px; text-align: center;">Select an item or cable</div>
           <div id="item-props" style="display:none">
-            <div class="prop-row"><label>Type</label><input id="ip-type" readonly=""></div>
+            <div class="prop-row" id="ip-type-row"><label>Type</label><select id="ip-type-select" style="width:100%;background:#1f2937;color:#e5e7eb;border:1px solid #374151;border-radius:4px;padding:3px 4px;font-size:12px">
+              <option value="speaker">Speaker</option>
+              <option value="amp">Amplifier</option>
+              <option value="foh">FOH Console</option>
+              <option value="iobox">I/O Box</option>
+              <option value="ap">WiFi AP</option>
+              <option value="powerdrop">Power Drop</option>
+              <option value="nl4nl2">NL4&#x2192;NL2</option>
+              <option value="nl8nl4">NL8&#x2192;NL4</option>
+              <option value="nl8nl2">NL8&#x2192;NL2</option>
+              <option value="cattail">Cattails</option>
+            </select></div>
             <div class="prop-row"><label>Label (one line per row)</label><textarea id="ip-label" rows="2"></textarea></div>
             <div class="prop-row"><label>Color</label><input type="color" id="ip-color"></div>
             <div class="prop-row"><label>Size (px)</label><input type="range" id="ip-size" min="10" max="80" value="20"></div>
@@ -313,7 +325,19 @@ canvas{display:block}
             <button id="ip-delete" style="width:100%;background:#7f1d1d;color:#fca5a5;border:1px solid #991b1b;border-radius:4px;padding:5px;margin-top:6px;cursor:pointer">⊟ Delete Item</button>
           </div>
           <div id="cable-props" style="display:none">
-            <div class="prop-row"><label>Type</label><input id="cp-type" readonly=""></div>
+            <div class="prop-row"><label>Type</label><select id="cp-type" style="width:100%;background:#1f2937;color:#e5e7eb;border:1px solid #374151;border-radius:4px;padding:3px 4px;font-size:12px">
+              <option value="xlr">XLR</option>
+              <option value="nl4">NL4</option>
+              <option value="nl8">NL8</option>
+              <option value="cat6">Cat6</option>
+              <option value="cat6e">Cat6 EtherCON</option>
+              <option value="cat5e">Cat5e EtherCON</option>
+              <option value="edison">Edison</option>
+              <option value="socapex">Socapex</option>
+              <option value="distro">Distro</option>
+              <option value="rf">RF Antenna</option>
+              <option value="custom">Custom</option>
+            </select></div>
             <div class="prop-row"><label>Color</label><input type="color" id="cp-color"></div>
             <div class="prop-row"><label>Height / Vertical Drop (ft)</label><input type="number" id="cp-height" min="0" value="0" step="1"></div>
             <div id="cp-length-row" class="prop-row"><label>Length</label><input id="cp-length" readonly=""></div>
@@ -478,7 +502,7 @@ function openLockoutEmail() {
 
 
 // ─── Constants ───────────────────────────────────────────────────────────────
-const LS_KEY = 'pflCablePlanner_v3';
+const LS_KEY = window.location.protocol === 'file:' ? 'pflCablePlanner_v3_local' : 'pflCablePlanner_v3';
 const UNDO_MAX = 60;
 const COORD_W = 1600, COORD_H = 1000;
 
@@ -502,7 +526,7 @@ const CABLE_DEFS = {
 const ITEM_DEFS = {
   foh:       {label:'FOH',      color:'#f87171', shape:'rect'},
   amp:       {label:'AMP',      color:'#fbbf24', shape:'diamond'},
-  speaker:   {label:'SPK',      color:'#4ade80', shape:'circle'},
+  speaker:   {label:'SPK',      color:'#4ade80', shape:'speaker'},
   iobox:     {label:'I/O',      color:'#60a5fa', shape:'roundrect'},
   powerdrop: {label:'PWR',      color:'#f97316', shape:'hex'},
   ap:        {label:'AP',       color:'#06b6d4', shape:'octagon'},
@@ -541,6 +565,7 @@ let cableInProgress = null; // {fromId, waypoints}
 
 // Scale state
 let scaleState = null; // {p1, p2, step}
+let measureState = null; // {p1, mouse} — point-to-point measure tool
 
 // Drag state
 let drag = null;
@@ -550,6 +575,7 @@ let panState = null;
 let spotlightId = null; // cmd+click spotlight
 let spotlightCableIds = new Set();
 let _unsavedChanges = false;
+let _autoSaveTimer = null;
 let _rafPending = false;
 function scheduleRender() {
   if(_rafPending) return;
@@ -565,13 +591,10 @@ const wrap = document.getElementById('canvas-wrap');
 window.addEventListener('DOMContentLoaded', () => {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   resizeCanvas();
-  restoreFromLS();
   loadSummaryNotes();
-  renderTabs();
   setTool('select');
-  render();
-  updateProps();
-  updateSchedule(); updateTotals(); updateItemTotals();
+  render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals(); renderTabs(); // initial render (blank state)
+  restoreFromLS(); // async — overlays saved session on top via IDB callback
 
   // Keyboard shortcuts
   document.addEventListener('keydown', onKey, true);
@@ -690,6 +713,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Props
   document.getElementById('ip-label').addEventListener('focus', () => { pushUndo(); });
+  document.getElementById('cp-type').addEventListener('change', e => {
+    const c=S.cables.find(ca=>ca.id===selectedId); if(!c) return;
+    pushUndo();
+    const newType=e.target.value;
+    const newDef=CABLE_DEFS[newType]||CABLE_DEFS.custom;
+    c.type=newType;
+    // Reset color to the new type's default color
+    c.color=newDef.color;
+    c.combo=null; // clear cached combo so length recalculates
+    dirtyLaneCache();
+    updateProps(); render(); updateSchedule(); updateTotals();
+  });
   document.getElementById('ip-exclude-totals').addEventListener('change', e => {
     const it=S.items.find(i=>i.id===selectedId); if(!it) return;
     pushUndo(); it.excludeTotals=e.target.checked; updateItemTotals(); if(summaryActive){ flushProps(); buildSummary(); }
@@ -712,6 +747,17 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ip-tb-h').addEventListener('mousedown', () => { pushUndo(); });
   document.getElementById('ip-tb-h').addEventListener('input', e => {
     const it=S.items.find(i=>i.id===selectedId); if(it&&it.type==='textbox'){it.h=Math.max(30,+e.target.value);render();}
+  });
+  document.getElementById('ip-type-select').addEventListener('change', e => {
+    const it = S.items.find(i=>i.id===selectedId);
+    if(!it) return;
+    pushUndo();
+    const newType = e.target.value;
+    const def = ITEM_DEFS[newType];
+    it.type = newType;
+    it.color = def.color;
+    if(!it.label || Object.values(ITEM_DEFS).some(d=>d.label===it.label)) it.label = '';
+    dirtyLaneCache(); updateProps(); render(); updateItemTotals();
   });
   document.getElementById('ip-delete').addEventListener('click', deleteSelected);
   document.getElementById('cp-color').addEventListener('input', e => {
@@ -818,11 +864,17 @@ function toggleDropdown(id) {
   if(!isOpen) { btn.classList.add('open'); menu.classList.add('open'); }
 }
 
+function autoSaveLS() {
+  // Debounced background save to IDB so state survives reloads (works for file:// and hosted)
+  clearTimeout(_autoSaveTimer);
+  _autoSaveTimer = setTimeout(() => { saveCurrent(); saveLS(); }, 1500);
+}
 function pushUndo() {
   undoStack.push(JSON.stringify(S));
   if(undoStack.length > UNDO_MAX) undoStack.shift();
   dirtyLaneCache();
   _unsavedChanges = true;
+  autoSaveLS();
 }
 function undo() {
   if(!undoStack.length) return;
@@ -835,15 +887,12 @@ function undo() {
 
 function saveLS() {
   _unsavedChanges = false;
-  if(window.location.protocol === 'file:') return; // don't overwrite hosted-site localStorage from local file
   const data = buildSaveData();
-  try {
-    localStorage.setItem(LS_KEY, JSON.stringify(data));
-  } catch(e) {
-    // quota exceeded — try without PDF
-    const d2 = {...data, tabs: data.tabs.map(t=>({...t, pdfData:null}))};
-    try { localStorage.setItem(LS_KEY, JSON.stringify(d2)); } catch(e2) {}
-  }
+  // Save pdfData to IDB separately (avoids localStorage quota)
+  _idbSet('planPdfData', data.tabs.map(t=>t.pdfData||null));
+  // Save everything else to localStorage using a protocol-scoped key (local vs hosted don't interfere)
+  const lean = {...data, tabs: data.tabs.map(t=>({...t, pdfData:null}))};
+  try { localStorage.setItem(LS_KEY, JSON.stringify(lean)); } catch(e) {}
   // Flash the Project dropdown button orange
   const ddBtn = document.querySelector('#dd-project .sb-dropdown-btn');
   if(ddBtn && !ddBtn._flashing) {
@@ -1034,6 +1083,17 @@ function buildSummary() {
     ta.addEventListener('input',()=>{ summaryNotes[ta.dataset.notekey]=ta.value; saveSummaryNotes(); });
     ta.addEventListener('keydown',e=>e.stopPropagation());
   });
+  // Row highlight on click
+  wrap.querySelectorAll('tbody tr').forEach(tr=>{
+    if(tr.querySelector('.sum-section')) return; // skip section headers
+    tr.style.cursor='pointer';
+    tr.addEventListener('click',e=>{
+      if(e.target.tagName==='TEXTAREA') return; // don't steal focus from notes
+      const already=tr.classList.contains('sum-highlighted');
+      wrap.querySelectorAll('tr.sum-highlighted').forEach(r=>r.classList.remove('sum-highlighted'));
+      if(!already) tr.classList.add('sum-highlighted');
+    });
+  });
 }
 
 function showSummary() {
@@ -1052,17 +1112,29 @@ function hideSummary() {
 }
 
 function restoreFromLS() {
-  if(window.location.protocol === 'file:') return; // local file always starts blank
+  // Load session state from localStorage (protocol-scoped key keeps local/hosted separate)
   try {
     const raw = localStorage.getItem(LS_KEY);
     if(!raw) return;
     const data = JSON.parse(raw);
-    if(data.version===3 && data.tabs) {
-      tabs = data.tabs.map(t => ({...t, fileHandle:null}));
-      activeTab = data.activeTab || 0;
-      if(activeTab >= tabs.length) activeTab = 0;
-      loadCurrent();
-    }
+    if(!data || data.version!==3 || !data.tabs) return;
+    tabs = data.tabs.map(t => ({...t, fileHandle:null}));
+    activeTab = data.activeTab || 0;
+    if(activeTab >= tabs.length) activeTab = 0;
+    loadCurrent();
+    renderTabs(); render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
+    // Restore pdfData/layout images from IDB (stored separately to avoid LS quota)
+    _idbGet('planPdfData', pdfs => {
+      if(pdfs && Array.isArray(pdfs)) {
+        pdfs.forEach((pdf, i) => { if(tabs[i] && pdf) tabs[i].pdfData = pdf; });
+        if(tabs[activeTab].pdfData) {
+          pdfData = tabs[activeTab].pdfData;
+          document.getElementById('grey-wrap').style.display = '';
+          loadPDFImage(pdfData);
+          render();
+        }
+      }
+    });
   } catch(e) {}
 }
 
@@ -1159,6 +1231,7 @@ function switchTab(i) {
   loadCurrent();
   renderTabs();
   render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
+  saveCurrent(); saveLS();
 }
 function addTab() {
   if(summaryActive) hideSummary();
@@ -1168,6 +1241,7 @@ function addTab() {
   loadCurrent();
   renderTabs();
   render(); updateProps(); updateSchedule(); updateTotals(); updateItemTotals();
+  saveCurrent(); saveLS();
 }
 function closeTab(i) {
   if(tabs.length===1) { alert('Cannot close the last tab.'); return; }
@@ -1316,7 +1390,28 @@ function render() {
     const cablesToDraw = spotlightId
       ? S.cables.filter(c => spotlightCableIds.has(c.id))
       : S.cables.filter(isCableShown);
-    cablesToDraw.forEach(c => drawCableStack(c));
+    if(_highlightCableIds.size > 0) {
+      // Draw non-highlighted cables dimmed, then highlighted cables on top with glow
+      ctx.globalAlpha = 0.18;
+      cablesToDraw.filter(c=>!_highlightCableIds.has(c.id)).forEach(c=>drawCableStack(c));
+      ctx.globalAlpha = 1;
+      cablesToDraw.filter(c=>_highlightCableIds.has(c.id)).forEach(c=>{
+        ctx.save();
+        ctx.shadowColor='#ffffff'; ctx.shadowBlur=10;
+        drawCableStack(c);
+        ctx.restore();
+      });
+    } else {
+      cablesToDraw.forEach(c => drawCableStack(c));
+    }
+  }
+
+  // Cable labels — drawn after cables, before items so icons cover labels that land on them
+  if(cablesVisible && labelsVisible && V.zoom >= fitZoom * 0.5) {
+    const cablesToLabel = spotlightId
+      ? S.cables.filter(c => spotlightCableIds.has(c.id))
+      : S.cables.filter(isCableShown);
+    cablesToLabel.forEach(c => { try { drawCableLabel(c); } catch(e) {} });
   }
 
   // In-progress cable
@@ -1325,23 +1420,71 @@ function render() {
   }
 
   // All other items on top of cables
-  S.items.forEach(it => {
-    if(it.type === 'textbox') return;
-    if(ITEM_DEFS[it.type]?.adapter && (!cablesVisible || V.zoom < fitZoom * 1.92)) return;
-    if(!isItemShown(it)) return;
-    drawItem(it);
-  });
+  if(_highlightItemTypes.size > 0) {
+    S.items.forEach(it => {
+      if(it.type === 'textbox') return;
+      if(ITEM_DEFS[it.type]?.adapter && (!cablesVisible || V.zoom < fitZoom * 1.92)) return;
+      if(!isItemShown(it)) return;
+      if(!_highlightItemTypes.has(it.id)) { ctx.globalAlpha=0.18; drawItem(it); ctx.globalAlpha=1; }
+    });
+    S.items.forEach(it => {
+      if(it.type === 'textbox') return;
+      if(ITEM_DEFS[it.type]?.adapter && (!cablesVisible || V.zoom < fitZoom * 1.92)) return;
+      if(!isItemShown(it)) return;
+      if(_highlightItemTypes.has(it.id)) {
+        ctx.save(); ctx.shadowColor='#ffffff'; ctx.shadowBlur=10;
+        drawItem(it); ctx.restore();
+      }
+    });
+  } else {
+    S.items.forEach(it => {
+      if(it.type === 'textbox') return;
+      if(ITEM_DEFS[it.type]?.adapter && (!cablesVisible || V.zoom < fitZoom * 1.92)) return;
+      if(!isItemShown(it)) return;
+      drawItem(it);
+    });
+  }
 
   // Scale guide
   if(scaleState && scaleState.p1) {
-    ctx.strokeStyle='#22d3ee';ctx.lineWidth=2;ctx.setLineDash([4,4]);
+    ctx.strokeStyle='#22d3ee';ctx.lineWidth=2;ctx.setLineDash([6,4]);
     const p=toCanvas(scaleState.p1.x,scaleState.p1.y);
     ctx.beginPath();ctx.arc(p.x,p.y,6,0,Math.PI*2);ctx.stroke();
-    if(scaleState.p2) {
-      const p2=toCanvas(scaleState.p2.x,scaleState.p2.y);
-      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p2.x,p2.y);ctx.stroke();
+    const scaleDest = scaleState.p2 ? toCanvas(scaleState.p2.x,scaleState.p2.y) : scaleState.mouse;
+    if(scaleDest){
+      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(scaleDest.x,scaleDest.y);ctx.stroke();
     }
     ctx.setLineDash([]);
+  }
+  if(measureState && measureState.p1) {
+    ctx.save();
+    ctx.strokeStyle='#f59e0b';ctx.lineWidth=2;ctx.setLineDash([6,4]);
+    const mp1=toCanvas(measureState.p1.x,measureState.p1.y);
+    ctx.beginPath();ctx.arc(mp1.x,mp1.y,6,0,Math.PI*2);ctx.stroke();
+    const mp2=measureState.mouse;
+    if(mp2){
+      ctx.beginPath();ctx.moveTo(mp1.x,mp1.y);ctx.lineTo(mp2.x,mp2.y);ctx.stroke();
+      if(S.scale.ppf){
+        const dxc=toCoord(mp2.x,mp2.y).x-measureState.p1.x;
+        const dyc=toCoord(mp2.x,mp2.y).y-measureState.p1.y;
+        const dist=Math.sqrt(dxc*dxc+dyc*dyc)/S.scale.ppf;
+        const lbl=Math.round(dist)+"'";
+        const fs=Math.max(12,14*V.zoom);
+        ctx.font=`bold ${fs}px sans-serif`;
+        ctx.textAlign='center';ctx.textBaseline='middle';
+        const mx=(mp1.x+mp2.x)/2, my=(mp1.y+mp2.y)/2-14;
+        const tw=ctx.measureText(lbl).width;
+        ctx.fillStyle='rgba(15,23,42,0.88)';
+        ctx.beginPath();ctx.roundRect(mx-tw/2-5,my-fs/2-3,tw+10,fs+6,3);ctx.fill();
+        ctx.fillStyle='#f59e0b';ctx.fillText(lbl,mx,my);
+      } else {
+        const mx=(mp1.x+mp2.x)/2, my=(mp1.y+mp2.y)/2-14;
+        ctx.font='bold 12px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.fillStyle='#f59e0b';ctx.fillText('Set scale first',mx,my);
+      }
+    }
+    ctx.setLineDash([]);
+    ctx.restore();
   }
 
   // Alignment guides
@@ -1377,6 +1520,7 @@ function drawItem(it) {
       case 'rect':      ctx.roundRect(-s*1.4,-s*0.7,s*2.8,s*1.4,s*0.15); break;
       case 'diamond':   ctx.moveTo(0,-s);ctx.lineTo(s*0.75,0);ctx.lineTo(0,s);ctx.lineTo(-s*0.75,0);ctx.closePath(); break;
       case 'circle':    ctx.arc(0,0,s,0,Math.PI*2); break;
+      case 'speaker':   ctx.roundRect(-s,-s,s*2,s*2,s*0.18); break;
       case 'roundrect': ctx.roundRect(-s,-s,s*2,s*2,s*0.25); break;
       case 'hex': {
         for(let i=0;i<6;i++){ const a=Math.PI/180*(60*i-30); i===0?ctx.moveTo(Math.cos(a)*s,Math.sin(a)*s):ctx.lineTo(Math.cos(a)*s,Math.sin(a)*s); }
@@ -1396,6 +1540,18 @@ function drawItem(it) {
 
   buildItemPath();
   ctx.fill(); ctx.stroke();
+
+  // Speaker icon details — woofer rings inside cabinet
+  if(def.shape === 'speaker') {
+    // Outer woofer ring (dark surround)
+    ctx.beginPath(); ctx.arc(0,0,s*0.72,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,0,0,0.35)'; ctx.fill();
+    // Mid cone
+    ctx.beginPath(); ctx.arc(0,0,s*0.5,0,Math.PI*2);
+    ctx.fillStyle=it.color||def.color; ctx.globalAlpha=0.7; ctx.fill(); ctx.globalAlpha=1;
+    // Reset fill for label
+    ctx.fillStyle=it.color||def.color;
+  }
 
   // Selection ring — drawn after fill so it's always visible
   if(isSelected) {
@@ -1493,15 +1649,23 @@ function drawItem(it) {
     ctx.font = `bold ${fs}px sans-serif`;
     const maxW = Math.max(...lines.map(ln=>ctx.measureText(ln).width));
     const pad = 2, lh = fs*1.2, totalH = lh*lineCount;
-    ctx.fillStyle = 'rgba(10,10,18,0.65)';
-    ctx.beginPath();
-    ctx.roundRect(-maxW/2-pad, -totalH/2-pad, maxW+pad*2, totalH+pad*2, 3);
-    ctx.fill();
-    ctx.fillStyle = '#fff';
-    lines.forEach((ln,i) => {
-      const yo = (i-(lineCount-1)/2)*lh;
-      ctx.fillText(ln, 0, yo);
-    });
+    if(def.shape === 'speaker') {
+      // Speaker: white label unless color is white/yellow (very light)
+      const rgb=(it.color||'#4ade80').replace('#','').match(/.{2}/g).map(x=>parseInt(x,16)/255);
+      const lum=0.299*rgb[0]+0.587*rgb[1]+0.114*rgb[2];
+      ctx.fillStyle = lum > 0.75 ? 'rgba(0,0,0,0.85)' : 'rgba(255,255,255,0.95)';
+      lines.forEach((ln,i)=>{ ctx.fillText(ln, 0, (i-(lineCount-1)/2)*lh); });
+    } else {
+      ctx.fillStyle = 'rgba(10,10,18,0.65)';
+      ctx.beginPath();
+      ctx.roundRect(-maxW/2-pad, -totalH/2-pad, maxW+pad*2, totalH+pad*2, 3);
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      lines.forEach((ln,i) => {
+        const yo = (i-(lineCount-1)/2)*lh;
+        ctx.fillText(ln, 0, yo);
+      });
+    }
   }
   ctx.restore();
 }
@@ -1648,22 +1812,31 @@ function drawCableStack(c) {
     ctx.beginPath();ctx.arc(p.x,p.y,7,0,Math.PI*2);ctx.fill();ctx.stroke();
   });
 
-  // 5. Label along the offset path
-  if(labelsVisible && V.zoom >= fitZoom * 1.92) {
-  const labelT=(c.labelT!==undefined)?c.labelT:0.85;
-  const lp=ptAtT(screenPts,labelT);
-  const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
-  const lbl=def.adapter?def.label+' 2ft':def.label+' '+getLengthLabel(c);
-  const fs=Math.max(10,12*V.zoom);
+  // 5. Label drawn in a separate pass after items (see drawAllCableLabels)
+  ctx.restore();
+}
+
+function cableLabelT(c) {
+  if(c.labelDragged && c.labelT!==undefined) return Math.max(0.1, Math.min(0.9, c.labelT));
+  return 0.5;
+}
+function drawCableLabel(c) {
+  if(!labelsVisible || V.zoom < fitZoom * 0.5) return;
+  const screenPts = cableOffsetScreenPts(c);
+  if(!screenPts || screenPts.length < 2) return;
+  const lp = ptAtT(screenPts, cableLabelT(c));
+  const def = CABLE_DEFS[c.type]||CABLE_DEFS.custom;
+  const lbl = def.adapter ? def.label+' 2ft' : def.label+' '+getLengthLabel(c);
+  const fs = Math.max(10, 12*V.zoom);
+  ctx.save();
   ctx.font=`bold ${fs}px sans-serif`;
-  ctx.textAlign='center';ctx.textBaseline='middle';
-  const tw=ctx.measureText(lbl).width;
-  const pad=4;
-  ctx.fillStyle='rgba(15,23,42,0.85)';
-  ctx.beginPath();ctx.roundRect(lp.x-tw/2-pad,lp.y-fs/2-pad,tw+pad*2,fs+pad*2,3);ctx.fill();
-  ctx.fillStyle=col;
-  ctx.fillText(lbl,lp.x,lp.y);
-  } // end labelsVisible
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  const tw = ctx.measureText(lbl).width;
+  const pad = 4;
+  ctx.fillStyle='rgba(15,23,42,0.88)';
+  ctx.beginPath(); ctx.roundRect(lp.x-tw/2-pad, lp.y-fs/2-pad, tw+pad*2, fs+pad*2, 3); ctx.fill();
+  ctx.fillStyle = c.color;
+  ctx.fillText(lbl, lp.x, lp.y);
   ctx.restore();
 }
 
@@ -1698,24 +1871,6 @@ function drawCableParallel(c, lane) {
     ctx.strokeStyle='#111';ctx.lineWidth=1.5;
     ctx.beginPath();ctx.arc(p.x,p.y,7,0,Math.PI*2);ctx.fill();ctx.stroke();
   });
-
-  // Label
-  if(labelsVisible && V.zoom >= fitZoom * 1.92) {
-  const allPts=[from,...c.waypoints,to].map(p=>toCanvas(p.x,p.y));
-  const labelT=(c.labelT!==undefined)?c.labelT:0.85;
-  const lp=ptAtT(allPts,labelT);
-  const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
-  const lbl=def.adapter?def.label+' 2ft':def.label+' '+getLengthLabel(c);
-  const fs=Math.max(10,12*V.zoom);
-  ctx.font=`bold ${fs}px sans-serif`;
-  ctx.textAlign='center';ctx.textBaseline='middle';
-  const tw=ctx.measureText(lbl).width;
-  const pad=4;
-  ctx.fillStyle='rgba(15,23,42,0.85)';
-  ctx.beginPath();ctx.roundRect(lp.x-tw/2-pad,lp.y-fs/2-pad,tw+pad*2,fs+pad*2,3);ctx.fill();
-  ctx.fillStyle=c.color;
-  ctx.fillText(lbl,lp.x,lp.y);
-  } // end labelsVisible
 
   ctx.restore();
 }
@@ -1761,8 +1916,8 @@ function drawCable(c, laneOffset=0) {
   });
 
   // Label with dark background pill
-  if(labelsVisible && V.zoom >= fitZoom * 1.92) {
-  const labelT = (c.labelT !== undefined) ? c.labelT : 0.5;
+  if(labelsVisible && V.zoom >= fitZoom * 0.5) {
+  const labelT = (c.labelT !== undefined) ? c.labelT : 0.75;
   const lp = ptAtT(pts, labelT);
   const def = CABLE_DEFS[c.type] || CABLE_DEFS.custom;
   const lbl = def.adapter ? def.label+' 2ft' : def.label+' '+getLengthLabel(c);
@@ -1802,7 +1957,7 @@ function drawInProgressCable() {
 // ─── Hit testing ──────────────────────────────────────────────────────────────
 const HIT_R = 10;
 
-function hitItem(cx,cy) {
+function hitItem(cx,cy,radiusMult=1.5) {
   for(let i=S.items.length-1;i>=0;i--) {
     const it=S.items[i];
     const p=toCanvas(it.x,it.y);
@@ -1817,7 +1972,7 @@ function hitItem(cx,cy) {
       if(dx>-8&&dx<approxW+8&&dy>-8&&dy<approxH+8) return it;
     } else {
       const s=(it.size||S.globalSize)*V.zoom;
-      if(Math.sqrt(dx*dx+dy*dy)<s*1.5) return it;
+      if(Math.sqrt(dx*dx+dy*dy)<s*radiusMult) return it;
     }
   }
   return null;
@@ -1888,7 +2043,7 @@ function hitLabel(cx,cy) {
     const c=S.cables[i];
     const pts=cableOffsetScreenPts(c);
     if(!pts) continue;
-    const t=c.labelT!==undefined?c.labelT:0.85;
+    const t=cableLabelT(c);
     const lp=ptAtT(pts,t);
     if(Math.abs(cx-lp.x)<36&&Math.abs(cy-lp.y)<16) return c;
   }
@@ -2038,12 +2193,47 @@ function onMouseDown(e) {
     // Cable
     const ca=hitCable(cx,cy);
     if(ca){
+      if(e.metaKey){
+        // Cmd+click on cable — insert a waypoint at click point in the right segment
+        const coord=toCoord(cx,cy);
+        const screenPts=cableOffsetScreenPts(ca);
+        let bestSeg=0, bestDist=Infinity;
+        if(screenPts){
+          for(let j=0;j<screenPts.length-1;j++){
+            const d=distToSegment(cx,cy,screenPts[j].x,screenPts[j].y,screenPts[j+1].x,screenPts[j+1].y);
+            if(d<bestDist){bestDist=d;bestSeg=j;}
+          }
+        }
+        pushUndo();
+        ca.waypoints.splice(bestSeg,0,coord);
+        selectedId=ca.id; selType='cable';
+        dirtyLaneCache(); render(); return;
+      }
       selectedIds.clear();
       selectedId=ca.id; selType='cable';
       updateProps(); render(); return;
     }
     selectedIds.clear(); selectedId=null; selType=null;
     updateProps(); render();
+  }
+
+  else if(tool==='measure') {
+    const coord=toCoord(cx,cy);
+    if(!measureState || !measureState.p1){
+      measureState={p1:coord,mouse:{x:cx,y:cy}};
+    } else {
+      // Second click — show result then clear
+      if(S.scale.ppf){
+        const dx=coord.x-measureState.p1.x, dy=coord.y-measureState.p1.y;
+        const ft=Math.round(Math.sqrt(dx*dx+dy*dy)/S.scale.ppf);
+        alert(ft+" ft between points");
+      } else {
+        alert('Set scale first before measuring.');
+      }
+      measureState=null;
+      setTool('select');
+    }
+    render();
   }
 
   else if(tool==='scale') {
@@ -2086,7 +2276,7 @@ function onMouseDown(e) {
 
   else if(tool==='cable') {
     const coord=toCoord(cx,cy);
-    const it=hitItem(cx,cy);
+    const it=hitItem(cx,cy, cableInProgress ? 0.7 : 1.5);
     if(!cableInProgress){
       if(it){
         cableInProgress={fromId:it.id,waypoints:[],mouse:toCanvas(it.x,it.y)};
@@ -2122,7 +2312,7 @@ function onMouseDown(e) {
           id:S.nextId++,fromId:cableInProgress.fromId||null,fromPos:cableInProgress.fromPos||null,toId:it.id,
           waypoints:finalWaypoints,
           type:ctype,label:lbl,color:def.color,
-          height:0,labelT:0.85,combo:null,adapterInput:0,adapterLegs:[]
+          height:0,combo:null,adapterInput:0,adapterLegs:[]
         });
         cableInProgress=null;
         setTool('select'); render(); updateSchedule(); updateTotals(); updateItemTotals();
@@ -2247,7 +2437,7 @@ function onMouseMove(e) {
       const from=cableEndpt(c,'from');
       const to=cableEndpt(c,'to');
       if(!from||!to) return;
-      const pts=[from,...c.waypoints,to].map(p=>toCanvas(p.x,p.y));
+      const pts=cableOffsetScreenPts(c)||[from,...c.waypoints,to].map(p=>toCanvas(p.x,p.y));
       const total=pathLength(pts);
       // Find closest t to mouse
       let best=0.5,bestD=Infinity;
@@ -2256,11 +2446,17 @@ function onMouseMove(e) {
         const d=Math.sqrt((cx-lp.x)**2+(cy-lp.y)**2);
         if(d<bestD){bestD=d;best=t;}
       }
-      c.labelT=best;
+      c.labelT=Math.max(0.1, Math.min(0.9, best)); c.labelDragged=true;
       render(); return;
     }
   }
 
+  if(tool==='scale' && scaleState && scaleState.p1 && !scaleState.p2){
+    scaleState.mouse={x:cx,y:cy}; render(); return;
+  }
+  if(tool==='measure' && measureState && measureState.p1){
+    measureState.mouse={x:cx,y:cy}; render(); return;
+  }
   if(cableInProgress){
     const prevPt = cableInProgress.waypoints.length
       ? cableInProgress.waypoints[cableInProgress.waypoints.length-1]
@@ -2363,7 +2559,8 @@ function onKey(e) {
     case 'p':case 'P': setTool('powerdrop'); break;
     case 'w':case 'W': setTool('ap'); break;
     case 'c':case 'C': setTool('cable'); break;
-    case 'Escape': cableInProgress=null; scaleState=null; render(); break;
+    case 'm':case 'M': measureState=null; setTool('measure'); break;
+    case 'Escape': cableInProgress=null; scaleState=null; measureState=null; render(); break;
     case 'Delete':case 'Backspace': deleteSelected(); break;
   }
 }
@@ -2480,7 +2677,9 @@ function updateProps() {
     const it=S.items.find(i=>i.id===selectedId);
     if(!it){selectedId=null;selType=null;noSel.style.display='';return;}
     ip.style.display='';
-    document.getElementById('ip-type').value=ITEM_DEFS[it.type]?.label||it.type||'Unknown';
+    const isGearItem = !['textbox','textlabel'].includes(it.type);
+    document.getElementById('ip-type-row').style.display = isGearItem ? '' : 'none';
+    if(isGearItem) document.getElementById('ip-type-select').value = it.type;
     document.getElementById('ip-exclude-totals').checked=!!it.excludeTotals;
     document.getElementById('ip-label').value=it.label||'';
     document.getElementById('ip-color').value=it.color||'#ffffff';
@@ -2496,7 +2695,7 @@ function updateProps() {
     if(!c){selectedId=null;selType=null;noSel.style.display='';return;}
     cp.style.display='';
     const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
-    document.getElementById('cp-type').value=def.label;
+    document.getElementById('cp-type').value=c.type;
     document.getElementById('cp-color').value=c.color;
     document.getElementById('cp-height').value=c.height||0;
 
@@ -2592,6 +2791,30 @@ function updateItemTotals() {
     entries.forEach(e => {
       const tr = document.createElement('tr');
       tr.innerHTML = `<td style="color:${e.color};font-weight:600;padding-left:6px">${e.label}</td><td>${e.count}</td>`;
+      // Store group type and label for highlight lookup
+      const gtypes = grp.types.join(',');
+      const glabel = e.label;
+      tr.dataset.itype = gtypes;
+      tr.dataset.ilabel = glabel;
+      tr.addEventListener('click', () => {
+        const already = tr.classList.contains('item-hl');
+        document.querySelectorAll('#item-totals-body tr.item-hl').forEach(r=>r.classList.remove('item-hl'));
+        document.querySelectorAll('.sched-row.sched-hl').forEach(r=>r.classList.remove('sched-hl'));
+        document.querySelectorAll('#totals-body tr.totals-hl').forEach(r=>r.classList.remove('totals-hl'));
+        _highlightCableIds = new Set();
+        if(already) {
+          _highlightItemTypes = new Set();
+        } else {
+          tr.classList.add('item-hl');
+          // Collect IDs of matching items
+          const matchIds = new Set(S.items.filter(it =>
+            gtypes.split(',').includes(it.type) &&
+            (it.label||ITEM_DEFS[it.type]?.label||it.type).trim() === glabel
+          ).map(it=>it.id));
+          _highlightItemTypes = matchIds;
+        }
+        render();
+      });
       tbody.appendChild(tr);
     });
   });
@@ -2628,6 +2851,14 @@ function updateSchedule() {
       if(total>def.limit){right.textContent='⚠ '+lbl;right.className='sched-warn';}
       else right.textContent=lbl;
     }
+    row.dataset.cableId=c.id;
+    row.addEventListener('click',()=>{
+      const already=row.classList.contains('sched-hl');
+      document.querySelectorAll('.sched-row.sched-hl').forEach(r=>r.classList.remove('sched-hl'));
+      document.querySelectorAll('#totals-body tr.totals-hl').forEach(r=>r.classList.remove('totals-hl'));
+      if(already){ _highlightCableIds=new Set(); } else { row.classList.add('sched-hl'); _highlightCableIds=new Set([c.id]); } _highlightItemTypes=new Set();
+      render();
+    });
     row.appendChild(left);row.appendChild(right);el.appendChild(row);
   });
 }
@@ -2666,6 +2897,23 @@ function updateTotals() {
   entries.forEach(e => {
     const tr = document.createElement('tr');
     tr.innerHTML = `<td style="color:${e.color};font-weight:600">${e.label}</td><td>${e.len}</td><td>${e.count}</td>`;
+    const key=e.label+'|'+e.len;
+    tr.addEventListener('click',()=>{
+      const already=tr.classList.contains('totals-hl');
+      document.querySelectorAll('#totals-body tr.totals-hl').forEach(r=>r.classList.remove('totals-hl'));
+      document.querySelectorAll('.sched-row.sched-hl').forEach(r=>r.classList.remove('sched-hl'));
+      if(already){ _highlightCableIds=new Set(); } else {
+        tr.classList.add('totals-hl');
+        _highlightCableIds=new Set(S.cables.filter(c=>{
+          const def=CABLE_DEFS[c.type]||CABLE_DEFS.custom;
+          if(def.adapter) return false;
+          const ft=calcCableLength(c);
+          const pieces=[...(c.combo||getBestCombo(ft,c.type))];
+          return pieces.some(len=>def.label+'|'+len+'ft'===key);
+        }).map(c=>c.id));
+      }
+      render();
+    });
     tbody.appendChild(tr);
   });
 
@@ -2743,7 +2991,9 @@ function flushProps() {
   }
 }
 
-let _lastSaveHandle = null; // remembers last saved file handle for startIn
+let _lastSaveHandle = null;
+let _highlightCableIds = new Set(); // cables highlighted from schedule/totals click
+let _highlightItemTypes = new Set(); // item types highlighted from item totals click // remembers last saved file handle for startIn
 
 // Persist file handle across sessions via IndexedDB (localStorage can't store FileSystemFileHandle)
 (function(){
@@ -2762,6 +3012,17 @@ let _lastSaveHandle = null; // remembers last saved file handle for startIn
   window._loadSaveHandle=function(cb){
     openDB(db=>{
       const req=db.transaction(STORE,'readonly').objectStore(STORE).get(KEY);
+      req.onsuccess=e=>cb(e.target.result||null);
+      req.onerror=()=>cb(null);
+    });
+  };
+  // Generic get/set helpers used for persisting plan pdfData
+  window._idbSet=function(key,val){
+    openDB(db=>{ try{db.transaction(STORE,'readwrite').objectStore(STORE).put(val,key);}catch(e){} });
+  };
+  window._idbGet=function(key,cb){
+    openDB(db=>{
+      const req=db.transaction(STORE,'readonly').objectStore(STORE).get(key);
       req.onsuccess=e=>cb(e.target.result||null);
       req.onerror=()=>cb(null);
     });
@@ -2840,6 +3101,7 @@ async function onLoadProject(e) {
     render();
     updateProps();
     updateSchedule(); updateTotals(); updateItemTotals();
+    saveCurrent(); saveLS(); // persist loaded project immediately so state survives reload
   } catch(err){ console.error('onLoadProject error:', err); alert('Error loading file: '+err.message); }
 }
 
